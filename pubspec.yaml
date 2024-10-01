@@ -37,6 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
+  http: ^1.2.2 #http flutter para hacer peticiones
+  injectable: ^2.4.4 # tener inyectar dependencias en presetation
+  get_it: ^7.7.0
+  fluttertoast: ^8.2.8 # para mostrar mensajes
+  shared_preferences: ^2.3.2 #
+
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +54,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  injectable_generator: ^2.6.2 #
+  build_runner: ^2.4.12 #
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

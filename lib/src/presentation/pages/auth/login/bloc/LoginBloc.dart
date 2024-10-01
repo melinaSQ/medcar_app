@@ -1,24 +1,23 @@
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-/*
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
-import 'package:medcar_app/src/domain/useCases/users/UsersUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/auth/LoginUseCase.dart';
+//import 'package:medcar_app/src/domain/useCases/users/UsersUseCases.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
-*/
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginState.dart';
 import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
-  //AuthUseCases authUseCases;
+  AuthUseCases authUseCases;
   //UsersUseCases usersUseCases;
-  final formKey = GlobalKey<FormState>();
   
-  LoginBloc(/*this.authUseCases, this.usersUseCases*/): super(LoginState()) {
+  final formKey = GlobalKey<FormState>();
 
+  LoginBloc(this.authUseCases, /*this.usersUseCases*/) : super(LoginState()) {
     on<LoginInitEvent>((event, emit) async {
       //AuthResponse? authResponse = await authUseCases.getUserSession.run();
       //print('Auth Response Session: ${authResponse?.toJson()}');
@@ -42,50 +41,35 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     */
     on<EmailChanged>((event, emit) {
       // event.email  LO QUE EL USUARIO ESTA ESCRIBIENDO
-      emit(
-        state.copyWith(
+      emit(state.copyWith(
           email: BlocFormItem(
-            value: event.email.value,
-            error: event.email.value.isEmpty ? 'Ingresa el email' : null
-          ),
-          formKey: formKey
-        )
-      );
+              value: event.email.value,
+              error: event.email.value.isEmpty ? 'Ingresa el email' : null),
+          formKey: formKey));
     });
 
     on<PasswordChanged>((event, emit) {
-      emit(
-        state.copyWith(
+      emit(state.copyWith(
           password: BlocFormItem(
-            value: event.password.value,
-            error: 
-              event.password.value.isEmpty 
-              ? 'Ingresa el password' 
-              : event.password.value.length < 6
-                ? 'Minimo 6 caracteres'
-                : null
-          ),
-          formKey: formKey
-        )
-      );
+              value: event.password.value,
+              error: event.password.value.isEmpty
+                  ? 'Ingresa el password'
+                  : event.password.value.length < 6
+                      ? 'Minimo 6 caracteres'
+                      : null),
+          formKey: formKey));
     });
 
     on<FormSubmit>((event, emit) async {
-      print('Email: ${ state.email.value }');
-      print('Password: ${ state.password.value }');
-      emit(
-        state.copyWith(
-          //response: Loading(),
-          formKey: formKey
-        )
-      );
-      //Resource response = await authUseCases.login.run( state.email.value, state.password.value );
-      emit(
-        state.copyWith(
-          //response: response,
-          formKey: formKey
-        )
-      );
+      print('Email: ${state.email.value}');
+      print('Password: ${state.password.value}');
+
+      emit(state.copyWith(response: Loading(), formKey: formKey));
+
+      Resource response =
+          await authUseCases.login.run(state.email.value, state.password.value);
+
+      emit(state.copyWith(response: response, formKey: formKey));
     });
 
     /*
@@ -102,7 +86,4 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
     */
   }
-
-  
-
 }

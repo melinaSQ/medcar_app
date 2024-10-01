@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-//import 'package:medcar_app/src/domain/models/user.dart';
-//import 'package:medcar_app/src/domain/utils/Resource.dart';
+import 'package:medcar_app/src/domain/models/user.dart';
+import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
 class RegisterState extends Equatable {
@@ -13,7 +13,7 @@ class RegisterState extends Equatable {
   final BlocFormItem password;
   final BlocFormItem confirmPassword;
   final GlobalKey<FormState>? formKey;
-  //final Resource? response;
+  final Resource? response;
 
   const RegisterState({
     this.name = const BlocFormItem(error: 'Ingresa el nombre'),
@@ -23,10 +23,10 @@ class RegisterState extends Equatable {
     this.password = const BlocFormItem(error: 'Ingresa el password'),
     this.confirmPassword = const BlocFormItem(error: 'Confirma la contraseña'),
     this.formKey,
-    //this.response
+    this.response
   });
 
-/*
+  //metodo que devuleve la instancia de un usuario
   toUser() => User(
     name: name.value, 
     lastname: lastname.value, 
@@ -34,7 +34,7 @@ class RegisterState extends Equatable {
     phone: phone.value, 
     password: password.value
   );
-  */
+  
 
   RegisterState copyWith({
     BlocFormItem? name,
@@ -44,7 +44,7 @@ class RegisterState extends Equatable {
     BlocFormItem? password,
     BlocFormItem? confirmPassword,
     GlobalKey<FormState>? formKey,
-    //Resource? response
+    Resource? response
   }) {
     return RegisterState(
       name: name ?? this.name,
@@ -54,11 +54,11 @@ class RegisterState extends Equatable {
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       formKey: formKey,
-      //response: response
+      response: response
     );
   } 
 
   @override
-  List<Object?> get props => [name, lastname, email, phone, password, confirmPassword, /*response*/];
+  List<Object?> get props => [name, lastname, email, phone, password, confirmPassword, response];
 
 }

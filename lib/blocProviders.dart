@@ -1,9 +1,9 @@
 // ignore: file_names
 import 'package:flutter_bloc/flutter_bloc.dart';
-/*
-import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/injection.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
+/*
+import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/driver-car-info/DriverCarInfoUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
@@ -39,8 +39,13 @@ import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesEvent.dart';
 */
 
 List<BlocProvider> blocProviders = [
-  BlocProvider<LoginBloc>(create: (context) => LoginBloc(/*locator<AuthUseCases>(), locator<UsersUseCases>()*/)..add(LoginInitEvent())),
-  BlocProvider<RegisterBloc>(create: (context) => RegisterBloc(/*locator<AuthUseCases>()*/)..add(RegisterInitEvent())),
+  BlocProvider<LoginBloc>(
+      create: (context) => LoginBloc(
+            locator<AuthUseCases>(), /*locator<UsersUseCases>()*/
+          )..add(LoginInitEvent())),
+  BlocProvider<RegisterBloc>(
+      create: (context) =>
+          RegisterBloc(locator<AuthUseCases>())..add(RegisterInitEvent())),
   /*
   BlocProvider<BlocSocketIO>(create: (context) => BlocSocketIO(locator<SocketUseCases>(), locator<AuthUseCases>())),
   BlocProvider<ClientHomeBloc>(create: (context) => ClientHomeBloc(locator<AuthUseCases>())),

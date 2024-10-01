@@ -34,16 +34,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/blocProviders.dart';
-/*
 import 'package:medcar_app/injection.dart';
+/*
 import 'package:medcar_app/src/domain/utils/FirebasePushNotifications.dart';
 */
 import 'package:medcar_app/src/presentation/pages/auth/login/LoginPage.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/RegisterPage.dart';
-/*
 import 'package:fluttertoast/fluttertoast.dart';
+/*
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersPage.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/ClientHomePage.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/ClientMapBookingInfoPage.dart';
@@ -63,8 +63,8 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  /*
   await configureDependencies();
+  /*
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
       //create: (context) => LoginBloc()..add(LoginInitEvent()),
 
       child: MaterialApp(
-        //builder: FToastBuilder(),
+        builder: FToastBuilder(),
         title: 'Flutter Demo',
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false, //quitar la equiqueta demo
