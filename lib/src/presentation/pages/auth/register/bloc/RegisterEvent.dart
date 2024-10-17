@@ -1,5 +1,5 @@
 // ignore: file_names
-//import 'package:medcar_app/src/domain/models/AuthResponse.dart';
+import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
 abstract class RegisterEvent {}
@@ -35,11 +35,11 @@ class ConfirmPasswordChanged extends RegisterInitEvent {
   final BlocFormItem confirmPassword;
   ConfirmPasswordChanged({ required this.confirmPassword });
 }
-/*
+
 class SaveUserSession extends RegisterInitEvent {
   final AuthResponse authResponse;
   SaveUserSession({ required this.authResponse });
-}*/
+}
 
 class FormSubmit extends RegisterInitEvent {}
 class FormReset extends RegisterInitEvent{}

@@ -19,7 +19,9 @@ import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterEve
 /*
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/historyTrip/bloc/ClientHistoryTripBloc.dart';
+*/
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
+/*
 import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/ClientMapBookingInfoBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
@@ -31,9 +33,11 @@ import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeBlo
 import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationBloc.dart';
 import 'package:medcar_app/src/presentation/pages/driver/mapTrip/bloc/DriverMapTripBloc.dart';
 import 'package:medcar_app/src/presentation/pages/driver/ratingTrip/bloc/DriverRatingTripBloc.dart';
+*/
 import 'package:medcar_app/src/presentation/pages/profile/info/bloc/ProfileInfoBloc.dart';
 import 'package:medcar_app/src/presentation/pages/profile/info/bloc/ProfileInfoEvent.dart';
 import 'package:medcar_app/src/presentation/pages/profile/update/bloc/ProfileUpdateBloc.dart';
+/*
 import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesBloc.dart';
 import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesEvent.dart';
 */
@@ -46,13 +50,20 @@ List<BlocProvider> blocProviders = [
   BlocProvider<RegisterBloc>(
       create: (context) =>
           RegisterBloc(locator<AuthUseCases>())..add(RegisterInitEvent())),
+  BlocProvider<ClientHomeBloc>(
+      create: (context) => ClientHomeBloc(locator<AuthUseCases>())),
   /*
   BlocProvider<BlocSocketIO>(create: (context) => BlocSocketIO(locator<SocketUseCases>(), locator<AuthUseCases>())),
-  BlocProvider<ClientHomeBloc>(create: (context) => ClientHomeBloc(locator<AuthUseCases>())),
   BlocProvider<DriverHomeBloc>(create: (context) => DriverHomeBloc(locator<AuthUseCases>())),
   BlocProvider<RolesBloc>(create: (context) => RolesBloc(locator<AuthUseCases>())..add(GetRolesList())),
-  BlocProvider<ProfileInfoBloc>(create: (context) => ProfileInfoBloc(locator<AuthUseCases>())..add(GetUserInfo())),
-  BlocProvider<ProfileUpdateBloc>(create: (context) => ProfileUpdateBloc(locator<UsersUseCases>(), locator<AuthUseCases>())),
+  */
+  BlocProvider<ProfileInfoBloc>(
+      create: (context) =>
+          ProfileInfoBloc(locator<AuthUseCases>())..add(GetUserInfo())),
+  BlocProvider<ProfileUpdateBloc>(
+      create: (context) =>
+          ProfileUpdateBloc(locator<UsersUseCases>(), locator<AuthUseCases>())),
+  /*
   BlocProvider<ClientMapSeekerBloc>(create: (context) => ClientMapSeekerBloc(context.read<BlocSocketIO>(), locator<GeolocatorUseCases>(), locator<SocketUseCases>())),
   BlocProvider<ClientMapBookingInfoBloc>(create: (context) => ClientMapBookingInfoBloc(context.read<BlocSocketIO>(), locator<GeolocatorUseCases>(), locator<ClientRequestsUseCases>(), locator<AuthUseCases>())),
   BlocProvider<DriverClientRequestsBloc>(create: (context) => DriverClientRequestsBloc(context.read<BlocSocketIO>(), locator<ClientRequestsUseCases>(), locator<DriversPositionUseCases>(), locator<AuthUseCases>(), locator<DriverTripRequestUseCases>())),

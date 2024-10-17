@@ -19,10 +19,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc(this.authUseCases, /*this.usersUseCases*/) : super(LoginState()) {
     on<LoginInitEvent>((event, emit) async {
-      //AuthResponse? authResponse = await authUseCases.getUserSession.run();
-      //print('Auth Response Session: ${authResponse?.toJson()}');
+      AuthResponse? authResponse = await authUseCases.getUserSession.run();
+      print('Auth Response Session: ${authResponse?.toJson()}');
+
       emit(state.copyWith(formKey: formKey));
-      /*
       if (authResponse != null) {
         emit(
           state.copyWith(
@@ -30,15 +30,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             formKey: formKey
           )
         );
-      }*/
+      }
     });
-
-    /*
 
     on<SaveUserSession>((event, emit) async {
       await authUseCases.saveUserSession.run(event.authResponse);
     });
-    */
+    
     on<EmailChanged>((event, emit) {
       // event.email  LO QUE EL USUARIO ESTA ESCRIBIENDO
       emit(state.copyWith(

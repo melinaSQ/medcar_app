@@ -44,19 +44,23 @@ class _LoginPageState extends State<LoginPage> {
           print('Error Data: ${response.message}');
         } else if (response is Success) {
           print('Success Dta: ${response.data}');
+
+          final authResponse = response.data as AuthResponse;
+          context
+              .read<LoginBloc>()
+              .add(SaveUserSession(authResponse: authResponse));
           /*
-            final authResponse = response.data as AuthResponse;
-            context.read<LoginBloc>().add(SaveUserSession(authResponse: authResponse));
             context.read<LoginBloc>().add(UpdateNotificationToken(id: authResponse.user.id!));
             context.read<BlocSocketIO>().add(ConnectSocketIO());
             context.read<BlocSocketIO>().add(ListenDriverAssignedSocketIO());
-            if (authResponse.user.roles!.length > 1) {
-              Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
-            }
-            else {
-              Navigator.pushNamedAndRemoveUntil(context, 'client/home', (route) => false);
-            }
             */
+          if (authResponse.user.roles!.length > 1) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, 'roles', (route) => false);
+          } else {
+            Navigator.pushNamedAndRemoveUntil(
+                context, 'client/home', (route) => false);
+          }
         }
       },
       child: BlocBuilder<LoginBloc, LoginState>(

@@ -30,12 +30,12 @@ import 'package:medcar_app/src/domain/repository/SocketRepository.dart';
 import 'package:medcar_app/src/domain/repository/UsersRepository.dart';
 */
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
-//import 'package:medcar_app/src/domain/useCases/auth/GetUserSessionUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/auth/GetUserSessionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/LoginUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/RegisterUseCase.dart';
-/*
 import 'package:medcar_app/src/domain/useCases/auth/LogoutUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/SaveUserSessionUseCase.dart';
+/*
 import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/client-requests/CreateClientRequestUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientAssignedUseCase%20copy.dart';
@@ -76,9 +76,10 @@ import 'package:injectable/injectable.dart';
 
 @module
 abstract class AppModule {
-/*
   @injectable
   SharefPref get sharefPref => SharefPref();
+
+  /*
 
   @injectable
   Socket get socket => io('http://${ApiConfig.API_PROJECT}', 
@@ -87,6 +88,7 @@ abstract class AppModule {
       .disableAutoConnect()  // disable auto-connection
       .build()
   );
+  
 
   @injectable
   Future<String> get token async {
@@ -119,9 +121,8 @@ abstract class AppModule {
   DriverCarInfoService get driverCarInfoService => DriverCarInfoService();
 */
   @injectable
-  AuthRepository get authRepository => AuthRepositoryImpl(
-        authService, /*sharefPref*/
-      );
+  AuthRepository get authRepository =>
+      AuthRepositoryImpl(authService, sharefPref);
 /*
   @injectable
   UsersRepository get usersRepository => UsersRepositoryImpl(usersService);
@@ -146,14 +147,12 @@ abstract class AppModule {
 */
   @injectable
   AuthUseCases get authUseCases => AuthUseCases(
-    login: LoginUseCase(authRepository),
-    register: RegisterUseCase(authRepository),
-    /*
-    saveUserSession: SaveUserSessionUseCase(authRepository),
-    getUserSession: GetUserSessionUseCase(authRepository),
-    logout: LogoutUseCase(authRepository)
-    */
-      );
+      login: LoginUseCase(authRepository),
+      register: RegisterUseCase(authRepository),
+      saveUserSession: SaveUserSessionUseCase(authRepository),
+      getUserSession: GetUserSessionUseCase(authRepository),
+      logout: LogoutUseCase(authRepository),
+  );
 /*
    @injectable
    UsersUseCases get usersUseCases => UsersUseCases(

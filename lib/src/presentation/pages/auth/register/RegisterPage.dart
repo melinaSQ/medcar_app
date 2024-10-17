@@ -35,8 +35,8 @@ class _RegisterPageState extends State<RegisterPage> {
           else if (response is Success) {
             final authResponse = response.data as AuthResponse;
             context.read<RegisterBloc>().add(FormReset());
-            //context.read<RegisterBloc>().add(SaveUserSession(authResponse: authResponse));
-            //Navigator.pushNamedAndRemoveUntil(context, 'client/home', (route) => false);
+            context.read<RegisterBloc>().add(SaveUserSession(authResponse: authResponse));
+            Navigator.pushNamedAndRemoveUntil(context, 'client/home', (route) => false);
           }
         },
         child: BlocBuilder<RegisterBloc, RegisterState>(

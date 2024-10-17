@@ -10,6 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:medcar_app/src/data/dataSource/local/SharefPref.dart' as _i230;
 import 'package:medcar_app/src/data/dataSource/remote/services/AuthService.dart'
     as _i744;
 import 'package:medcar_app/src/di/AppModule.dart' as _i132;
@@ -28,6 +29,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final appModule = _$AppModule();
+    gh.factory<_i230.SharefPref>(() => appModule.sharefPref);
     gh.factory<_i744.AuthService>(() => appModule.authService);
     gh.factory<_i101.AuthRepository>(() => appModule.authRepository);
     gh.factory<_i17.AuthUseCases>(() => appModule.authUseCases);
