@@ -1,13 +1,13 @@
 // ignore_for_file: file_names
 
-import 'package:medcar_app/src/domain/repository/UsersRepository.dart';
+// import 'package:medcar_app/src/domain/repository/UsersRepository.dart';
 
-class UpdateNotificationTokenUseCase {
+// class UpdateNotificationTokenUseCase {
 
-  UsersRepository usersRepository;
+//   UsersRepository usersRepository;
 
-  UpdateNotificationTokenUseCase(this.usersRepository);
+//   UpdateNotificationTokenUseCase(this.usersRepository);
 
-  run(int id, String notificationToken) => usersRepository.updateNotificationToken(id, notificationToken);
+//   run(int id, String notificationToken) => usersRepository.updateNotificationToken(id, notificationToken);
 
-}
+// }

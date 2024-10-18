@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, file_names
+
 import 'package:flutter/material.dart';
 import 'package:medcar_app/src/domain/models/user.dart';
 
@@ -64,7 +66,8 @@ class ProfileInfoContent extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Text(
-              '${user?.name} ${user?.lastname}' ?? '',
+              // '${user?.name} ${user?.lastname}' ?? '',
+              '${user?.name} ${user?.lastname}',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             SizedBox(height: 15),
@@ -101,7 +104,7 @@ class ProfileInfoContent extends StatelessWidget {
                 gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
-                    colors: [
+                    colors: const [
                       // Color.fromARGB(255, 19, 58, 213),
                       Color.fromARGB(255, 65, 173, 255),
                       Color(0xFF6041a2)
@@ -127,7 +130,7 @@ class ProfileInfoContent extends StatelessWidget {
         gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [
+            colors: const [
               Color(0xFF652580), //morado kev
               Color(0xFF5a469c), //morado
               Color(0xFF00A099), //turquesa kev

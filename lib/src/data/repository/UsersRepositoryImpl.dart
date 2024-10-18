@@ -21,8 +21,8 @@ class UsersRepositoryImpl implements UsersRepository {
     return usersService.updateImage(id, user, file);
   }
   
-  @override
-  Future<Resource<User>> updateNotificationToken(int id, String notificationToken) {
-    return usersService.updateNotificationToken(id, notificationToken);
-  }
+  // @override
+  // Future<Resource<User>> updateNotificationToken(int id, String notificationToken) {
+  //   return usersService.updateNotificationToken(id, notificationToken);
+  // }
 }

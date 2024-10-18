@@ -68,9 +68,10 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
     on<TakePhoto>((event, emit) async {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.camera);
-      if (image != null) { // SI EL USUARIO SELECCIONO UNA IMAGEN
+      if (image != null) {
+        // SI EL USUARIO SELECCIONO UNA IMAGEN
         emit(
-           state.copyWith(
+          state.copyWith(
             image: File(image.path),
             formKey: formKey,
           ),
@@ -89,17 +90,21 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
       print('Name: ${state.name.value}');
       print('LastName: ${state.lastname.value}');
       print('Phone: ${state.phone.value}');
-      emit(state.copyWith(
-        response: Loading(),
-        formKey: formKey,
-      ));
+      emit(
+        state.copyWith(
+          response: Loading(),
+          formKey: formKey,
+        ),
+      );
 
       Resource response =
           await usersUseCases.update.run(state.id, state.toUser(), state.image);
-      emit(state.copyWith(
-        response: response,
-        formKey: formKey,
-      ));
+      emit(
+        state.copyWith(
+          response: response,
+          formKey: formKey,
+        ),
+      );
     });
   }
 }
