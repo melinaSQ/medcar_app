@@ -1,46 +1,39 @@
-// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/injection.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
-/*
-import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
-import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
-import 'package:medcar_app/src/domain/useCases/driver-car-info/DriverCarInfoUseCases.dart';
-import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
-import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
-import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
-import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
+// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+// import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
+// import 'package:medcar_app/src/domain/useCases/driver-car-info/DriverCarInfoUseCases.dart';
+// import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
+// import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
+// import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
+// import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/users/UsersUseCases.dart';
-*/
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterBloc.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterEvent.dart';
-/*
-import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
-import 'package:medcar_app/src/presentation/pages/client/historyTrip/bloc/ClientHistoryTripBloc.dart';
-*/
+// import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/client/historyTrip/bloc/ClientHistoryTripBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
-/*
-import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/ClientMapBookingInfoBloc.dart';
-import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerBloc.dart';
-import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
-import 'package:medcar_app/src/presentation/pages/client/ratingTrip/bloc/ClientRatingTripBloc.dart';
-import 'package:medcar_app/src/presentation/pages/driver/carInfo/bloc/DriverCarInfoBloc.dart';
-import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
-import 'package:medcar_app/src/presentation/pages/driver/historyTrip/bloc/DriverHistoryTripBloc.dart';
-import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeBloc.dart';
-import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationBloc.dart';
-import 'package:medcar_app/src/presentation/pages/driver/mapTrip/bloc/DriverMapTripBloc.dart';
-import 'package:medcar_app/src/presentation/pages/driver/ratingTrip/bloc/DriverRatingTripBloc.dart';
-*/
+// import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/ClientMapBookingInfoBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/client/ratingTrip/bloc/ClientRatingTripBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/driver/carInfo/bloc/DriverCarInfoBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/driver/historyTrip/bloc/DriverHistoryTripBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/driver/mapTrip/bloc/DriverMapTripBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/driver/ratingTrip/bloc/DriverRatingTripBloc.dart';
 import 'package:medcar_app/src/presentation/pages/profile/info/bloc/ProfileInfoBloc.dart';
 import 'package:medcar_app/src/presentation/pages/profile/info/bloc/ProfileInfoEvent.dart';
 import 'package:medcar_app/src/presentation/pages/profile/update/bloc/ProfileUpdateBloc.dart';
-/*
-import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesBloc.dart';
-import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesEvent.dart';
-*/
+// import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesEvent.dart';
 
 List<BlocProvider> blocProviders = [
   BlocProvider<LoginBloc>(
@@ -58,11 +51,13 @@ List<BlocProvider> blocProviders = [
   BlocProvider<RolesBloc>(create: (context) => RolesBloc(locator<AuthUseCases>())..add(GetRolesList())),
   */
   BlocProvider<ProfileInfoBloc>(
-      create: (context) =>
-          ProfileInfoBloc(locator<AuthUseCases>())..add(GetUserInfo())),
+    create: (context) =>
+        ProfileInfoBloc(locator<AuthUseCases>())..add(GetUserInfo()),
+  ),
   BlocProvider<ProfileUpdateBloc>(
-      create: (context) =>
-          ProfileUpdateBloc(locator<UsersUseCases>(), locator<AuthUseCases>())),
+    create: (context) =>
+        ProfileUpdateBloc(locator<UsersUseCases>(), locator<AuthUseCases>()),
+  ),
   /*
   BlocProvider<ClientMapSeekerBloc>(create: (context) => ClientMapSeekerBloc(context.read<BlocSocketIO>(), locator<GeolocatorUseCases>(), locator<SocketUseCases>())),
   BlocProvider<ClientMapBookingInfoBloc>(create: (context) => ClientMapBookingInfoBloc(context.read<BlocSocketIO>(), locator<GeolocatorUseCases>(), locator<ClientRequestsUseCases>(), locator<AuthUseCases>())),

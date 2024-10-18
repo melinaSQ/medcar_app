@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -42,12 +44,15 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
         listener: (context, state) {
           final response = state.response;
           if (response is ErrorData) {
-            Fluttertoast.showToast(msg: response.message, toastLength: Toast.LENGTH_LONG);
-          }
-          else if (response is Success) {
+            Fluttertoast.showToast(
+                msg: response.message, toastLength: Toast.LENGTH_LONG);
+          } else if (response is Success) {
             User user = response.data as User;
-            Fluttertoast.showToast(msg: 'Actualizacion exitosa', toastLength: Toast.LENGTH_LONG);
-            context.read<ProfileUpdateBloc>().add(UpdateUserSession(user: user));
+            Fluttertoast.showToast(
+                msg: 'Actualizacion exitosa', toastLength: Toast.LENGTH_LONG);
+            context
+                .read<ProfileUpdateBloc>()
+                .add(UpdateUserSession(user: user));
             Future.delayed(Duration(seconds: 1), () {
               context.read<ProfileInfoBloc>().add(GetUserInfo());
             });

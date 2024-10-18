@@ -1,6 +1,6 @@
-// ignore: file_names
+// ignore_for_file: constant_identifier_names, file_names
+
 class ApiConfig {
-  // ignore: constant_identifier_names
   //ip wifi cas
   static const String API_PROJECT = '172.17.0.1:3000';
 

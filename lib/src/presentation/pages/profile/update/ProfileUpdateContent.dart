@@ -11,7 +11,6 @@ import 'package:medcar_app/src/presentation/widgets/DefaultTextField.dart';
 
 // ignore: must_be_immutable
 class ProfileUpdateContent extends StatelessWidget {
-
   User? user;
   ProfileUpdateState state;
 
@@ -47,10 +46,9 @@ class ProfileUpdateContent extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         GalleryOrPhotoDialog(
-          context,
-          () => { context.read<ProfileUpdateBloc>().add(PickImage()) },
-          () => { context.read<ProfileUpdateBloc>().add(TakePhoto()) }
-        );
+            context,
+            () => {context.read<ProfileUpdateBloc>().add(PickImage())},
+            () => {context.read<ProfileUpdateBloc>().add(TakePhoto())});
       },
       child: Container(
         width: 115,
@@ -194,9 +192,13 @@ class ProfileUpdateContent extends StatelessWidget {
         gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(255, 19, 58, 213),
-              Color.fromARGB(255, 65, 173, 255),
+            colors: const [
+              Color(0xFF652580), //morado kev
+              Color(0xFF5a469c), //morado
+              Color(0xFF00A099), //turquesa kev
+
+              // Color.fromARGB(255, 19, 58, 213),
+              // Color.fromARGB(255, 65, 173, 255),
             ]),
       ),
       child: Text(
