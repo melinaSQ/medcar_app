@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/users/UsersUseCases.dart';
@@ -50,29 +50,32 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
         formKey: formKey,
       ));
     });
+
     on<PickImage>((event, emit) async {
-      // final ImagePicker picker = ImagePicker();
-      // final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-      // if (image != null) { // SI EL USUARIO SELECCIONO UNA IMAGEN
-      //   emit(
-      //      state.copyWith(
-      //       image: File(image.path),
-      //       formKey: formKey
-      //     )
-      //   );
-      // }
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        // SI EL USUARIO SELECCIONO UNA IMAGEN
+        emit(
+          state.copyWith(
+            image: File(image.path),
+            formKey: formKey,
+          ),
+        );
+      }
     });
+
     on<TakePhoto>((event, emit) async {
-      // final ImagePicker picker = ImagePicker();
-      // final XFile? image = await picker.pickImage(source: ImageSource.camera);
-      // if (image != null) { // SI EL USUARIO SELECCIONO UNA IMAGEN
-      //   emit(
-      //      state.copyWith(
-      //       image: File(image.path),
-      //       formKey: formKey
-      //     )
-      //   );
-      // }
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.camera);
+      if (image != null) { // SI EL USUARIO SELECCIONO UNA IMAGEN
+        emit(
+           state.copyWith(
+            image: File(image.path),
+            formKey: formKey,
+          ),
+        );
+      }
     });
     on<UpdateUserSession>((event, emit) async {
       AuthResponse authResponse = await authUseCases.getUserSession.run();
@@ -91,7 +94,8 @@ class ProfileUpdateBloc extends Bloc<ProfileUpdateEvent, ProfileUpdateState> {
         formKey: formKey,
       ));
 
-      Resource response = await usersUseCases.update.run(state.id, state.toUser(), state.image);
+      Resource response =
+          await usersUseCases.update.run(state.id, state.toUser(), state.image);
       emit(state.copyWith(
         response: response,
         formKey: formKey,

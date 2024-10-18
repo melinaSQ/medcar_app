@@ -1,5 +1,7 @@
+// ignore_for_file: file_names, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:medcar_app/src/presentation/widgets/DefaultTextField.dart';
+// import 'package:medcar_app/src/presentation/widgets/DefaultTextField.dart';
 
 GalleryOrPhotoDialog(BuildContext context, Function() pickImage, Function() takePhoto) {
 
