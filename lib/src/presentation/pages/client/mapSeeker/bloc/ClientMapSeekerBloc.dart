@@ -35,7 +35,8 @@ class ClientMapSeekerBloc
 
     on<FindPosition>((event, emit) async {
       Position position = await geolocatorUseCases.findPosition.run();
-      add(ChangeMapCameraPosition(lat: position.latitude, lng: position.longitude));
+      add(ChangeMapCameraPosition(
+          lat: position.latitude, lng: position.longitude));
       emit(state.copyWith(
         position: position,
       ));
@@ -43,59 +44,41 @@ class ClientMapSeekerBloc
 
     on<ChangeMapCameraPosition>((event, emit) async {
       try {
-        GoogleMapController googleMapController = await state.controller!.future;
+        GoogleMapController googleMapController =
+            await state.controller!.future;
         await googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(event.lat, event.lng),
-            zoom: 13,
-            bearing: 0
-          )
-        ));
+            CameraPosition(
+                target: LatLng(event.lat, event.lng), zoom: 13, bearing: 0)));
       } catch (e) {
         print('ERROR EN ChangeMapCameraPosition: $e');
       }
-
     });
 
     on<OnCameraMove>((event, emit) {
-      emit(
-        state.copyWith(
-          cameraPosition: event.cameraPosition
-        )
-      );
+      emit(state.copyWith(cameraPosition: event.cameraPosition));
     });
 
     on<OnCameraIdle>((event, emit) async {
       try {
-        PlacemarkData placemarkData = await geolocatorUseCases.getPlacemarkData.run(state.cameraPosition);
-        emit(
-          state.copyWith(
-            placemarkData: placemarkData
-          )
-        );
+        PlacemarkData placemarkData =
+            await geolocatorUseCases.getPlacemarkData.run(state.cameraPosition);
+        emit(state.copyWith(placemarkData: placemarkData));
       } catch (e) {
         print('OnCameraIdle Error: $e');
       }
-
     });
 
-    // on<OnAutoCompletedPickUpSelected>((event, emit) {
-    //   emit(
-    //     state.copyWith(
-    //       pickUpLatLng: LatLng(event.lat, event.lng),
-    //       pickUpDescription: event.pickUpDescription
-    //     )
-    //   );
-    // });
+    on<OnAutoCompletedPickUpSelected>((event, emit) {
+      emit(state.copyWith(
+          pickUpLatLng: LatLng(event.lat, event.lng),
+          pickUpDescription: event.pickUpDescription));
+    });
 
-    // on<OnAutoCompletedDestinationSelected>((event, emit) {
-    //   emit(
-    //     state.copyWith(
-    //       destinationLatLng: LatLng(event.lat, event.lng),
-    //       destinationDescription: event.destinationDescription
-    //     )
-    //   );
-    // });
+    on<OnAutoCompletedDestinationSelected>((event, emit) {
+      emit(state.copyWith(
+          destinationLatLng: LatLng(event.lat, event.lng),
+          destinationDescription: event.destinationDescription));
+    });
 
     // on<ListenDriversPositionSocketIO>((event, emit) async {
     //   if (blocSocketIO.state.socket != null ) {

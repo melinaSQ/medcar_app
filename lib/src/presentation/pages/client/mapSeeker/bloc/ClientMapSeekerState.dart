@@ -8,26 +8,26 @@ import 'package:medcar_app/src/domain/models/PlacemarkData.dart';
 // import 'package:socket_io_client/socket_io_client.dart';
 
 class ClientMapSeekerState extends Equatable {
-
   final Completer<GoogleMapController>? controller;
   final Position? position;
   final CameraPosition cameraPosition;
   final PlacemarkData? placemarkData;
   final Map<MarkerId, Marker> markers;
-  // final LatLng? pickUpLatLng;
-  // final LatLng? destinationLatLng;
-  // final String pickUpDescription;
-  // final String destinationDescription;
+  final LatLng? pickUpLatLng;
+  final LatLng? destinationLatLng;
+  final String pickUpDescription;
+  final String destinationDescription;
 
   const ClientMapSeekerState({
     this.position,
     this.controller,
-    this.cameraPosition = const CameraPosition(target: LatLng(-17.3927522, -66.1592157), zoom: 14.0),
+    this.cameraPosition = const CameraPosition(
+        target: LatLng(-17.3927522, -66.1592157), zoom: 14.0),
     this.placemarkData,
-    // this.pickUpLatLng,
-    // this.destinationLatLng,
-    // this.pickUpDescription = '',
-    // this.destinationDescription = '',
+    this.pickUpLatLng,
+    this.destinationLatLng,
+    this.pickUpDescription = '',
+    this.destinationDescription = '',
     this.markers = const <MarkerId, Marker>{},
   });
 
@@ -36,29 +36,36 @@ class ClientMapSeekerState extends Equatable {
     Completer<GoogleMapController>? controller,
     CameraPosition? cameraPosition,
     PlacemarkData? placemarkData,
-    // LatLng? pickUpLatLng,
-    // LatLng? destinationLatLng,
-    // String? pickUpDescription,
-    // String? destinationDescription,
+    LatLng? pickUpLatLng,
+    LatLng? destinationLatLng,
+    String? pickUpDescription,
+    String? destinationDescription,
     Map<MarkerId, Marker>? markers,
   }) {
-    
     return ClientMapSeekerState(
       position: position ?? this.position,
       markers: markers ?? this.markers,
       controller: controller ?? this.controller,
       cameraPosition: cameraPosition ?? this.cameraPosition,
       placemarkData: placemarkData ?? this.placemarkData,
-      // pickUpLatLng: pickUpLatLng ?? this.pickUpLatLng,
-      // destinationLatLng: destinationLatLng ?? this.destinationLatLng,
-      // pickUpDescription: pickUpDescription ?? this.pickUpDescription,
-      // destinationDescription: destinationDescription ?? this.destinationDescription,
+      pickUpLatLng: pickUpLatLng ?? this.pickUpLatLng,
+      destinationLatLng: destinationLatLng ?? this.destinationLatLng,
+      pickUpDescription: pickUpDescription ?? this.pickUpDescription,
+      destinationDescription:
+          destinationDescription ?? this.destinationDescription,
     );
   }
 
-
   @override
-  // List<Object?> get props => [position, /*markers,*/ controller, cameraPosition, placemarkData, /*pickUpLatLng, destinationLatLng, pickUpDescription, destinationDescription*/];
-  List<Object?> get props => [position, controller, cameraPosition, placemarkData];
-
+  List<Object?> get props => [
+        position,
+        markers,
+        controller,
+        cameraPosition,
+        placemarkData,
+        pickUpLatLng,
+        destinationLatLng,
+        pickUpDescription,
+        destinationDescription
+      ];
 }

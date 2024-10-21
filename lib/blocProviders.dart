@@ -20,7 +20,10 @@ import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterEve
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/ClientMapBookingInfoBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerBloc.dart';
+
+// ignore: unused_import
 import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerEvent.dart';
+
 // import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/client/ratingTrip/bloc/ClientRatingTripBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/carInfo/bloc/DriverCarInfoBloc.dart';

@@ -56,13 +56,13 @@ class _ClientMapSeekerPageState extends State<ClientMapSeekerPage> {
                 onCameraIdle: () async {
                   context.read<ClientMapSeekerBloc>().add(OnCameraIdle());
                   pickUpController.text = state.placemarkData?.address ?? '';
-                  // if (state.placemarkData != null) {
-                  //   context.read<ClientMapSeekerBloc>().add(
-                  //       OnAutoCompletedPickUpSelected(
-                  //           lat: state.placemarkData!.lat,
-                  //           lng: state.placemarkData!.lng,
-                  //           pickUpDescription: state.placemarkData!.address));
-                  // }
+                  if (state.placemarkData != null) {
+                    context.read<ClientMapSeekerBloc>().add(
+                        OnAutoCompletedPickUpSelected(
+                            lat: state.placemarkData!.lat,
+                            lng: state.placemarkData!.lng,
+                            pickUpDescription: state.placemarkData!.address));
+                  }
                 },
 
                 onMapCreated: (GoogleMapController controller) {
@@ -87,9 +87,10 @@ class _ClientMapSeekerPageState extends State<ClientMapSeekerPage> {
                 // },
               ),
               Container(
-                  height: 120,
-                  margin: EdgeInsets.only(left: 30, right: 30, top: 30),
-                  child: _googlePlacesAutocomplete()),
+                height: 120,
+                margin: EdgeInsets.only(left: 30, right: 30, top: 30),
+                child: _googlePlacesAutocomplete(),
+              ),
               _iconMyLocation(),
               Container(
                   alignment: Alignment.bottomCenter,
@@ -97,19 +98,19 @@ class _ClientMapSeekerPageState extends State<ClientMapSeekerPage> {
                     margin: EdgeInsets.only(bottom: 30, left: 60, right: 60),
                     text: 'REVISAR VIAJE',
                     iconData: Icons.check_circle,
-                    // textColor: Colors.white,
+                    textColor: Colors.white,
                     onPressed: () {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   'client/map/booking',
-                      //   arguments: {
-                      //     'pickUpLatLng': state.pickUpLatLng,
-                      //     'destinationLatLng': state.destinationLatLng,
-                      //     'pickUpDescription': state.pickUpDescription,
-                      //     'destinationDescription':
-                      //         state.destinationDescription,
-                      //   },
-                      // );
+                      Navigator.pushNamed(
+                        context,
+                        'client/map/booking',
+                        arguments: {
+                          'pickUpLatLng': state.pickUpLatLng,
+                          'destinationLatLng': state.destinationLatLng,
+                          'pickUpDescription': state.pickUpDescription,
+                          'destinationDescription':
+                              state.destinationDescription,
+                        },
+                      );
                     },
                   ))
             ],
@@ -134,11 +135,11 @@ class _ClientMapSeekerPageState extends State<ClientMapSeekerPage> {
                       lng: double.parse(prediction.lng!),
                     ),
                   );
-              // context.read<ClientMapSeekerBloc>().add(
-              //     OnAutoCompletedPickUpSelected(
-              //         lat: double.parse(prediction.lat!),
-              //         lng: double.parse(prediction.lng!),
-              //         pickUpDescription: prediction.description ?? ''));
+              context.read<ClientMapSeekerBloc>().add(
+                  OnAutoCompletedPickUpSelected(
+                      lat: double.parse(prediction.lat!),
+                      lng: double.parse(prediction.lng!),
+                      pickUpDescription: prediction.description ?? ''));
             }
           }),
           Divider(
@@ -146,11 +147,11 @@ class _ClientMapSeekerPageState extends State<ClientMapSeekerPage> {
           ),
           GooglePlacesAutoComplete(destinationController, 'Dejar en',
               (Prediction prediction) {
-            // context.read<ClientMapSeekerBloc>().add(
-            //     OnAutoCompletedDestinationSelected(
-            //         lat: double.parse(prediction.lat!),
-            //         lng: double.parse(prediction.lng!),
-            //         destinationDescription: prediction.description ?? ''));
+            context.read<ClientMapSeekerBloc>().add(
+                OnAutoCompletedDestinationSelected(
+                    lat: double.parse(prediction.lat!),
+                    lng: double.parse(prediction.lng!),
+                    destinationDescription: prediction.description ?? ''));
           })
         ],
       ),

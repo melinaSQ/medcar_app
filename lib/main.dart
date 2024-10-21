@@ -12,7 +12,7 @@ import 'package:medcar_app/src/presentation/pages/auth/register/RegisterPage.dar
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/ClientHomePage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersPage.dart';
-// import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/ClientMapBookingInfoPage.dart';
+import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/ClientMapBookingInfoPage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapTrip/ClientMapTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/ratingTrip/ClientRatingTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
@@ -79,8 +79,8 @@ class _MyAppState extends State<MyApp> {
           'register': (BuildContext context) => RegisterPage(),
           'client/home': (BuildContext context) => ClientHomePage(),
           // 'roles': (BuildContext context) => RolesPage(),
-          'driver/home': (BuildContext context) => DriverHomePage(),
-          // 'client/map/booking': (BuildContext context) => ClientMapBookingInfoPage(),
+          // 'driver/home': (BuildContext context) => DriverHomePage(),
+          'client/map/booking': (BuildContext context) => ClientMapBookingInfoPage(),
           'profile/update': (BuildContext context) => ProfileUpdatePage(),
           // 'client/driver/offers': (BuildContext context) => ClientDriverOffersPage(),
           // 'client/map/trip': (BuildContext context) => ClientMapTripPage(),
