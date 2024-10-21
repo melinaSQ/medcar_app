@@ -1,4 +1,3 @@
-
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +16,13 @@ import 'package:medcar_app/src/presentation/pages/client/home/ClientHomePage.dar
 // import 'package:medcar_app/src/presentation/pages/client/mapTrip/ClientMapTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/ratingTrip/ClientRatingTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
-// import 'package:medcar_app/src/presentation/pages/driver/home/DriverHomePage.dart';
+import 'package:medcar_app/src/presentation/pages/driver/home/DriverHomePage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/mapTrip/DriverMapTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/ratingTrip/DriverRatingTripPage.dart';
 import 'package:medcar_app/src/presentation/pages/profile/update/ProfileUpdatePage.dart';
 // import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
-
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -81,7 +79,7 @@ class _MyAppState extends State<MyApp> {
           'register': (BuildContext context) => RegisterPage(),
           'client/home': (BuildContext context) => ClientHomePage(),
           // 'roles': (BuildContext context) => RolesPage(),
-          // 'driver/home': (BuildContext context) => DriverHomePage(),
+          'driver/home': (BuildContext context) => DriverHomePage(),
           // 'client/map/booking': (BuildContext context) => ClientMapBookingInfoPage(),
           'profile/update': (BuildContext context) => ProfileUpdatePage(),
           // 'client/driver/offers': (BuildContext context) => ClientDriverOffersPage(),
@@ -90,7 +88,6 @@ class _MyAppState extends State<MyApp> {
           // 'driver/rating/trip': (BuildContext context) => DriverRatingTripPage(),
           // 'driver/client/request': (BuildContext context) => DriverClientRequestsPage(),
           // 'client/rating/trip': (BuildContext context) => ClientRatingTripPage(),
-          
         },
       ),
     );

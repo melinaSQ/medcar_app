@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          final response = state.response;
+          final response = state.response; 
           if (response is Loading) {
             return Stack(
               children: [

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-/*
-import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
-import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
-*/
+// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+// import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
 import 'package:medcar_app/main.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/LoginPage.dart';
 //import 'package:medcar_app/src/presentation/pages/client/historyTrip/ClientHistoryTripPage.dart';
@@ -11,11 +9,9 @@ import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeBlo
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeEvent.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeState.dart';
 import 'package:medcar_app/src/presentation/pages/profile/info/ProfileInfoPage.dart';
-
-/*
 import 'package:medcar_app/src/presentation/pages/client/mapSeeker/ClientMapSeekerPage.dart';
-import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
-*/
+// import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
+
 class ClientHomePage extends StatefulWidget {
   const ClientHomePage({super.key});
 
@@ -25,7 +21,7 @@ class ClientHomePage extends StatefulWidget {
 
 class _ClientHomePageState extends State<ClientHomePage> {
   List<Widget> pageList = <Widget>[
-    //ClientMapSeekerPage(),
+    ClientMapSeekerPage(),
     //ClientHistoryTripPage(),
     ProfileInfoPage(),
     //RolesPage(),
@@ -63,26 +59,25 @@ class _ClientHomePageState extends State<ClientHomePage> {
               padding: EdgeInsets.zero,
               children: [
                 DrawerHeader(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: const [
-                            /*
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: const [
+                          /*
                             Color.fromARGB(255, 12, 38, 145),
                             Color.fromARGB(255, 34, 156, 249),
                             */
-                            Color(0xFF652580), //morado kev
-                            Color(0xFF5a469c), //morado
-                            Color(0xFF00A099), //turquesa kev
-                          ]),
-                    ),
-                    child: Text(
-                      'Menu del cliente',
-                      style: TextStyle(color: Colors.white),
-                    )),
-
-                /*    
+                          Color(0xFF652580), //morado kev
+                          Color(0xFF5a469c), //morado
+                          Color(0xFF00A099), //turquesa kev
+                        ]),
+                  ),
+                  child: Text(
+                    'Menu del cliente',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
                 ListTile(
                   title: Text('Mapa de busqueda'),
                   selected: state.pageIndex == 0,
@@ -93,6 +88,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
                     Navigator.pop(context);
                   },
                 ),
+                /*
                 ListTile(
                   title: Text('Historial de viajes'),
                   selected: state.pageIndex == 1,
@@ -106,11 +102,11 @@ class _ClientHomePageState extends State<ClientHomePage> {
                 */
                 ListTile(
                   title: Text('Perfil del usuario'),
-                  selected: state.pageIndex == 0,
+                  selected: state.pageIndex == 1,
                   onTap: () {
                     context
                         .read<ClientHomeBloc>()
-                        .add(ChangeDrawerPage(pageIndex: 0));
+                        .add(ChangeDrawerPage(pageIndex: 1));
                     Navigator.pop(context);
                   },
                 ),

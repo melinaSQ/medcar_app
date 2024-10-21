@@ -8,7 +8,7 @@ import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-car-info/DriverCarInfoUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/users/UsersUseCases.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
@@ -19,7 +19,8 @@ import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterEve
 // import 'package:medcar_app/src/presentation/pages/client/historyTrip/bloc/ClientHistoryTripBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/ClientMapBookingInfoBloc.dart';
-// import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerBloc.dart';
+import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerBloc.dart';
+import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerEvent.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/client/ratingTrip/bloc/ClientRatingTripBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/carInfo/bloc/DriverCarInfoBloc.dart';
@@ -58,8 +59,13 @@ List<BlocProvider> blocProviders = [
     create: (context) =>
         ProfileUpdateBloc(locator<UsersUseCases>(), locator<AuthUseCases>()),
   ),
+  BlocProvider<ClientMapSeekerBloc>(
+    create: (context) => ClientMapSeekerBloc(
+      /*context.read<BlocSocketIO>(),*/
+      locator<GeolocatorUseCases>(), /*locator<SocketUseCases>()*/
+    ),
+  ),
   /*
-  BlocProvider<ClientMapSeekerBloc>(create: (context) => ClientMapSeekerBloc(context.read<BlocSocketIO>(), locator<GeolocatorUseCases>(), locator<SocketUseCases>())),
   BlocProvider<ClientMapBookingInfoBloc>(create: (context) => ClientMapBookingInfoBloc(context.read<BlocSocketIO>(), locator<GeolocatorUseCases>(), locator<ClientRequestsUseCases>(), locator<AuthUseCases>())),
   BlocProvider<DriverClientRequestsBloc>(create: (context) => DriverClientRequestsBloc(context.read<BlocSocketIO>(), locator<ClientRequestsUseCases>(), locator<DriversPositionUseCases>(), locator<AuthUseCases>(), locator<DriverTripRequestUseCases>())),
   BlocProvider<ClientDriverOffersBloc>(create: (context) => ClientDriverOffersBloc(context.read<BlocSocketIO>(), locator<DriverTripRequestUseCases>(), locator<ClientRequestsUseCases>())),
