@@ -13,18 +13,18 @@ class ClientMapBookingInfoState extends Equatable {
   final Completer<GoogleMapController>? controller;
   final CameraPosition cameraPosition;
   final Map<MarkerId, Marker> markers;
-  final Map<PolylineId, Polyline> polylines;
+  // final Map<PolylineId, Polyline> polylines;
   final Position? position;
   final LatLng? pickUpLatLng;
   final LatLng? destinationLatLng;
   final String pickUpDescription;
   final String destinationDescription;
-  final Resource? responseTimeAndDistance;
-  final Resource? responseClientRequest;
-  final BlocFormItem fareOffered;
+  // final Resource? responseTimeAndDistance;
+  // final Resource? responseClientRequest;
+  // final BlocFormItem fareOffered;
   
 
-  ClientMapBookingInfoState({
+  const ClientMapBookingInfoState({
     this.position,
     this.controller,
     this.cameraPosition = const CameraPosition(target: LatLng(4.7449125, -74.1113708), zoom: 14.0),
@@ -33,10 +33,10 @@ class ClientMapBookingInfoState extends Equatable {
     this.pickUpDescription = '',
     this.destinationDescription = '',
     this.markers = const <MarkerId, Marker>{},
-    this.polylines = const <PolylineId, Polyline>{},
-    this.responseTimeAndDistance,
-    this.responseClientRequest,
-    this.fareOffered = const BlocFormItem(error: 'Ingresa la tarifa')
+    // this.polylines = const <PolylineId, Polyline>{},
+    // this.responseTimeAndDistance,
+    // this.responseClientRequest,
+    // this.fareOffered = const BlocFormItem(error: 'Ingresa la tarifa')
   });
 
   ClientMapBookingInfoState copyWith({
@@ -48,29 +48,30 @@ class ClientMapBookingInfoState extends Equatable {
     String? pickUpDescription,
     String? destinationDescription,
     Map<MarkerId, Marker>? markers,
-    Map<PolylineId, Polyline>? polylines,
-    Resource? responseTimeAndDistance,
-    Resource? responseClientRequest,
-    BlocFormItem? fareOffered
+    // Map<PolylineId, Polyline>? polylines,
+    // Resource? responseTimeAndDistance,
+    // Resource? responseClientRequest,
+    // BlocFormItem? fareOffered
   }) {
     return ClientMapBookingInfoState(
       position: position ?? this.position,
       markers: markers ?? this.markers,
-      polylines: polylines ?? this.polylines,
+      // polylines: polylines ?? this.polylines,
       controller: controller ?? this.controller,
       cameraPosition: cameraPosition ?? this.cameraPosition,
       pickUpLatLng: pickUpLatLng ?? this.pickUpLatLng,
       destinationLatLng: destinationLatLng ?? this.destinationLatLng,
-      pickUpDescription: pickUpDescription ?? this.pickUpDescription,
+      pickUpDescription: pickUpDescription ?? this.pickUpDescription,  // Manejo del valor nulo
       destinationDescription: destinationDescription ?? this.destinationDescription,
-      responseTimeAndDistance: responseTimeAndDistance ?? this.responseTimeAndDistance,
-      responseClientRequest: responseClientRequest,
-      fareOffered: fareOffered ?? this.fareOffered
+      // responseTimeAndDistance: responseTimeAndDistance ?? this.responseTimeAndDistance,
+      // responseClientRequest: responseClientRequest,
+      // fareOffered: fareOffered ?? this.fareOffered
     );
   }
 
 
   @override
-  List<Object?> get props => [position, markers, polylines, controller, cameraPosition, pickUpLatLng, destinationLatLng, pickUpDescription, destinationDescription, responseTimeAndDistance, responseClientRequest, fareOffered];
+  // List<Object?> get props => [position, markers, polylines, controller, cameraPosition, pickUpLatLng, destinationLatLng, pickUpDescription, destinationDescription, responseTimeAndDistance, responseClientRequest, fareOffered];
+  List<Object?> get props => [position, markers, controller, cameraPosition, pickUpLatLng, destinationLatLng, pickUpDescription, destinationDescription];
 
 }

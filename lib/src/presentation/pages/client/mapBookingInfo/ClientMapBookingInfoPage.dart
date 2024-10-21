@@ -29,14 +29,14 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // context
-      //     .read<ClientMapBookingInfoBloc>()
-      //     .add(ClientMapBookingInfoInitEvent(
-      //       pickUpLatLng: pickUpLatLng!,
-      //       destinationLatLng: destinationLatLng!,
-      //       pickUpDescription: pickUpDestination!,
-      //       destinationDescription: destinationDescription!,
-      //     ));
+      context
+          .read<ClientMapBookingInfoBloc>()
+          .add(ClientMapBookingInfoInitEvent(
+              // pickUpLatLng: pickUpLatLng!,
+              // destinationLatLng: destinationLatLng!,
+              // pickUpDescription: pickUpDestination!,
+              // destinationDescription: destinationDescription!,
+              ));
       // context.read<ClientMapBookingInfoBloc>().add(GetTimeAndDistanceValues());
       // context.read<ClientMapBookingInfoBloc>().add(AddPolyline());
       // context.read<ClientMapBookingInfoBloc>().add(ChangeMapCameraPosition(
@@ -53,32 +53,37 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
     pickUpDestination = arguments['pickUpDescription'];
     destinationDescription = arguments['destinationDescription'];
     return Scaffold(
-      body: BlocListener<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
-        listener: (context, state) {
-          final responseClientRequest = state.responseClientRequest;
-          if (responseClientRequest is Success) {
-            int idClientRequest = responseClientRequest.data;
-            context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
-            // Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
-            Navigator.pushNamed(context, 'client/driver/offers', arguments: idClientRequest);
-            Fluttertoast.showToast(msg: 'Solicitud enviada', toastLength: Toast.LENGTH_LONG);
-          }
+      // body: BlocListener<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
+      //   listener: (context, state) {
+      //     // final responseClientRequest = state.responseClientRequest;
+      //     // if (responseClientRequest is Success) {
+      //     //   int idClientRequest = responseClientRequest.data;
+      //     //   context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
+      //     //   // Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
+      //     //   Navigator.pushNamed(context, 'client/driver/offers', arguments: idClientRequest);
+      //     //   Fluttertoast.showToast(msg: 'Solicitud enviada', toastLength: Toast.LENGTH_LONG);
+      //     // }
+      //   },
+      //   child: BlocBuilder<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
+      //     builder: (context, state) {
+      //       // final responseTimeAndDistance = state.responseTimeAndDistance;
+      //       // if (responseTimeAndDistance is Loading) {
+      //       //   return Center(
+      //       //     child: CircularProgressIndicator(),
+      //       //   );
+      //       // } else if (responseTimeAndDistance is Success) {
+      //       //   TimeAndDistanceValues timeAndDistanceValues =
+      //       //       responseTimeAndDistance.data as TimeAndDistanceValues;
+      //       // return ClientMapBookingInfoContent(state, timeAndDistanceValues);
+      //       // }
+      //       return Container();
+      //     },
+      //   ),
+      //
+      body: BlocBuilder<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
+        builder: (context, state) {
+          return ClientMapBookingInfoContent(state);
         },
-        child: BlocBuilder<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
-          builder: (context, state) {
-            final responseTimeAndDistance = state.responseTimeAndDistance;
-            if (responseTimeAndDistance is Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (responseTimeAndDistance is Success) {
-              TimeAndDistanceValues timeAndDistanceValues =
-                  responseTimeAndDistance.data as TimeAndDistanceValues;
-              return ClientMapBookingInfoContent(state, timeAndDistanceValues);
-            }
-            return Container();
-          },
-        ),
       ),
     );
   }
