@@ -29,18 +29,18 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context
-          .read<ClientMapBookingInfoBloc>()
-          .add(ClientMapBookingInfoInitEvent(
-              // pickUpLatLng: pickUpLatLng!,
-              // destinationLatLng: destinationLatLng!,
-              // pickUpDescription: pickUpDestination!,
-              // destinationDescription: destinationDescription!,
-              ));
+      context.read<ClientMapBookingInfoBloc>().add(
+            ClientMapBookingInfoInitEvent(
+              pickUpLatLng: pickUpLatLng!,
+              destinationLatLng: destinationLatLng!,
+              pickUpDescription: pickUpDestination!,
+              destinationDescription: destinationDescription!,
+            ),
+          );
       // context.read<ClientMapBookingInfoBloc>().add(GetTimeAndDistanceValues());
-      // context.read<ClientMapBookingInfoBloc>().add(AddPolyline());
-      // context.read<ClientMapBookingInfoBloc>().add(ChangeMapCameraPosition(
-      //     lat: pickUpLatLng!.latitude, lng: pickUpLatLng!.longitude));
+      context.read<ClientMapBookingInfoBloc>().add(AddPolyline());
+      context.read<ClientMapBookingInfoBloc>().add(ChangeMapCameraPosition(
+          lat: pickUpLatLng!.latitude, lng: pickUpLatLng!.longitude));
     });
   }
 

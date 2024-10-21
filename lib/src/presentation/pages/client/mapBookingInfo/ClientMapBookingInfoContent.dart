@@ -36,7 +36,7 @@ class ClientMapBookingInfoContent extends StatelessWidget {
   Widget _cardBookingInfo(BuildContext context) {
     return Container(
         height: MediaQuery.of(context).size.height * 0.49,
-        padding: EdgeInsets.only(left: 20, right: 20),
+        padding: EdgeInsets.only(left: 20, right: 20, top: 20),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topRight,
@@ -95,6 +95,9 @@ class ClientMapBookingInfoContent extends StatelessWidget {
               // ),
               leading: Icon(Icons.money),
             ),
+            SizedBox(
+              height: 20,
+            ),
             DefaultTextField(
               margin: EdgeInsets.only(left: 15, right: 15),
               text: 'OFRECE TU TARIFA',
@@ -106,6 +109,9 @@ class ClientMapBookingInfoContent extends StatelessWidget {
               validator: (value) {
                 // return state.fareOffered.error;
               },
+            ),
+            SizedBox(
+              height: 20,
             ),
             _actionProfile('BUSCAR CONDUCTOR', Icons.search, () {
               // context.read<ClientMapBookingInfoBloc>().add(CreateClientRequest());
@@ -156,7 +162,7 @@ class ClientMapBookingInfoContent extends StatelessWidget {
         mapType: MapType.normal,
         initialCameraPosition: state.cameraPosition,
         // markers: Set<Marker>.of(state.markers.values),
-        // polylines: Set<Polyline>.of(state.polylines.values),
+        polylines: Set<Polyline>.of(state.polylines.values),
 
         // onMapCreated: (GoogleMapController controller) {
         //   controller.setMapStyle('[ { "featureType": "all", "elementType": "labels.text.fill", "stylers": [ { "color": "#ffffff" } ] }, { "featureType": "all", "elementType": "labels.text.stroke", "stylers": [ { "color": "#000000" }, { "lightness": 13 } ] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [ { "color": "#000000" } ] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [ { "color": "#144b53" }, { "lightness": 14 }, { "weight": 1.4 } ] }, { "featureType": "landscape", "elementType": "all", "stylers": [ { "color": "#08304b" } ] }, { "featureType": "poi", "elementType": "geometry", "stylers": [ { "color": "#0c4152" }, { "lightness": 5 } ] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [ { "color": "#000000" } ] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [ { "color": "#0b434f" }, { "lightness": 25 } ] }, { "featureType": "road.arterial", "elementType": "geometry.fill", "stylers": [ { "color": "#000000" } ] }, { "featureType": "road.arterial", "elementType": "geometry.stroke", "stylers": [ { "color": "#0b3d51" }, { "lightness": 16 } ] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [ { "color": "#000000" } ] }, { "featureType": "transit", "elementType": "all", "stylers": [ { "color": "#146474" } ] }, { "featureType": "water", "elementType": "all", "stylers": [ { "color": "#021019" } ] } ]');

@@ -30,10 +30,10 @@ class ClientMapBookingInfoBloc
       Completer<GoogleMapController> controller =
           Completer<GoogleMapController>();
       emit(state.copyWith(
-        // pickUpLatLng: event.pickUpLatLng,
-        // destinationLatLng: event.destinationLatLng,
-        // pickUpDescription: event.pickUpDescription,
-        // destinationDescription: event.destinationDescription,
+        pickUpLatLng: event.pickUpLatLng,
+        destinationLatLng: event.destinationLatLng,
+        pickUpDescription: event.pickUpDescription,
+        destinationDescription: event.destinationDescription,
         controller: controller,
       ));
       // BitmapDescriptor pickUpDescriptor =
@@ -116,16 +116,16 @@ class ClientMapBookingInfoBloc
     //   emit(state.copyWith(responseTimeAndDistance: response));
     // });
 
-    // on<AddPolyline>((event, emit) async {
-    //   List<LatLng> polylineCoordinates = await geolocatorUseCases.getPolyline
-    //       .run(state.pickUpLatLng!, state.destinationLatLng!);
-    //   PolylineId id = PolylineId("MyRoute");
-    //   Polyline polyline = Polyline(
-    //       polylineId: id,
-    //       color: Colors.blueAccent,
-    //       points: polylineCoordinates,
-    //       width: 6);
-    //   emit(state.copyWith(polylines: {id: polyline}));
-    // });
+    on<AddPolyline>((event, emit) async {
+      List<LatLng> polylineCoordinates = await geolocatorUseCases.getPolyline
+          .run(state.pickUpLatLng!, state.destinationLatLng!);
+      PolylineId id = PolylineId("MyRoute");
+      Polyline polyline = Polyline(
+          polylineId: id,
+          color: Colors.blueAccent,
+          points: polylineCoordinates,
+          width: 6);
+      emit(state.copyWith(polylines: {id: polyline}));
+    });
   }
 }

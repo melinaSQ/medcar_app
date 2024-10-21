@@ -4,16 +4,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 abstract class ClientMapBookingInfoEvent {}
 
 class ClientMapBookingInfoInitEvent extends ClientMapBookingInfoEvent {
-  // final LatLng pickUpLatLng;
-  // final LatLng destinationLatLng;
-  // final String pickUpDescription;
-  // final String destinationDescription;
-  // ClientMapBookingInfoInitEvent({
-  //   required this.pickUpLatLng,
-  //   required this.destinationLatLng,
-  //   required this.pickUpDescription,
-  //   required this.destinationDescription,
-  // });
+  final LatLng pickUpLatLng;
+  final LatLng destinationLatLng;
+  final String pickUpDescription;
+  final String destinationDescription;
+  ClientMapBookingInfoInitEvent({
+    required this.pickUpLatLng,
+    required this.destinationLatLng,
+    required this.pickUpDescription,
+    required this.destinationDescription,
+  });
 }
 
 // class FareOfferedChanged extends ClientMapBookingInfoEvent {
@@ -31,10 +31,10 @@ class ChangeMapCameraPosition extends ClientMapBookingInfoEvent {
     required this.lng,
   });
 }
-//
+
 // class CreateClientRequest extends ClientMapBookingInfoEvent {}
 // class GetTimeAndDistanceValues extends ClientMapBookingInfoEvent {}
-// class AddPolyline extends ClientMapBookingInfoEvent {}
+class AddPolyline extends ClientMapBookingInfoEvent {}
 // class EmitNewClientRequestSocketIO extends ClientMapBookingInfoEvent {
 //   final int idClientRequest;
 //   EmitNewClientRequestSocketIO({required this.idClientRequest}); 

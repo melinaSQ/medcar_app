@@ -55,7 +55,7 @@ import 'package:medcar_app/src/domain/useCases/geolocator/FindPositionUseCase.da
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GetMarkerUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GetPlacemarkDataUseCase.dart';
-// import 'package:medcar_app/src/domain/useCases/geolocator/GetPolylineUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/geolocator/GetPolylineUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/geolocator/GetPositionStreamUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/socket/ConnectSocketUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/socket/DisconnectSocketUseCase.dart';
@@ -72,16 +72,14 @@ abstract class AppModule {
   @injectable
   SharefPref get sharefPref => SharefPref();
 
-  /*
-
-  @injectable
-  Socket get socket => io('http://${ApiConfig.API_PROJECT}', 
-    OptionBuilder()
-      .setTransports(['websocket']) // for Flutter or Dart VM
-      .disableAutoConnect()  // disable auto-connection
-      .build()
-  );
-  */
+  // @injectable
+  // Socket get socket => io('http://${ApiConfig.API_PROJECT}', 
+  //   OptionBuilder()
+  //     .setTransports(['websocket']) // for Flutter or Dart VM
+  //     .disableAutoConnect()  // disable auto-connection
+  //     .build()
+  // );
+  
 
   @injectable
   Future<String> get token async {
@@ -98,45 +96,44 @@ abstract class AppModule {
   AuthService get authService => AuthService();
   @injectable
   UsersService get usersService => UsersService(token);
-/*
 
-  @injectable
-  DriversPositionService get driversPositionService => DriversPositionService();
+  // @injectable
+  // DriversPositionService get driversPositionService => DriversPositionService();
 
-  @injectable
-  ClientRequestsService get clientRequestsService => ClientRequestsService();
+  // @injectable
+  // ClientRequestsService get clientRequestsService => ClientRequestsService();
 
-  @injectable
-  DriverTripRequestsService get driverTripRequestsService => DriverTripRequestsService();
+  // @injectable
+  // DriverTripRequestsService get driverTripRequestsService => DriverTripRequestsService();
 
-  @injectable
-  DriverCarInfoService get driverCarInfoService => DriverCarInfoService();
-*/
+  // @injectable
+  // DriverCarInfoService get driverCarInfoService => DriverCarInfoService();
+
   @injectable
   AuthRepository get authRepository =>
       AuthRepositoryImpl(authService, sharefPref);
 
   @injectable
   UsersRepository get usersRepository => UsersRepositoryImpl(usersService);
-/*
-  @injectable
-  SocketRepository get socketRepository => SocketRepositoryImpl(socket);
 
-  @injectable
-  ClientRequestsRepository get clientRequestsRepository => ClientRequestsRepositoryImpl(clientRequestsService);
-*/
+  // @injectable
+  // SocketRepository get socketRepository => SocketRepositoryImpl(socket);
+
+  // @injectable
+  // ClientRequestsRepository get clientRequestsRepository => ClientRequestsRepositoryImpl(clientRequestsService);
+
   @injectable
   GeolocatorRepository get geolocatorRepository => GeolocatorRepositoryImpl();
-/*
-  @injectable
-  DriverPositionRepository get driversPositionRepository => DriversPositionRepositoryImpl(driversPositionService);
 
-  @injectable
-  DriverTripRequestsRepository get driverTripRequestsRepository => DriverTripRequestsRepositoryImpl(driverTripRequestsService);
+  // @injectable
+  // DriverPositionRepository get driversPositionRepository => DriversPositionRepositoryImpl(driversPositionService);
 
-  @injectable
-  DriverCarInfoRepository get driverCarInfoRepository => DriverCarInfoRepositoryImpl(driverCarInfoService);
-*/
+  // @injectable
+  // DriverTripRequestsRepository get driverTripRequestsRepository => DriverTripRequestsRepositoryImpl(driverTripRequestsService);
+
+  // @injectable
+  // DriverCarInfoRepository get driverCarInfoRepository => DriverCarInfoRepositoryImpl(driverCarInfoService);
+
   @injectable
   AuthUseCases get authUseCases => AuthUseCases(
         login: LoginUseCase(authRepository),
@@ -158,47 +155,47 @@ abstract class AppModule {
         createMarker: CreateMarkerUseCase(geolocatorRepository),
         getMarker: GetMarkerUseCase(geolocatorRepository),
         getPlacemarkData: GetPlacemarkDataUseCase(geolocatorRepository),
-        // getPolyline: GetPolylineUseCase(geolocatorRepository),
+        getPolyline: GetPolylineUseCase(geolocatorRepository),
         // getPositionStream: GetPositionStreamUseCase(geolocatorRepository)
       );
-/*
-  @injectable
-   SocketUseCases get socketUseCases => SocketUseCases(
-    connect: ConnectSocketUseCase(socketRepository),
-    disconnect: DisconnectSocketUseCase(socketRepository)
-  );
 
-  @injectable
-   DriversPositionUseCases get driversPositionUseCases => DriversPositionUseCases(
-    createDriverPosition: CreateDriverPositionUseCase(driversPositionRepository),
-    deleteDriverPosition: DeleteDriverPositionUseCase(driversPositionRepository),
-    getDriverPosition: GetDriverPositionUseCase(driversPositionRepository)
-  );
+  // @injectable
+  //  SocketUseCases get socketUseCases => SocketUseCases(
+  //   connect: ConnectSocketUseCase(socketRepository),
+  //   disconnect: DisconnectSocketUseCase(socketRepository)
+  // );
 
-  @injectable
-   ClientRequestsUseCases get clientRequestsUseCases => ClientRequestsUseCases(
-    createClientRequest: CreateClientRequestUseCase(clientRequestsRepository),
-    getTimeAndDistance: GetTimeAndDistanceUseCase(clientRequestsRepository),
-    getNearbyTripRequest: GetNearbyTripRequestUseCase(clientRequestsRepository),
-    updateDriverAssigned: UpdateDriverAssignedUseCase(clientRequestsRepository),
-    getByClientRequest: GetByClientRequestUseCase(clientRequestsRepository),
-    updateStatusClientRequest: UpdateStatusClientRequestUseCase(clientRequestsRepository),
-    updateClientRating: UpdateClientRatingUseCase(clientRequestsRepository),
-    updateDriverRating: UpdateDriverRatingUseCase(clientRequestsRepository),
-    getByClientAssigned: GetByClientAssignedUseCase(clientRequestsRepository),
-    getByDriverAssigned: GetByDriverAssignedUseCase(clientRequestsRepository)
-  );
+  // @injectable
+  //  DriversPositionUseCases get driversPositionUseCases => DriversPositionUseCases(
+  //   createDriverPosition: CreateDriverPositionUseCase(driversPositionRepository),
+  //   deleteDriverPosition: DeleteDriverPositionUseCase(driversPositionRepository),
+  //   getDriverPosition: GetDriverPositionUseCase(driversPositionRepository)
+  // );
 
-  @injectable
-   DriverTripRequestUseCases get driverTripRequestUseCases => DriverTripRequestUseCases(
-    createDriverTripRequest: CreateDriverTripRequestUseCase(driverTripRequestsRepository),
-    getDriverTripOffersByClientRequest: GetDriverTripOffersByClientRequestUseCase(driverTripRequestsRepository)
-  );
+  // @injectable
+  //  ClientRequestsUseCases get clientRequestsUseCases => ClientRequestsUseCases(
+  //   createClientRequest: CreateClientRequestUseCase(clientRequestsRepository),
+  //   getTimeAndDistance: GetTimeAndDistanceUseCase(clientRequestsRepository),
+  //   getNearbyTripRequest: GetNearbyTripRequestUseCase(clientRequestsRepository),
+  //   updateDriverAssigned: UpdateDriverAssignedUseCase(clientRequestsRepository),
+  //   getByClientRequest: GetByClientRequestUseCase(clientRequestsRepository),
+  //   updateStatusClientRequest: UpdateStatusClientRequestUseCase(clientRequestsRepository),
+  //   updateClientRating: UpdateClientRatingUseCase(clientRequestsRepository),
+  //   updateDriverRating: UpdateDriverRatingUseCase(clientRequestsRepository),
+  //   getByClientAssigned: GetByClientAssignedUseCase(clientRequestsRepository),
+  //   getByDriverAssigned: GetByDriverAssignedUseCase(clientRequestsRepository)
+  // );
 
-  @injectable
-   DriverCarInfoUseCases get driverCarInfoUseCases => DriverCarInfoUseCases(
-    createDriverCarInfo: CreateDriverCarInfoUseCase(driverCarInfoRepository),
-    getDriverCarInfo: GetDriverCarInfoUseCase(driverCarInfoRepository)
-  );
-  */
+  // @injectable
+  //  DriverTripRequestUseCases get driverTripRequestUseCases => DriverTripRequestUseCases(
+  //   createDriverTripRequest: CreateDriverTripRequestUseCase(driverTripRequestsRepository),
+  //   getDriverTripOffersByClientRequest: GetDriverTripOffersByClientRequestUseCase(driverTripRequestsRepository)
+  // );
+
+  // @injectable
+  //  DriverCarInfoUseCases get driverCarInfoUseCases => DriverCarInfoUseCases(
+  //   createDriverCarInfo: CreateDriverCarInfoUseCase(driverCarInfoRepository),
+  //   getDriverCarInfo: GetDriverCarInfoUseCase(driverCarInfoRepository)
+  // );
+  
 }

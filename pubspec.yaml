@@ -49,6 +49,7 @@ dependencies:
   geolocator: ^13.0.1
   google_places_flutter: ^2.0.9 #para completar google
   geocoding: ^3.0.0
+  flutter_polyline_points: ^2.1.0 #para trazar rutas
 
 dev_dependencies:
   flutter_test:
