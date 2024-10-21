@@ -1,5 +1,12 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
+import 'dart:typed_data';
+import 'package:image/image.dart' as img;
+
+//
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
@@ -25,7 +32,7 @@ class ClientMapBookingInfoBloc
 
   ClientMapBookingInfoBloc(this.geolocatorUseCases, this.authUseCases)
       : super(ClientMapBookingInfoState()) {
-    //
+    //init event
     on<ClientMapBookingInfoInitEvent>((event, emit) async {
       Completer<GoogleMapController> controller =
           Completer<GoogleMapController>();
@@ -36,28 +43,58 @@ class ClientMapBookingInfoBloc
         destinationDescription: event.destinationDescription,
         controller: controller,
       ));
+
+      //
+      // Redimensionar imagen
+      Future<BitmapDescriptor> getResizedBitmapDescriptor(
+          String assetPath, int width, int height) async {
+        // Cargar la imagen
+        ByteData data = await rootBundle.load(assetPath);
+        Uint8List bytes = data.buffer.asUint8List();
+
+        // Decodificar y redimensionar la imagen
+        img.Image originalImage = img.decodeImage(bytes)!;
+        img.Image resizedImage =
+            img.copyResize(originalImage, width: width, height: height);
+
+        // Codificar la imagen redimensionada
+        Uint8List resizedBytes =
+            Uint8List.fromList(img.encodePng(resizedImage));
+
+        // ignore: deprecated_member_use
+        return BitmapDescriptor.fromBytes(resizedBytes);
+      }
+
+      // Crea los marcadores usando las imágenes redimensionadas
+      BitmapDescriptor pickUpDescriptor = await getResizedBitmapDescriptor(
+          'assets/img/pin_white.png', 64, 64); // Cambia el tamaño a 64x64
+      BitmapDescriptor destinationDescriptor = await getResizedBitmapDescriptor(
+          'assets/img/flag.png', 64, 64); // Cambia el tamaño a 64x64
+
       // BitmapDescriptor pickUpDescriptor =
       //     await geolocatorUseCases.createMarker.run('assets/img/pin_white.png');
       // BitmapDescriptor destinationDescriptor =
       //     await geolocatorUseCases.createMarker.run('assets/img/flag.png');
-      // Marker markerPickUp = geolocatorUseCases.getMarker.run(
-      //     'pickup',
-      //     state.pickUpLatLng!.latitude,
-      //     state.pickUpLatLng!.longitude,
-      //     'Lugar de recogida',
-      //     'Debes permancer aqui mientras llega el conductor',
-      //     pickUpDescriptor);
-      // Marker markerDestination = geolocatorUseCases.getMarker.run(
-      //     'destination',
-      //     state.destinationLatLng!.latitude,
-      //     state.destinationLatLng!.longitude,
-      //     'Tu Destino',
-      //     '',
-      //     destinationDescriptor);
-      // emit(state.copyWith(markers: {
-      //   markerPickUp.markerId: markerPickUp,
-      //   markerDestination.markerId: markerDestination
-      // }));
+      Marker markerPickUp = geolocatorUseCases.getMarker.run(
+          'pickup',
+          state.pickUpLatLng!.latitude,
+          state.pickUpLatLng!.longitude,
+          'Lugar de recogida',
+          'Debes permancer aqui mientras llega el conductor',
+          pickUpDescriptor);
+      Marker markerDestination = geolocatorUseCases.getMarker.run(
+          'destination',
+          state.destinationLatLng!.latitude,
+          state.destinationLatLng!.longitude,
+          'Tu Destino',
+          '',
+          destinationDescriptor);
+      emit(state.copyWith(
+        markers: {
+          markerPickUp.markerId: markerPickUp,
+          markerDestination.markerId: markerDestination
+        },
+      ));
     });
 
     on<ChangeMapCameraPosition>((event, emit) async {
