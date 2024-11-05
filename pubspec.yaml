@@ -51,6 +51,7 @@ dependencies:
   geocoding: ^3.0.0
   flutter_polyline_points: ^2.1.0 #para trazar rutas
   image: ^3.0.1 # para edimiensionar los bitmap descriptor imagenes
+  socket_io_client: ^3.0.1 #para la ctuaizacion e la ubicacion en tiempo real
 
 dev_dependencies:
   flutter_test:

@@ -14,14 +14,14 @@ import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
 import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationEvent.dart';
 import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationState.dart';
 // import 'package:socket_io_client/socket_io_client.dart';
 
 class DriverMapLocationBloc
     extends Bloc<DriverMapLocationEvent, DriverMapLocationState> {
-  // SocketUseCases socketUseCases;
+  SocketUseCases socketUseCases;
   GeolocatorUseCases geolocatorUseCases;
   AuthUseCases authUseCases;
   // DriversPositionUseCases driversPositionUseCases;
@@ -30,7 +30,8 @@ class DriverMapLocationBloc
 
   DriverMapLocationBloc(
     /*this.blocSocketIO,*/ this.geolocatorUseCases,
-    /*this.socketUseCases,*/ this.authUseCases,
+    this.socketUseCases,
+    this.authUseCases,
     /*this.driversPositionUseCases*/
   ) : super(DriverMapLocationState()) {
     on<DriverMapLocationInitEvent>((event, emit) async {
@@ -138,5 +139,13 @@ class DriverMapLocationBloc
     // on<DeleteLocationData>((event, emit) async {
     //   await driversPositionUseCases.deleteDriverPosition.run(event.idDriver);
     // });
+
+    on<ConnectSocketIo>((event, emit) {
+      socketUseCases.connect.run();
+    });
+
+    on<DisconnectSocketIo>((event, emit) {
+      socketUseCases.disconnect.run();
+    });
   }
 }

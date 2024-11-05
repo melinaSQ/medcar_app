@@ -24,6 +24,7 @@ class _DriverMapLocationPageState extends State<DriverMapLocationPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<DriverMapLocationBloc>().add(DriverMapLocationInitEvent());
+      context.read<DriverMapLocationBloc>().add(ConnectSocketIo());
       context.read<DriverMapLocationBloc>().add(FindPosition());
     });
   }

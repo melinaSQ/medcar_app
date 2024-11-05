@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:medcar_app/src/domain/models/DriverPosition.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:medcar_app/src/domain/models/DriverPosition.dart';
 
 abstract class DriverMapLocationEvent {}
 
@@ -37,3 +37,6 @@ class ChangeMapCameraPosition extends DriverMapLocationEvent {
 //   final int idDriver;
 //   DeleteLocationData({ required this.idDriver });
 // }
+
+class ConnectSocketIo extends DriverMapLocationEvent{}
+class DisconnectSocketIo extends DriverMapLocationEvent{}

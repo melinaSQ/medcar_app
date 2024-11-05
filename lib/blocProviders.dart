@@ -9,7 +9,7 @@ import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/users/UsersUseCases.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
@@ -92,7 +92,7 @@ List<BlocProvider> blocProviders = [
     create: (context) => DriverMapLocationBloc(
       // context.read<BlocSocketIO>(),
       locator<GeolocatorUseCases>(),
-      // locator<SocketUseCases>(),
+      locator<SocketUseCases>(),
       locator<AuthUseCases>(),
       // locator<DriversPositionUseCases>(),
     ),
