@@ -5,7 +5,7 @@ import 'package:medcar_app/src/domain/useCases/geolocator/FindPositionUseCase.da
 import 'package:medcar_app/src/domain/useCases/geolocator/GetMarkerUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GetPlacemarkDataUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GetPolylineUseCase.dart';
-// import 'package:medcar_app/src/domain/useCases/geolocator/GetPositionStreamUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/geolocator/GetPositionStreamUseCase.dart';
 
 class GeolocatorUseCases {
   FindPositionUseCase findPosition;
@@ -13,7 +13,7 @@ class GeolocatorUseCases {
   GetMarkerUseCase getMarker;
   GetPlacemarkDataUseCase getPlacemarkData;
   GetPolylineUseCase getPolyline;
-  // GetPositionStreamUseCase getPositionStream;
+  GetPositionStreamUseCase getPositionStream;
 
   GeolocatorUseCases({
     required this.findPosition,
@@ -21,6 +21,6 @@ class GeolocatorUseCases {
     required this.getMarker,
     required this.getPlacemarkData,
     required this.getPolyline,
-    // required this.getPositionStream,
+    required this.getPositionStream,
   });
 }

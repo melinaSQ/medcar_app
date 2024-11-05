@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 
 import 'dart:async';
 
@@ -10,7 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
-import 'package:medcar_app/src/domain/models/DriverPosition.dart';
+// import 'package:medcar_app/src/domain/models/DriverPosition.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
@@ -46,17 +46,19 @@ class DriverMapLocationBloc
       add(ChangeMapCameraPosition(
           lat: position.latitude, lng: position.longitude));
       add(AddMyPositionMarker(lat: position.latitude, lng: position.longitude));
-      // Stream<Position> positionStream = geolocatorUseCases.getPositionStream.run();
-      // positionSubscription = positionStream.listen((Position position) {
-      //   add(UpdateLocation(position: position));
-      //   add(SaveLocationData(
-      //     driverPosition: DriverPosition(
-      //       idDriver: state.idDriver!,
-      //       lat: position.latitude,
-      //       lng: position.longitude)
-      //     )
-      //   );
-      // });
+
+      Stream<Position> positionStream =
+          geolocatorUseCases.getPositionStream.run();
+      positionSubscription = positionStream.listen((Position position) {
+        add(UpdateLocation(position: position));
+        // add(SaveLocationData(
+        //   driverPosition: DriverPosition(
+        //     idDriver: state.idDriver!,
+        //     lat: position.latitude,
+        //     lng: position.longitude)
+        //   )
+        // );
+      });
       emit(state.copyWith(
         position: position,
       ));
@@ -113,12 +115,12 @@ class DriverMapLocationBloc
       add(ChangeMapCameraPosition(
           lat: event.position.latitude, lng: event.position.longitude));
       emit(state.copyWith(position: event.position));
-      add(EmitDriverPositionSocketIO());
+      // add(EmitDriverPositionSocketIO());
     });
 
     on<StopLocation>((event, emit) {
       positionSubscription?.cancel();
-      add(DeleteLocationData(idDriver: state.idDriver!));
+      // add(DeleteLocationData(idDriver: state.idDriver!));
     });
 
     // on<EmitDriverPositionSocketIO>((event, emit) async {

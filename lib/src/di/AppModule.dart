@@ -1,4 +1,5 @@
-import 'package:medcar_app/src/data/api/ApiConfig.dart';
+// ignore_for_file: file_names
+// import 'package:medcar_app/src/data/api/ApiConfig.dart';
 import 'package:medcar_app/src/data/dataSource/local/SharefPref.dart';
 import 'package:medcar_app/src/data/dataSource/remote/services/AuthService.dart';
 // import 'package:medcar_app/src/data/dataSource/remote/services/ClientRequestsService.dart';
@@ -56,7 +57,7 @@ import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dar
 import 'package:medcar_app/src/domain/useCases/geolocator/GetMarkerUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GetPlacemarkDataUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GetPolylineUseCase.dart';
-// import 'package:medcar_app/src/domain/useCases/geolocator/GetPositionStreamUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/geolocator/GetPositionStreamUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/socket/ConnectSocketUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/socket/DisconnectSocketUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
@@ -156,7 +157,7 @@ abstract class AppModule {
         getMarker: GetMarkerUseCase(geolocatorRepository),
         getPlacemarkData: GetPlacemarkDataUseCase(geolocatorRepository),
         getPolyline: GetPolylineUseCase(geolocatorRepository),
-        // getPositionStream: GetPositionStreamUseCase(geolocatorRepository)
+        getPositionStream: GetPositionStreamUseCase(geolocatorRepository)
       );
 
   // @injectable

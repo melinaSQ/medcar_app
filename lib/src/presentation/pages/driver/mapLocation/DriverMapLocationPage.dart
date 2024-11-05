@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+// import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
@@ -9,7 +9,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationEvent.dart';
 import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationBloc.dart';
 import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationState.dart';
-import 'package:medcar_app/src/presentation/widgets/DefaultButton.dart';
 // import 'package:toggle_switch/toggle_switch.dart';
 
 class DriverMapLocationPage extends StatefulWidget {

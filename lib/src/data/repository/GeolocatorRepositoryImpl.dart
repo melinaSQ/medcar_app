@@ -105,12 +105,12 @@ class GeolocatorRepositoryImpl implements GeolocatorRepository {
     return polylineCoordinates;
   }
 
-  // @override
-  // Stream<Position> getPositionStream() {
-  //   LocationSettings locationSettings = LocationSettings(
-  //     accuracy: LocationAccuracy.best,
-  //     distanceFilter: 1
-  //   );
-  //   return Geolocator.getPositionStream(locationSettings: locationSettings);
-  // }
+  @override
+  Stream<Position> getPositionStream() {
+    LocationSettings locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.best,
+      distanceFilter: 1
+    );
+    return Geolocator.getPositionStream(locationSettings: locationSettings);
+  }
 }
