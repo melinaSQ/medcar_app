@@ -20,7 +20,7 @@ import 'package:medcar_app/src/presentation/pages/driver/home/DriverHomePage.dar
 // import 'package:medcar_app/src/presentation/pages/driver/mapTrip/DriverMapTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/ratingTrip/DriverRatingTripPage.dart';
 import 'package:medcar_app/src/presentation/pages/profile/update/ProfileUpdatePage.dart';
-// import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
+import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 
@@ -78,9 +78,10 @@ class _MyAppState extends State<MyApp> {
           'login': (BuildContext context) => LoginPage(),
           'register': (BuildContext context) => RegisterPage(),
           'client/home': (BuildContext context) => ClientHomePage(),
-          // 'roles': (BuildContext context) => RolesPage(),
-          // 'driver/home': (BuildContext context) => DriverHomePage(),
-          'client/map/booking': (BuildContext context) => ClientMapBookingInfoPage(),
+          'roles': (BuildContext context) => RolesPage(),
+          'driver/home': (BuildContext context) => DriverHomePage(),
+          'client/map/booking': (BuildContext context) =>
+              ClientMapBookingInfoPage(),
           'profile/update': (BuildContext context) => ProfileUpdatePage(),
           // 'client/driver/offers': (BuildContext context) => ClientDriverOffersPage(),
           // 'client/map/trip': (BuildContext context) => ClientMapTripPage(),

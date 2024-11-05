@@ -34,6 +34,10 @@ class _DriverHomePageState extends State<DriverHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Center(
+        child: Text('driverhomepage'),
+      ),
+      /*
       appBar: AppBar(
         title: Text(
           'Menu de opciones',
@@ -149,6 +153,7 @@ class _DriverHomePageState extends State<DriverHomePage> {
           );
         },
       ),
+      */
     );
   }
 }

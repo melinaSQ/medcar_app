@@ -36,8 +36,8 @@ import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMa
 import 'package:medcar_app/src/presentation/pages/profile/info/bloc/ProfileInfoBloc.dart';
 import 'package:medcar_app/src/presentation/pages/profile/info/bloc/ProfileInfoEvent.dart';
 import 'package:medcar_app/src/presentation/pages/profile/update/bloc/ProfileUpdateBloc.dart';
-// import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesBloc.dart';
-// import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesEvent.dart';
+import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesBloc.dart';
+import 'package:medcar_app/src/presentation/pages/roles/bloc/RolesEvent.dart';
 
 List<BlocProvider> blocProviders = [
   BlocProvider<LoginBloc>(
@@ -52,11 +52,14 @@ List<BlocProvider> blocProviders = [
   BlocProvider<ClientHomeBloc>(
     create: (context) => ClientHomeBloc(locator<AuthUseCases>()),
   ),
-  /*
-  BlocProvider<BlocSocketIO>(create: (context) => BlocSocketIO(locator<SocketUseCases>(), locator<AuthUseCases>())),
-  BlocProvider<DriverHomeBloc>(create: (context) => DriverHomeBloc(locator<AuthUseCases>())),
-  BlocProvider<RolesBloc>(create: (context) => RolesBloc(locator<AuthUseCases>())..add(GetRolesList())),
-  */
+
+  // BlocProvider<BlocSocketIO>(create: (context) => BlocSocketIO(locator<SocketUseCases>(), locator<AuthUseCases>())),
+  // BlocProvider<DriverHomeBloc>(create: (context) => DriverHomeBloc(locator<AuthUseCases>())),
+  BlocProvider<RolesBloc>(
+    create: (context) =>
+        RolesBloc(locator<AuthUseCases>())..add(GetRolesList()),
+  ),
+
   BlocProvider<ProfileInfoBloc>(
     create: (context) =>
         ProfileInfoBloc(locator<AuthUseCases>())..add(GetUserInfo()),

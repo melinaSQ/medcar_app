@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_interpolations, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/LoginContent.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
           print('Error Data: ${response.message}');
         } else if (response is Success) {
           print('Success Dta: ${response.data}');
-
           final authResponse = response.data as AuthResponse;
           context
               .read<LoginBloc>()
