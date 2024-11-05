@@ -29,7 +29,7 @@ import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMa
 // import 'package:medcar_app/src/presentation/pages/driver/carInfo/bloc/DriverCarInfoBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/historyTrip/bloc/DriverHistoryTripBloc.dart';
-// import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeBloc.dart';
+import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/mapLocation/bloc/DriverMapLocationBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/mapTrip/bloc/DriverMapTripBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/ratingTrip/bloc/DriverRatingTripBloc.dart';
@@ -54,7 +54,10 @@ List<BlocProvider> blocProviders = [
   ),
 
   // BlocProvider<BlocSocketIO>(create: (context) => BlocSocketIO(locator<SocketUseCases>(), locator<AuthUseCases>())),
-  // BlocProvider<DriverHomeBloc>(create: (context) => DriverHomeBloc(locator<AuthUseCases>())),
+  BlocProvider<DriverHomeBloc>(
+    create: (context) => DriverHomeBloc(locator<AuthUseCases>()),
+  ),
+  
   BlocProvider<RolesBloc>(
     create: (context) =>
         RolesBloc(locator<AuthUseCases>())..add(GetRolesList()),

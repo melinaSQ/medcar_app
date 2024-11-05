@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
@@ -10,7 +12,7 @@ import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeEve
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeState.dart';
 import 'package:medcar_app/src/presentation/pages/profile/info/ProfileInfoPage.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapSeeker/ClientMapSeekerPage.dart';
-// import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
+import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
 
 class ClientHomePage extends StatefulWidget {
   const ClientHomePage({super.key});
@@ -24,7 +26,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
     ClientMapSeekerPage(),
     //ClientHistoryTripPage(),
     ProfileInfoPage(),
-    //RolesPage(),
+    RolesPage(),
   ];
 
   @override
@@ -110,18 +112,18 @@ class _ClientHomePageState extends State<ClientHomePage> {
                     Navigator.pop(context);
                   },
                 ),
-                /*
+                
                 ListTile(
                   title: Text('Roles de usuario'),
-                  selected: state.pageIndex == 3,
+                  selected: state.pageIndex == 2,
                   onTap: () {
                     context
                         .read<ClientHomeBloc>()
-                        .add(ChangeDrawerPage(pageIndex: 3));
+                        .add(ChangeDrawerPage(pageIndex: 2));
                     Navigator.pop(context);
                   },
                 ),
-              */
+              
 
                 ListTile(
                   title: Text('Cerrar sesion'),

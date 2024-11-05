@@ -4,7 +4,7 @@ class ClientHomeState extends Equatable {
 
   final int pageIndex;
 
-  ClientHomeState({
+  const ClientHomeState({
     this.pageIndex = 0
   });
 
