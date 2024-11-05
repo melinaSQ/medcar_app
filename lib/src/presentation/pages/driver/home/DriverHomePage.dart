@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
 import 'package:medcar_app/main.dart';
-import 'package:medcar_app/src/presentation/pages/client/mapSeeker/ClientMapSeekerPage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapSeeker/ClientMapSeekerPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/carInfo/DriverCarInfoPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
@@ -14,7 +13,7 @@ import 'package:medcar_app/src/presentation/pages/client/mapSeeker/ClientMapSeek
 import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeBloc.dart';
 import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeState.dart';
 import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeEvent.dart';
-// import 'package:medcar_app/src/presentation/pages/driver/mapLocation/DriverMapLocationPage.dart';
+import 'package:medcar_app/src/presentation/pages/driver/mapLocation/DriverMapLocationPage.dart';
 import 'package:medcar_app/src/presentation/pages/profile/info/ProfileInfoPage.dart';
 import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
 
@@ -27,8 +26,7 @@ class DriverHomePage extends StatefulWidget {
 
 class _DriverHomePageState extends State<DriverHomePage> {
   List<Widget> pageList = <Widget>[
-    ClientMapSeekerPage(),
-    // DriverMapLocationPage(),
+    DriverMapLocationPage(),
     // DriverClientRequestsPage(),
     // DriverCarInfoPage(),
     // DriverHistoryTripPage(),
