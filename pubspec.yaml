@@ -52,6 +52,8 @@ dependencies:
   flutter_polyline_points: ^2.1.0 #para trazar rutas
   image: ^3.0.1 # para edimiensionar los bitmap descriptor imagenes
   socket_io_client: ^3.0.1 #para la ctuaizacion e la ubicacion en tiempo real
+  flutter_datetime_picker: ^1.5.1 # or the latest version
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

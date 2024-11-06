@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:medcar_app/src/data/dataSource/remote/services/ClientRequestsService.dart';
 import 'package:medcar_app/src/domain/models/ClientRequest.dart';
 import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
@@ -23,7 +25,7 @@ class ClientRequestsRepositoryImpl implements ClientRequestsRepository {
   }
 
   @override
-  Future<Resource<int>> create(ClientRequest clientRequest) {
+  Future<Resource<bool>> create(ClientRequest clientRequest) {
     return clientRequestsService.create(clientRequest);
   }
 

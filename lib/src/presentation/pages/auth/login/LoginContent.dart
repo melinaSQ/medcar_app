@@ -90,9 +90,9 @@ class LoginContent extends StatelessWidget {
                     _textWelcome('back...'),*/
                     _imageMedcar(),
                     //_textLogin(),
-                    _text('Introduce tu número de teléfono', 28),
+                    _text('Introduce tu correo electronico', 28),
                     _text(
-                        'Te enviaremos un código para verificar tu número teléfonico',
+                        'Te enviaremos un código para verificar tu correo',
                         18),
 
                     //***campo email

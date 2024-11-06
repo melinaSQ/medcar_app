@@ -1,7 +1,9 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, use_build_context_synchronously, prefer_interpolation_to_compose_strings, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/ClientMapBookingInfoBloc.dart';
@@ -10,6 +12,7 @@ import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/Cli
 import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 import 'package:medcar_app/src/presentation/widgets/DefaultIconBack.dart';
 import 'package:medcar_app/src/presentation/widgets/DefaultTextField.dart';
+// import 'package:flutter_datetime_picker/flutter_datetime_picker.dart'; // Importar el paquete
 
 class ClientMapBookingInfoContent extends StatelessWidget {
   ClientMapBookingInfoState state;
@@ -49,81 +52,178 @@ class ClientMapBookingInfoContent extends StatelessWidget {
               topLeft: Radius.circular(30),
               topRight: Radius.circular(30),
             )),
-        child: Column(
-          children: [
-            ListTile(
-              title: Text(
-                'Recoger en',
-                style: TextStyle(fontSize: 15),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ListTile(
+                title: Text(
+                  'Recoger en',
+                  style: TextStyle(fontSize: 15),
+                ),
+                subtitle: Text(
+                  state.pickUpDescription,
+                  style: TextStyle(fontSize: 13),
+                ),
+                leading: Icon(Icons.location_on),
               ),
-              subtitle: Text(
-                state.pickUpDescription,
-                style: TextStyle(fontSize: 13),
+              ListTile(
+                title: Text(
+                  'Dejar en',
+                  style: TextStyle(fontSize: 15),
+                ),
+                subtitle: Text(
+                  state.destinationDescription,
+                  style: TextStyle(fontSize: 13),
+                ),
+                leading: Icon(Icons.my_location),
               ),
-              leading: Icon(Icons.location_on),
-            ),
-            ListTile(
-              title: Text(
-                'Dejar en',
-                style: TextStyle(fontSize: 15),
+              ListTile(
+                title: Text(
+                  'Tiempo y distancia aproximados',
+                  style: TextStyle(fontSize: 15),
+                ),
+                subtitle: Text(
+                  '${timeAndDistanceValues.distance.text} y ${timeAndDistanceValues.duration.text}',
+                  style: TextStyle(fontSize: 13),
+                ),
+                leading: Icon(Icons.timer),
               ),
-              subtitle: Text(
-                state.destinationDescription,
-                style: TextStyle(fontSize: 13),
+              ListTile(
+                title: Text(
+                  'Precios recomendados',
+                  style: TextStyle(fontSize: 15),
+                ),
+                subtitle: Text(
+                  'Bs ${timeAndDistanceValues.recommendedValue}',
+                  style: TextStyle(fontSize: 13),
+                ),
+                leading: Icon(Icons.money),
               ),
-              leading: Icon(Icons.my_location),
-            ),
-            ListTile(
-              title: Text(
-                'Tiempo y distancia aproximados',
-                style: TextStyle(fontSize: 15),
+              SizedBox(
+                height: 10,
               ),
-              subtitle: Text(
-                '${timeAndDistanceValues.distance.text} y ${timeAndDistanceValues.duration.text}',
-                style: TextStyle(fontSize: 13),
+              ElevatedButton(
+                iconAlignment: IconAlignment.start,
+                onPressed: () => _selectDateTime(context),
+                child: Text('Seleccionar Fecha y Hora'),
               ),
-              leading: Icon(Icons.timer),
-            ),
-            ListTile(
-              title: Text(
-                'Precios recomendados',
-                style: TextStyle(fontSize: 15),
+              DefaultTextField(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                // text: 'Fecha y Hora de recogida',
+                text: state.pickupDate.value,
+                icon: Icons.schedule,
+                keyboardType: TextInputType.none,
+                onChanged: (text) {
+                  context.read<ClientMapBookingInfoBloc>().add(
+                      PickUpTimeChanged(pickupDate: BlocFormItem(value: text)));
+                },
+                validator: (value) {
+                  return state.pickupDate.error;
+                },
               ),
-              subtitle: Text(
-                'Bs ${timeAndDistanceValues.recommendedValue}',
-                style: TextStyle(fontSize: 13),
+              SizedBox(
+                height: 10,
               ),
-              leading: Icon(Icons.money),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            DefaultTextField(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              text: 'OFRECE TU TARIFA',
-              icon: Icons.attach_money,
-              keyboardType: TextInputType.phone,
-              onChanged: (text) {
-                context.read<ClientMapBookingInfoBloc>().add(FareOfferedChanged(fareOffered: BlocFormItem(value: text)));
-              },
-              validator: (value) {
-                return state.fareOffered.error;
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            _actionProfile('BUSCAR CONDUCTOR', Icons.search, () {
-              context.read<ClientMapBookingInfoBloc>().add(CreateClientRequest());
-            })
-          ],
+              DefaultTextField(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                text: 'Datos del paciente',
+                icon: Icons.person,
+                keyboardType: TextInputType.text,
+                onChanged: (text) {
+                  // context.read<ClientMapBookingInfoBloc>().add(FareOfferedChanged(fareOffered: BlocFormItem(value: text)));
+                  context.read<ClientMapBookingInfoBloc>().add(
+                      PatientDataChanged(
+                          patientData: BlocFormItem(value: text)));
+                },
+                validator: (value) {
+                  return state.patientData.error;
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              _actionProfile('BUSCAR AMBULANCIA', Icons.search, () {
+                context
+                    .read<ClientMapBookingInfoBloc>()
+                    .add(CreateClientRequest());
+                print("boton  presionado");
+              }),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ));
+  }
+
+  // Método para seleccionar fecha y hora
+  // void _selectDateTime1(BuildContext context) {
+  //   DatePicker.showDateTimePicker(
+  //     context,
+  //     showTitleActions: true,
+  //     onConfirm: (date) {
+  //       // Actualizar la variable con la fecha seleccionada
+  //     //   setState(() {
+  //     //     _selectedDateTime = "${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}";
+  //     //   });
+  //     // },
+  //     currentTime: DateTime.now(),
+  //     locale: LocaleType.es,
+  //   );
+  // }
+
+  Future<void> _selectDateTime(BuildContext context) async {
+    DateTime selectedDate = DateTime.now();
+    TimeOfDay selectedTime = TimeOfDay.now();
+
+    // Seleccionar fecha
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (pickedDate != null && pickedDate != selectedDate) {
+      selectedDate = pickedDate;
+    }
+
+    // Seleccionar hora
+    final TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+
+    if (pickedTime != null && pickedTime != selectedTime) {
+      selectedTime = pickedTime;
+    }
+
+    // Formatear la fecha en formato 'yyyy-MM-dd'
+    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+
+    // Formatear la hora en formato de 24 horas (HH:mm)
+    String formattedTime =
+        "${selectedTime.hour.toString().padLeft(2, '0')}:${selectedTime.minute.toString().padLeft(2, '0')}";
+
+    // Combina la fecha y la hora en un solo string
+    String formattedDateTime = "$formattedDate $formattedTime";
+
+    // Aquí, no es necesario convertirlo de nuevo a DateTime.parse() si no lo necesitas como un DateTime.
+    // Si lo necesitas, entonces usa el formato adecuado para que el parseo funcione:
+    // DateTime parsedDateTime = DateTime.parse(formattedDateTime);  // Usamos el formato 'yyyy-MM-dd HH:mm'
+
+    // Actualizar el campo de texto con la fecha y hora seleccionada
+    print("Fecha y hora seleccionada: $formattedDateTime");
+    context.read<ClientMapBookingInfoBloc>().add(
+        PickUpTimeChanged(pickupDate: BlocFormItem(value: formattedDateTime)));
   }
 
   Widget _actionProfile(String option, IconData icon, Function() function) {
     return GestureDetector(
       onTap: () {
         function();
+        print("entro a la funcion");
       },
       child: Container(
         margin: EdgeInsets.only(left: 10, right: 0, top: 15),

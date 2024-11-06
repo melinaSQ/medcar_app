@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
@@ -16,11 +18,6 @@ class ClientMapBookingInfoInitEvent extends ClientMapBookingInfoEvent {
   });
 }
 
-class FareOfferedChanged extends ClientMapBookingInfoEvent {
-  final BlocFormItem fareOffered;
-
-  FareOfferedChanged({required this.fareOffered});
-}
 
 class ChangeMapCameraPosition extends ClientMapBookingInfoEvent {
   final double lat;
@@ -40,3 +37,17 @@ class AddPolyline extends ClientMapBookingInfoEvent {}
 //   final int idClientRequest;
 //   EmitNewClientRequestSocketIO({required this.idClientRequest}); 
 // }
+
+
+//extras para la hora de reocgida y los dtaos del paciente
+class PatientDataChanged extends ClientMapBookingInfoEvent {
+  final BlocFormItem patientData;
+
+  PatientDataChanged({required this.patientData});
+}
+
+class PickUpTimeChanged extends ClientMapBookingInfoEvent {
+  final BlocFormItem pickupDate;
+
+  PickUpTimeChanged({required this.pickupDate});
+}

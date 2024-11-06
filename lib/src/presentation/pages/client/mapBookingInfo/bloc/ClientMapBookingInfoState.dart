@@ -22,7 +22,9 @@ class ClientMapBookingInfoState extends Equatable {
   final String destinationDescription;
   final Resource? responseTimeAndDistance;
   final Resource? responseClientRequest;
-  final BlocFormItem fareOffered;
+  //extras
+  final BlocFormItem patientData;
+  final BlocFormItem pickupDate;
 
   const ClientMapBookingInfoState({
     this.position,
@@ -37,7 +39,10 @@ class ClientMapBookingInfoState extends Equatable {
     this.polylines = const <PolylineId, Polyline>{},
     this.responseTimeAndDistance,
     this.responseClientRequest,
-    this.fareOffered = const BlocFormItem(error: 'Ingresa la tarifa')
+    //
+    this.patientData = const BlocFormItem(error: 'Ingresa los datos del paciente'),
+    this.pickupDate = const BlocFormItem(error: 'Ingresa la fecha y hora de recogida'),
+
   });
 
   ClientMapBookingInfoState copyWith({
@@ -52,7 +57,10 @@ class ClientMapBookingInfoState extends Equatable {
     Map<PolylineId, Polyline>? polylines,
     Resource? responseTimeAndDistance,
     Resource? responseClientRequest,
-    BlocFormItem? fareOffered
+    BlocFormItem? fareOffered,
+    //
+    BlocFormItem? patientData,
+    BlocFormItem? pickupDate, 
   }) {
     return ClientMapBookingInfoState(
       position: position ?? this.position,
@@ -69,7 +77,8 @@ class ClientMapBookingInfoState extends Equatable {
       responseTimeAndDistance:
           responseTimeAndDistance ?? this.responseTimeAndDistance,
       responseClientRequest: responseClientRequest,
-      fareOffered: fareOffered ?? this.fareOffered
+      patientData: patientData ?? this.patientData,
+      pickupDate: pickupDate ?? this.pickupDate,
     );
   }
 
@@ -86,7 +95,9 @@ class ClientMapBookingInfoState extends Equatable {
         destinationDescription,
         responseTimeAndDistance,
         responseClientRequest,
-        fareOffered
+        //
+        patientData,
+        pickupDate,
       ];
   
 }

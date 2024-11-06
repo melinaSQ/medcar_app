@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
-import 'package:medcar_app/src/domain/models/AuthResponse.dart';
+// import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 // import 'package:medcar_app/src/domain/models/ClientRequest.dart';
 import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
 import 'package:medcar_app/src/domain/models/DriverPosition.dart';

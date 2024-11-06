@@ -61,7 +61,8 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
             // // context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
             // Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
             // Navigator.pushNamed(context, 'client/driver/offers', arguments: idClientRequest);
-            Fluttertoast.showToast(msg: 'Solicitud enviada', toastLength: Toast.LENGTH_LONG);
+            Fluttertoast.showToast(
+                msg: 'Solicitud enviada', toastLength: Toast.LENGTH_LONG);
           }
         },
         child: BlocBuilder<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
@@ -74,12 +75,11 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
             } else if (responseTimeAndDistance is Success) {
               TimeAndDistanceValues timeAndDistanceValues =
                   responseTimeAndDistance.data as TimeAndDistanceValues;
-            return ClientMapBookingInfoContent(state, timeAndDistanceValues);
+              return ClientMapBookingInfoContent(state, timeAndDistanceValues);
             }
             return Container();
           },
         ),
-      
       ),
     );
   }

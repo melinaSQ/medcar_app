@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 
 import 'dart:async';
 import 'package:image/image.dart' as img;
@@ -108,31 +108,47 @@ class ClientMapBookingInfoBloc
       );
     });
 
-    on<FareOfferedChanged>((event, emit) {
-      emit(state.copyWith(
-        fareOffered: BlocFormItem(
-            value: event.fareOffered.value,
-            error:
-                event.fareOffered.value.isEmpty ? 'Ingresa la tarifa' : null),
-      ));
-    });
-
     on<CreateClientRequest>((event, emit) async {
+      // print("entro al evento create");
       AuthResponse authResponse = await authUseCases.getUserSession.run();
+      // print("Usuario autenticado, ID: ${authResponse.user.id}");
 
-      // Resource<bool> response = await clientRequestsUseCases.createClientRequest
-      Resource<int> response = await clientRequestsUseCases.createClientRequest
-          .run(ClientRequest(
-              idClient: authResponse.user.id!,
-              fareOffered: double.parse(state.fareOffered.value),
-              pickupDescription: state.pickUpDescription,
-              destinationDescription: state.destinationDescription,
-              pickupLat: state.pickUpLatLng!.latitude,
-              pickupLng: state.pickUpLatLng!.longitude,
-              destinationLat: state.destinationLatLng!.latitude,
-              destinationLng: state.destinationLatLng!.longitude));
+      // Asegúrate de que los valores del estado estén correctos
+      // print("Valores actuales del estado:");
+      // print("pickUpDescription: ${state.pickUpDescription}");
+      // print("destinationDescription: ${state.destinationDescription}");
+      // print("pickUpLatLng: ${state.pickUpLatLng}");
+      // print("destinationLatLng: ${state.destinationLatLng}");
+      // print("patientData: ${state.patientData.value}");
+      // print("pickupDate: ${state.pickupDate.value}");
+
+      // Verifica si el formato de pickupDate es correcto
+      // try {
+      //   DateTime parsedDateTime = DateTime.parse(state.pickupDate.value);
+      //   print("pickupDate (parsed): $parsedDateTime");
+      // } catch (e) {
+      //   print("Error al parsear pickupDate: $e");
+      // }
+
+      // Resource<bool> response =
+      //     await clientRequestsUseCases.createClientRequest.run(ClientRequest(
+      Resource<bool> response =
+          await clientRequestsUseCases.createClientRequest.run(ClientRequest(
+        idClient: authResponse.user.id!,
+        patientData: state.patientData.value, // nuevo campo
+        pickupDate: DateTime.parse(state.pickupDate.value),//
+        pickupDescription: state.pickUpDescription,
+        destinationDescription: state.destinationDescription,
+        pickupLat: state.pickUpLatLng!.latitude,
+        pickupLng: state.pickUpLatLng!.longitude,
+        destinationLat: state.destinationLatLng!.latitude,
+        destinationLng: state.destinationLatLng!.longitude,
+      ));
+      print("entro al run client");
 
       emit(state.copyWith(responseClientRequest: response));
+
+      print("termino el evento created");
     });
 
     // on<EmitNewClientRequestSocketIO>((event, emit) {
@@ -164,6 +180,31 @@ class ClientMapBookingInfoBloc
           points: polylineCoordinates,
           width: 6);
       emit(state.copyWith(polylines: {id: polyline}));
+    });
+
+    //extras para la hora y los datos del paciente
+    on<PatientDataChanged>((event, emit) {
+      emit(state.copyWith(
+        // Actualiza el estado con el nuevo valor de patientData
+        patientData: BlocFormItem(
+          value: event.patientData.value,
+          error: event.patientData.value.isEmpty
+              ? 'Ingresa los datos del paciente'
+              : null,
+        ),
+      ));
+    });
+
+    on<PickUpTimeChanged>((event, emit) {
+      emit(state.copyWith(
+        // Actualiza el estado con el nuevo valor de pickupDate
+        pickupDate: BlocFormItem(
+          value: event.pickupDate.value,
+          error: event.pickupDate.value.isEmpty
+              ? 'Ingresa la hora de recogida'
+              : null,
+        ),
+      ));
     });
   }
 }
