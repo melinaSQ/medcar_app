@@ -84,8 +84,3 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
     );
   }
 }
-
-      // body: BlocBuilder<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
-      //   builder: (context, state) {
-      //     return ClientMapBookingInfoContent(state);
-      //   },

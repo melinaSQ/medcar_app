@@ -1,6 +1,6 @@
 import 'package:medcar_app/src/data/dataSource/remote/services/ClientRequestsService.dart';
 import 'package:medcar_app/src/domain/models/ClientRequest.dart';
-// import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
+import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
 // import 'package:medcar_app/src/domain/models/StatusTrip.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 import 'package:medcar_app/src/domain/repository/ClientRequestsRepository.dart';
@@ -27,10 +27,10 @@ class ClientRequestsRepositoryImpl implements ClientRequestsRepository {
     return clientRequestsService.create(clientRequest);
   }
 
-  // @override
-  // Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat, double driverLng) {
-  //   return clientRequestsService.getNearbyTripRequest(driverLat, driverLng);
-  // }
+  @override
+  Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat, double driverLng) {
+    return clientRequestsService.getNearbyTripRequest(driverLat, driverLng);
+  }
   
   // @override
   // Future<Resource<bool>> updateDriverAssigned(int idClientRequest, int idDriver, double fareAssigned) {

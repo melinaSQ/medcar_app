@@ -1,7 +1,8 @@
-/*
+// ignore_for_file: file_names, avoid_function_literals_in_foreach_calls
+
 import 'dart:convert';
 
-import 'package:indriver_clone_flutter/src/domain/models/DriverCarInfo.dart';
+import 'package:medcar_app/src/domain/models/DriverCarInfo.dart';
 
 ClientRequestResponse clientRequestResponseFromJson(String str) => ClientRequestResponse.fromJson(json.decode(str));
 
@@ -186,4 +187,3 @@ class Distance {
         "value": value,
     };
 }
-*/

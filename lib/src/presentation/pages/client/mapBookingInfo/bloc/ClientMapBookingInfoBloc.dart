@@ -120,6 +120,7 @@ class ClientMapBookingInfoBloc
     on<CreateClientRequest>((event, emit) async {
       AuthResponse authResponse = await authUseCases.getUserSession.run();
 
+      // Resource<bool> response = await clientRequestsUseCases.createClientRequest
       Resource<int> response = await clientRequestsUseCases.createClientRequest
           .run(ClientRequest(
               idClient: authResponse.user.id!,

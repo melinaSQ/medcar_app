@@ -36,7 +36,7 @@ import 'package:medcar_app/src/domain/useCases/client-requests/CreateClientReque
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientAssignedUseCase%20copy.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientRequestUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByDriverAssignedUseCase.dart';
-// import 'package:medcar_app/src/domain/useCases/client-requests/GetNearbyTripRequestUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/client-requests/GetNearbyTripRequestUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/UpdateClientRatingUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/UpdateDriverAssignedUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/UpdateDriverRatingUseCase.dart';
@@ -181,7 +181,7 @@ abstract class AppModule {
         createClientRequest:
             CreateClientRequestUseCase(clientRequestsRepository),
         getTimeAndDistance: GetTimeAndDistanceUseCase(clientRequestsRepository),
-        // getNearbyTripRequest: GetNearbyTripRequestUseCase(clientRequestsRepository),
+        getNearbyTripRequest: GetNearbyTripRequestUseCase(clientRequestsRepository),
         // updateDriverAssigned: UpdateDriverAssignedUseCase(clientRequestsRepository),
         // getByClientRequest: GetByClientRequestUseCase(clientRequestsRepository),
         // updateStatusClientRequest: UpdateStatusClientRequestUseCase(clientRequestsRepository),

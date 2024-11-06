@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:medcar_app/src/data/api/ApiConfig.dart';
 import 'package:medcar_app/src/domain/models/ClientRequest.dart';
-// import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
+import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
 // import 'package:medcar_app/src/domain/models/StatusTrip.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 import 'package:medcar_app/src/domain/utils/ListToString.dart';
@@ -156,27 +156,27 @@ class ClientRequestsService {
 
   }
 
-  // Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat, double driverLng) async {
+  Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat, double driverLng) async {
 
-  //   try {
-  //     Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests/${driverLat}/${driverLng}');
-  //     Map<String, String> headers = { 'Content-Type': 'application/json' };
-  //     final response = await http.get(url, headers: headers);
-  //     final data = json.decode(response.body);
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       List<ClientRequestResponse> clientRequests = ClientRequestResponse.fromJsonList(data);
-  //       return Success(clientRequests);
-  //     }
-  //     else {
-  //       return ErrorData(listToString(data['message']));
-  //     }
+    try {
+      Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests/${driverLat}/${driverLng}');
+      Map<String, String> headers = { 'Content-Type': 'application/json' };
+      final response = await http.get(url, headers: headers);
+      final data = json.decode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        List<ClientRequestResponse> clientRequests = ClientRequestResponse.fromJsonList(data);
+        return Success(clientRequests);
+      }
+      else {
+        return ErrorData(listToString(data['message']));
+      }
       
-  //   } catch (e) {
-  //     print('Error: $e');
-  //     return ErrorData(e.toString());
-  //   }
+    } catch (e) {
+      print('Error: $e');
+      return ErrorData(e.toString());
+    }
 
-  // }
+  }
 
   // Future<Resource<List<ClientRequestResponse>>> getByDriverAssigned(int idDriver) async {
   //   try {

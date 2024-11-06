@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/main.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapSeeker/ClientMapSeekerPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/carInfo/DriverCarInfoPage.dart';
-// import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
+import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/historyTrip/DriverHistoryTripPage.dart';
 import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeBloc.dart';
 import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeState.dart';
@@ -27,7 +27,7 @@ class DriverHomePage extends StatefulWidget {
 class _DriverHomePageState extends State<DriverHomePage> {
   List<Widget> pageList = <Widget>[
     DriverMapLocationPage(),
-    // DriverClientRequestsPage(),
+    DriverClientRequestsPage(),
     // DriverCarInfoPage(),
     // DriverHistoryTripPage(),
     ProfileInfoPage(),
@@ -89,16 +89,16 @@ class _DriverHomePageState extends State<DriverHomePage> {
                     Navigator.pop(context);
                   },
                 ),
-                // ListTile(
-                //   title: Text('Solicitudes de viaje'),
-                //   selected: state.pageIndex == 1,
-                //   onTap: () {
-                //     context
-                //         .read<DriverHomeBloc>()
-                //         .add(ChangeDrawerPage(pageIndex: 1));
-                //     Navigator.pop(context);
-                //   },
-                // ),
+                ListTile(
+                  title: Text('Solicitudes de viaje'),
+                  selected: state.pageIndex == 1,
+                  onTap: () {
+                    context
+                        .read<DriverHomeBloc>()
+                        .add(ChangeDrawerPage(pageIndex: 1));
+                    Navigator.pop(context);
+                  },
+                ),
                 // ListTile(
                 //   title: Text('Mi Vehiculo'),
                 //   selected: state.pageIndex == 2,
@@ -121,11 +121,11 @@ class _DriverHomePageState extends State<DriverHomePage> {
                 // ),
                 ListTile(
                   title: Text('Perfil del usuario'),
-                  selected: state.pageIndex == 1,
+                  selected: state.pageIndex == 2,
                   onTap: () {
                     context
                         .read<DriverHomeBloc>()
-                        .add(ChangeDrawerPage(pageIndex: 1));
+                        .add(ChangeDrawerPage(pageIndex: 2));
                     Navigator.pop(context);
                   },
                 ),

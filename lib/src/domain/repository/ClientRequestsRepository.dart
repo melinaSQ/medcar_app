@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:medcar_app/src/domain/models/ClientRequest.dart';
-// import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
+import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
 // import 'package:medcar_app/src/domain/models/StatusTrip.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
@@ -19,7 +19,7 @@ abstract class ClientRequestsRepository {
   // Future<Resource<bool>> updateDriverRating(int idClientRequest, double rating);
   // Future<Resource<bool>> updateClientRating(int idClientRequest, double rating);
   // Future<Resource<bool>> updateDriverAssigned(int idClientRequest, int idDriver, double fareAssigned);
-  // Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat,double driverLng);
+  Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat,double driverLng);
   // Future<Resource<ClientRequestResponse>> getByClientRequest(int idClientRequest);
   // Future<Resource<List<ClientRequestResponse>>> getByDriverAssigned(int idDriver);
   // Future<Resource<List<ClientRequestResponse>>> getByClientAssigned(int idClient);

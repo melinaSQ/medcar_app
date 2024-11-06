@@ -1,11 +1,11 @@
-// import 'package:indriver_clone_flutter/src/domain/repository/ClientRequestsRepository.dart';
+import 'package:medcar_app/src/domain/repository/ClientRequestsRepository.dart';
 
-// class GetNearbyTripRequestUseCase {
+class GetNearbyTripRequestUseCase {
 
-//   ClientRequestsRepository clientRequestsRepository;
+  ClientRequestsRepository clientRequestsRepository;
 
-//   GetNearbyTripRequestUseCase(this.clientRequestsRepository);
+  GetNearbyTripRequestUseCase(this.clientRequestsRepository);
 
-//   run(double driverLat, double driverLng) => clientRequestsRepository.getNearbyTripRequest(driverLat, driverLng);
+  run(double driverLat, double driverLng) => clientRequestsRepository.getNearbyTripRequest(driverLat, driverLng);
 
-// }
+}
