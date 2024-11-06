@@ -7,7 +7,7 @@ import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-car-info/DriverCarInfoUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/users/UsersUseCases.dart';
@@ -73,8 +73,9 @@ List<BlocProvider> blocProviders = [
   ),
   BlocProvider<ClientMapSeekerBloc>(
     create: (context) => ClientMapSeekerBloc(
-      /*context.read<BlocSocketIO>(),*/
-      locator<GeolocatorUseCases>(), /*locator<SocketUseCases>()*/
+      // context.read<BlocSocketIO>(),
+      locator<GeolocatorUseCases>(),
+      locator<SocketUseCases>(),
     ),
   ),
 
@@ -94,7 +95,7 @@ List<BlocProvider> blocProviders = [
       locator<GeolocatorUseCases>(),
       locator<SocketUseCases>(),
       locator<AuthUseCases>(),
-      // locator<DriversPositionUseCases>(),
+      locator<DriversPositionUseCases>(),
     ),
   ),
 

@@ -9,7 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/models/PlacemarkData.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerEvent.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerState.dart';
 // import 'package:socket_io_client/socket_io_client.dart';
@@ -17,12 +17,12 @@ import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMa
 class ClientMapSeekerBloc
     extends Bloc<ClientMapSeekerEvent, ClientMapSeekerState> {
   GeolocatorUseCases geolocatorUseCases;
-  // SocketUseCases socketUseCases;
+  SocketUseCases socketUseCases;
   // BlocSocketIO blocSocketIO;
 
   ClientMapSeekerBloc(
     /*this.blocSocketIO,*/ this.geolocatorUseCases,
-    /*this.socketUseCases*/
+    this.socketUseCases
   ) : super(ClientMapSeekerState()) {
     //
     on<ClientMapSeekerInitEvent>((event, emit) {
@@ -80,53 +80,53 @@ class ClientMapSeekerBloc
           destinationDescription: event.destinationDescription));
     });
 
-    // on<ListenDriversPositionSocketIO>((event, emit) async {
-    //   if (blocSocketIO.state.socket != null ) {
-    //     blocSocketIO.state.socket?.on('new_driver_position', (data) {
-    //       add(
-    //         AddDriverPositionMarker(
-    //           idSocket: data['id_socket'] as String,
-    //           id: data['id'] as int,
-    //           lat: data['lat'] as double,
-    //           lng: data['lng'] as double
-    //         )
-    //       );
-    //     });
-    //   }
-    // });
+    on<ListenDriversPositionSocketIO>((event, emit) async {
+      // if (blocSocketIO.state.socket != null ) {
+      //   blocSocketIO.state.socket?.on('new_driver_position', (data) {
+          // add(
+          //   AddDriverPositionMarker(
+          //     idSocket: data['id_socket'] as String,
+          //     id: data['id'] as int,
+          //     lat: data['lat'] as double,
+          //     lng: data['lng'] as double
+          //   )
+          // );
+      //   });
+      // }
+    });
 
-    // on<ListenDriversDisconnectedSocketIO>((event, emit) {
-    //   if (blocSocketIO.state.socket != null ) {
-    //     blocSocketIO.state.socket?.on('driver_disconnected', (data) {
-    //       print('Id: ${data['id_socket']}');
-    //       add(RemoveDriverPositionMarker(idSocket: data['id_socket'] as String));
-    //     });
-    //   }
-    // });
+    on<ListenDriversDisconnectedSocketIO>((event, emit) {
+      // if (blocSocketIO.state.socket != null ) {
+      //   blocSocketIO.state.socket?.on('driver_disconnected', (data) {
+      //     print('Id: ${data['id_socket']}');
+      //     add(RemoveDriverPositionMarker(idSocket: data['id_socket'] as String));
+      //   });
+      // }
+    });
 
-    // on<RemoveDriverPositionMarker>((event, emit) {
-    //   emit(
-    //       state.copyWith(
-    //         markers: Map.of(state.markers)..remove(MarkerId(event.idSocket))
-    //       )
-    //     );
-    // });
+    on<RemoveDriverPositionMarker>((event, emit) {
+      emit(
+          state.copyWith(
+            markers: Map.of(state.markers)..remove(MarkerId(event.idSocket))
+          )
+        );
+    });
 
-    // on<AddDriverPositionMarker>((event, emit) async {
-    //   BitmapDescriptor descriptor = await geolocatorUseCases.createMarker.run('assets/img/car_pin.png');
-    //   Marker marker = geolocatorUseCases.getMarker.run(
-    //     event.idSocket,
-    //     event.lat,
-    //     event.lng,
-    //     'Conductor disponible',
-    //     '',
-    //     descriptor
-    //   );
-    //   emit(
-    //     state.copyWith(
-    //       markers: Map.of(state.markers)..[marker.markerId] = marker
-    //     )
-    //   );
-    // });
+    on<AddDriverPositionMarker>((event, emit) async {
+      BitmapDescriptor descriptor = await geolocatorUseCases.createMarker.run('assets/img/car_pin.png');
+      Marker marker = geolocatorUseCases.getMarker.run(
+        event.idSocket,
+        event.lat,
+        event.lng,
+        'Conductor disponible',
+        '',
+        descriptor
+      );
+      emit(
+        state.copyWith(
+          markers: Map.of(state.markers)..[marker.markerId] = marker
+        )
+      );
+    });
   }
 }

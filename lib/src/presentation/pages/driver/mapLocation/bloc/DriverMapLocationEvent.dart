@@ -2,7 +2,7 @@
 
 import 'package:geolocator/geolocator.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:medcar_app/src/domain/models/DriverPosition.dart';
+import 'package:medcar_app/src/domain/models/DriverPosition.dart';
 
 abstract class DriverMapLocationEvent {}
 
@@ -18,7 +18,7 @@ class AddMyPositionMarker extends DriverMapLocationEvent {
   final double lng;
   AddMyPositionMarker({ required this.lat, required this.lng });
 }
-// class EmitDriverPositionSocketIO extends DriverMapLocationEvent {}
+class EmitDriverPositionSocketIO extends DriverMapLocationEvent {}
 class ChangeMapCameraPosition extends DriverMapLocationEvent {
   final double lat;
   final double lng;
@@ -28,15 +28,17 @@ class ChangeMapCameraPosition extends DriverMapLocationEvent {
   });
 }
 
-// class SaveLocationData extends DriverMapLocationEvent {
-//   final DriverPosition driverPosition;
-//   SaveLocationData({ required this.driverPosition });
-// }
+class SaveLocationData extends DriverMapLocationEvent {
+  final DriverPosition driverPosition;
+  SaveLocationData({ required this.driverPosition });
+}
 
-// class DeleteLocationData extends DriverMapLocationEvent {
-//   final int idDriver;
-//   DeleteLocationData({ required this.idDriver });
-// }
+class DeleteLocationData extends DriverMapLocationEvent {
+  final int idDriver;
+  DeleteLocationData({ required this.idDriver });
+}
 
+
+//opcional
 class ConnectSocketIo extends DriverMapLocationEvent{}
 class DisconnectSocketIo extends DriverMapLocationEvent{}

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
 DriverPosition driverPositionFromJson(String str) => DriverPosition.fromJson(json.decode(str));
