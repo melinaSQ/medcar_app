@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:medcar_app/src/data/dataSource/remote/services/DriversPositionService.dart';
 import 'package:medcar_app/src/domain/models/DriverPosition.dart';
 import 'package:medcar_app/src/domain/repository/DriversPositionRepository.dart';
@@ -19,9 +21,9 @@ class DriversPositionRepositoryImpl implements DriverPositionRepository {
     return driversPositionService.delete(idDriver);
   }
   
-  // @override
-  // Future<Resource<DriverPosition>> getDriverPosition(int idDriver) {
-  //   return driversPositionService.getDriverPosition(idDriver);
-  // }
+  @override
+  Future<Resource<DriverPosition>> getDriverPosition(int idDriver) {
+    return driversPositionService.getDriverPosition(idDriver);
+  }
 
 }

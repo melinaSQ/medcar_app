@@ -9,6 +9,7 @@ import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsItem.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
+import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsEvent.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsEvent.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsState.dart';
 
@@ -27,7 +28,7 @@ class _DriverClientRequestsPageState extends State<DriverClientRequestsPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // context.read<DriverClientRequestsBloc>().add(InitDriverClientRequest());
       // context.read<DriverClientRequestsBloc>().add(ListenNewClientRequestSocketIO());
-      // context.read<DriverClientRequestsBloc>().add(GetNearbyTripRequest());
+      context.read<DriverClientRequestsBloc>().add(GetNearbyTripRequest());
     });
   }
 
@@ -49,14 +50,14 @@ class _DriverClientRequestsPageState extends State<DriverClientRequestsPage> {
           final response = state.response;
           if (response is Loading) {
             return Center(child: CircularProgressIndicator());
-          } 
-          else if (response is Success) {
+          } else if (response is Success) {
             List<ClientRequestResponse> clientRequests =
                 response.data as List<ClientRequestResponse>;
             return ListView.builder(
                 itemCount: clientRequests.length,
                 itemBuilder: (context, index) {
-                  return DriverClientRequestsItem(state, clientRequests[index]);
+                  // return DriverClientRequestsItem(state, clientRequests[index]);
+                  return Text(clientRequests[index].destinationDescription);
                 });
           }
           return Container();

@@ -26,27 +26,27 @@ class DriversPositionService {
     }
   }
 
-  //  Future<Resource<DriverPosition>> getDriverPosition(int idDriver) async {
+   Future<Resource<DriverPosition>> getDriverPosition(int idDriver) async {
 
-  //   try {
-  //     Uri url = Uri.http(ApiConfig.API_PROJECT, '/drivers-position/${idDriver}');
-  //     Map<String, String> headers = { 'Content-Type': 'application/json' };
-  //     final response = await http.get(url, headers: headers);
-  //     final data = json.decode(response.body);
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       DriverPosition driverPosition = DriverPosition.fromJson(data);
-  //       return Success(driverPosition);
-  //     }
-  //     else {
-  //       return ErrorData(listToString(data['message']));
-  //     }
+    try {
+      Uri url = Uri.http(ApiConfig.API_PROJECT, '/drivers-position/${idDriver}');
+      Map<String, String> headers = { 'Content-Type': 'application/json' };
+      final response = await http.get(url, headers: headers);
+      final data = json.decode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        DriverPosition driverPosition = DriverPosition.fromJson(data);
+        return Success(driverPosition);
+      }
+      else {
+        return ErrorData(listToString(data['message']));
+      }
 
-  //   } catch (e) {
-  //     print('Error: $e');
-  //     return ErrorData(e.toString());
-  //   }
+    } catch (e) {
+      print('Error: $e');
+      return ErrorData(e.toString());
+    }
 
-  //  }
+   }
 
   Future<Resource<bool>> delete(int idDriver) async {
     try {

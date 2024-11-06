@@ -131,11 +131,11 @@ class _DriverHomePageState extends State<DriverHomePage> {
                 ),
                 ListTile(
                   title: Text('Roles de usuario'),
-                  selected: state.pageIndex == 2,
+                  selected: state.pageIndex == 3,
                   onTap: () {
                     context
                         .read<DriverHomeBloc>()
-                        .add(ChangeDrawerPage(pageIndex: 2));
+                        .add(ChangeDrawerPage(pageIndex: 3));
                     Navigator.pop(context);
                   },
                 ),

@@ -90,8 +90,8 @@ List<BlocProvider> blocProviders = [
     create: (context) => DriverClientRequestsBloc(
       // context.read<BlocSocketIO>(),
       locator<ClientRequestsUseCases>(),
-      // locator<DriversPositionUseCases>(),
-      // locator<AuthUseCases>(),
+      locator<DriversPositionUseCases>(),
+      locator<AuthUseCases>(),
       // locator<DriverTripRequestUseCases>(),
     ),
   ),

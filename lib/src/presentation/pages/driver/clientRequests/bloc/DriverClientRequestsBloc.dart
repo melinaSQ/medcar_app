@@ -16,8 +16,8 @@ import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/Dri
 
 class DriverClientRequestsBloc
     extends Bloc<DriverClientRequestsEvent, DriverClientRequestsState> {
-  // AuthUseCases authUseCases;
-  // DriversPositionUseCases driversPositionUseCases;
+  AuthUseCases authUseCases;
+  DriversPositionUseCases driversPositionUseCases;
   ClientRequestsUseCases clientRequestsUseCases;
   // DriverTripRequestUseCases driverTripRequestUseCases;
   // BlocSocketIO blocSocketIO;
@@ -26,8 +26,8 @@ class DriverClientRequestsBloc
   DriverClientRequestsBloc(
     // this.blocSocketIO,
     this.clientRequestsUseCases,
-    // this.driversPositionUseCases,
-    // this.authUseCases,
+    this.driversPositionUseCases,
+    this.authUseCases,
     // this.driverTripRequestUseCases,
   ) : super(DriverClientRequestsState()) {
     // on<InitDriverClientRequest>((event, emit) async {
@@ -52,7 +52,7 @@ class DriverClientRequestsBloc
         Resource<List<ClientRequestResponse>> response =
             await clientRequestsUseCases.getNearbyTripRequest
                 .run(driverPosition.lat, driverPosition.lng);
-                
+
         emit(state.copyWith(
           response: response,
         ));

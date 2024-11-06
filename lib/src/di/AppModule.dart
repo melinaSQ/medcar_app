@@ -51,7 +51,7 @@ import 'package:medcar_app/src/domain/useCases/client-requests/GetTimeAndDistanc
 import 'package:medcar_app/src/domain/useCases/drivers-position/CreateDriverPositionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/drivers-position/DeleteDriverPositionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/drivers-position/GetDriverPositionUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/drivers-position/GetDriverPositionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/CreateMarkerUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/FindPositionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
@@ -173,7 +173,7 @@ abstract class AppModule {
             CreateDriverPositionUseCase(driversPositionRepository),
         deleteDriverPosition:
             DeleteDriverPositionUseCase(driversPositionRepository),
-        // getDriverPosition: GetDriverPositionUseCase(driversPositionRepository)
+        getDriverPosition: GetDriverPositionUseCase(driversPositionRepository)
       );
 
   @injectable
