@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
@@ -55,14 +55,14 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
     return Scaffold(
       body: BlocListener<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
         listener: (context, state) {
-          // final responseClientRequest = state.responseClientRequest;
-          // if (responseClientRequest is Success) {
-          //   int idClientRequest = responseClientRequest.data;
-          //   context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
-          //   // Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
-          //   Navigator.pushNamed(context, 'client/driver/offers', arguments: idClientRequest);
-          //   Fluttertoast.showToast(msg: 'Solicitud enviada', toastLength: Toast.LENGTH_LONG);
-          // }
+          final responseClientRequest = state.responseClientRequest;
+          if (responseClientRequest is Success) {
+            // int idClientRequest = responseClientRequest.data;
+            // // context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
+            // Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
+            // Navigator.pushNamed(context, 'client/driver/offers', arguments: idClientRequest);
+            Fluttertoast.showToast(msg: 'Solicitud enviada', toastLength: Toast.LENGTH_LONG);
+          }
         },
         child: BlocBuilder<ClientMapBookingInfoBloc, ClientMapBookingInfoState>(
           builder: (context, state) {

@@ -32,7 +32,7 @@ import 'package:medcar_app/src/domain/useCases/auth/RegisterUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/LogoutUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/SaveUserSessionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/client-requests/CreateClientRequestUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/client-requests/CreateClientRequestUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientAssignedUseCase%20copy.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientRequestUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByDriverAssignedUseCase.dart';
@@ -178,7 +178,8 @@ abstract class AppModule {
 
   @injectable
   ClientRequestsUseCases get clientRequestsUseCases => ClientRequestsUseCases(
-        // createClientRequest: CreateClientRequestUseCase(clientRequestsRepository),
+        createClientRequest:
+            CreateClientRequestUseCase(clientRequestsRepository),
         getTimeAndDistance: GetTimeAndDistanceUseCase(clientRequestsRepository),
         // getNearbyTripRequest: GetNearbyTripRequestUseCase(clientRequestsRepository),
         // updateDriverAssigned: UpdateDriverAssignedUseCase(clientRequestsRepository),

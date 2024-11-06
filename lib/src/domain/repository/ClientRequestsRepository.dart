@@ -2,12 +2,11 @@
 
 import 'package:medcar_app/src/domain/models/ClientRequest.dart';
 // import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
-import 'package:medcar_app/src/domain/models/StatusTrip.dart';
+// import 'package:medcar_app/src/domain/models/StatusTrip.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
 
 abstract class ClientRequestsRepository {
-
   Future<Resource<TimeAndDistanceValues>> getTimeAndDistanceClientRequets(
     double originLat,
     double originLng,
@@ -15,7 +14,7 @@ abstract class ClientRequestsRepository {
     double destinationLng,
   );
 
-  // Future<Resource<int>> create(ClientRequest clientRequest);
+  Future<Resource<int>> create(ClientRequest clientRequest);
   // Future<Resource<bool>> updateStatus(int idClientRequest, StatusTrip statusTrip);
   // Future<Resource<bool>> updateDriverRating(int idClientRequest, double rating);
   // Future<Resource<bool>> updateClientRating(int idClientRequest, double rating);
@@ -24,5 +23,4 @@ abstract class ClientRequestsRepository {
   // Future<Resource<ClientRequestResponse>> getByClientRequest(int idClientRequest);
   // Future<Resource<List<ClientRequestResponse>>> getByDriverAssigned(int idDriver);
   // Future<Resource<List<ClientRequestResponse>>> getByClientAssigned(int idClient);
-
 }

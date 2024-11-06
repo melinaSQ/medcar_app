@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 // import 'package:medcar_app/src/domain/useCases/client-requests/CreateClientRequestUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/client-requests/CreateClientRequestUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/client-requests/GetTimeAndDistanceUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientAssignedUseCase%20copy.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientRequestUseCase.dart';
@@ -13,7 +14,7 @@ import 'package:medcar_app/src/domain/useCases/client-requests/GetTimeAndDistanc
 
 class ClientRequestsUseCases {
 
-  // CreateClientRequestUseCase createClientRequest;
+  CreateClientRequestUseCase createClientRequest;
   GetTimeAndDistanceUseCase getTimeAndDistance;
   // GetNearbyTripRequestUseCase getNearbyTripRequest;
   // UpdateDriverAssignedUseCase updateDriverAssigned;
@@ -25,7 +26,7 @@ class ClientRequestsUseCases {
   // GetByDriverAssignedUseCase getByDriverAssigned;
 
   ClientRequestsUseCases({
-    // required this.createClientRequest,
+    required this.createClientRequest,
     required this.getTimeAndDistance,
     // required this.getNearbyTripRequest,
     // required this.updateDriverAssigned,

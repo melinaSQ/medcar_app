@@ -1,5 +1,5 @@
 import 'package:medcar_app/src/data/dataSource/remote/services/ClientRequestsService.dart';
-// import 'package:medcar_app/src/domain/models/ClientRequest.dart';
+import 'package:medcar_app/src/domain/models/ClientRequest.dart';
 // import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
 // import 'package:medcar_app/src/domain/models/StatusTrip.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
@@ -22,10 +22,10 @@ class ClientRequestsRepositoryImpl implements ClientRequestsRepository {
     return clientRequestsService.getTimeAndDistanceClientRequets(originLat, originLng, destinationLat, destinationLng);
   }
 
-  // @override
-  // Future<Resource<int>> create(ClientRequest clientRequest) {
-  //   return clientRequestsService.create(clientRequest);
-  // }
+  @override
+  Future<Resource<int>> create(ClientRequest clientRequest) {
+    return clientRequestsService.create(clientRequest);
+  }
 
   // @override
   // Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat, double driverLng) {

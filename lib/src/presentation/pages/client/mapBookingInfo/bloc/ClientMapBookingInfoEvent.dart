@@ -1,5 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
+import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
 abstract class ClientMapBookingInfoEvent {}
 
@@ -16,11 +16,11 @@ class ClientMapBookingInfoInitEvent extends ClientMapBookingInfoEvent {
   });
 }
 
-// class FareOfferedChanged extends ClientMapBookingInfoEvent {
-//   final BlocFormItem fareOffered;
+class FareOfferedChanged extends ClientMapBookingInfoEvent {
+  final BlocFormItem fareOffered;
 
-//   FareOfferedChanged({required this.fareOffered});
-// }
+  FareOfferedChanged({required this.fareOffered});
+}
 
 class ChangeMapCameraPosition extends ClientMapBookingInfoEvent {
   final double lat;
@@ -32,7 +32,7 @@ class ChangeMapCameraPosition extends ClientMapBookingInfoEvent {
   });
 }
 
-// class CreateClientRequest extends ClientMapBookingInfoEvent {}
+class CreateClientRequest extends ClientMapBookingInfoEvent {}
 class GetTimeAndDistanceValues extends ClientMapBookingInfoEvent {}
 
 class AddPolyline extends ClientMapBookingInfoEvent {}

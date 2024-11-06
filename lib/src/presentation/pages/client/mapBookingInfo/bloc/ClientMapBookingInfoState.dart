@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unnecessary_this
 
 import 'dart:async';
 import 'package:equatable/equatable.dart';
@@ -8,7 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:medcar_app/src/domain/models/PlacemarkData.dart';
 // import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
-// import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
+import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
 class ClientMapBookingInfoState extends Equatable {
   final Completer<GoogleMapController>? controller;
@@ -21,8 +21,8 @@ class ClientMapBookingInfoState extends Equatable {
   final String pickUpDescription;
   final String destinationDescription;
   final Resource? responseTimeAndDistance;
-  // final Resource? responseClientRequest;
-  // final BlocFormItem fareOffered;
+  final Resource? responseClientRequest;
+  final BlocFormItem fareOffered;
 
   const ClientMapBookingInfoState({
     this.position,
@@ -36,8 +36,8 @@ class ClientMapBookingInfoState extends Equatable {
     this.markers = const <MarkerId, Marker>{},
     this.polylines = const <PolylineId, Polyline>{},
     this.responseTimeAndDistance,
-    // this.responseClientRequest,
-    // this.fareOffered = const BlocFormItem(error: 'Ingresa la tarifa')
+    this.responseClientRequest,
+    this.fareOffered = const BlocFormItem(error: 'Ingresa la tarifa')
   });
 
   ClientMapBookingInfoState copyWith({
@@ -51,8 +51,8 @@ class ClientMapBookingInfoState extends Equatable {
     Map<MarkerId, Marker>? markers,
     Map<PolylineId, Polyline>? polylines,
     Resource? responseTimeAndDistance,
-    // Resource? responseClientRequest,
-    // BlocFormItem? fareOffered
+    Resource? responseClientRequest,
+    BlocFormItem? fareOffered
   }) {
     return ClientMapBookingInfoState(
       position: position ?? this.position,
@@ -68,8 +68,8 @@ class ClientMapBookingInfoState extends Equatable {
           destinationDescription ?? this.destinationDescription,
       responseTimeAndDistance:
           responseTimeAndDistance ?? this.responseTimeAndDistance,
-      // responseClientRequest: responseClientRequest,
-      // fareOffered: fareOffered ?? this.fareOffered
+      responseClientRequest: responseClientRequest,
+      fareOffered: fareOffered ?? this.fareOffered
     );
   }
 
@@ -85,8 +85,8 @@ class ClientMapBookingInfoState extends Equatable {
         pickUpDescription,
         destinationDescription,
         responseTimeAndDistance,
-        // responseClientRequest,
-        // fareOffered
+        responseClientRequest,
+        fareOffered
       ];
   
 }

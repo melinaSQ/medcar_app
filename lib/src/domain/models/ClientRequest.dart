@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
 ClientRequest clientRequestFromJson(String str) => ClientRequest.fromJson(json.decode(str));

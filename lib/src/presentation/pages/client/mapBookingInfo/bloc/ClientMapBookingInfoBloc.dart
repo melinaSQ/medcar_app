@@ -29,7 +29,8 @@ class ClientMapBookingInfoBloc
 
   // ClientMapBookingInfoBloc(this.blocSocketIO, this.geolocatorUseCases, this.clientRequestsUseCases, this.authUseCases): super(ClientMapBookingInfoState()) {
 
-  ClientMapBookingInfoBloc(this.geolocatorUseCases, this.clientRequestsUseCases, this.authUseCases)
+  ClientMapBookingInfoBloc(
+      this.geolocatorUseCases, this.clientRequestsUseCases, this.authUseCases)
       : super(ClientMapBookingInfoState()) {
     //init event
     on<ClientMapBookingInfoInitEvent>((event, emit) async {
@@ -107,31 +108,31 @@ class ClientMapBookingInfoBloc
       );
     });
 
-    // on<FareOfferedChanged>((event, emit) {
-    //   emit(state.copyWith(
-    //       fareOffered: BlocFormItem(
-    //           value: event.fareOffered.value,
-    //           error: event.fareOffered.value.isEmpty
-    //               ? 'Ingresa la tarifa'
-    //               : null)));
-    // });
+    on<FareOfferedChanged>((event, emit) {
+      emit(state.copyWith(
+        fareOffered: BlocFormItem(
+            value: event.fareOffered.value,
+            error:
+                event.fareOffered.value.isEmpty ? 'Ingresa la tarifa' : null),
+      ));
+    });
 
-    // on<CreateClientRequest>((event, emit) async {
-    //   AuthResponse authResponse = await authUseCases.getUserSession.run();
+    on<CreateClientRequest>((event, emit) async {
+      AuthResponse authResponse = await authUseCases.getUserSession.run();
 
-    //   Resource<int> response = await clientRequestsUseCases.createClientRequest
-    //       .run(ClientRequest(
-    //           idClient: authResponse.user.id!,
-    //           fareOffered: double.parse(state.fareOffered.value),
-    //           pickupDescription: state.pickUpDescription,
-    //           destinationDescription: state.destinationDescription,
-    //           pickupLat: state.pickUpLatLng!.latitude,
-    //           pickupLng: state.pickUpLatLng!.longitude,
-    //           destinationLat: state.destinationLatLng!.latitude,
-    //           destinationLng: state.destinationLatLng!.longitude));
+      Resource<int> response = await clientRequestsUseCases.createClientRequest
+          .run(ClientRequest(
+              idClient: authResponse.user.id!,
+              fareOffered: double.parse(state.fareOffered.value),
+              pickupDescription: state.pickUpDescription,
+              destinationDescription: state.destinationDescription,
+              pickupLat: state.pickUpLatLng!.latitude,
+              pickupLng: state.pickUpLatLng!.longitude,
+              destinationLat: state.destinationLatLng!.latitude,
+              destinationLng: state.destinationLatLng!.longitude));
 
-    //   emit(state.copyWith(responseClientRequest: response));
-    // });
+      emit(state.copyWith(responseClientRequest: response));
+    });
 
     // on<EmitNewClientRequestSocketIO>((event, emit) {
     //   if (blocSocketIO.state.socket != null) {

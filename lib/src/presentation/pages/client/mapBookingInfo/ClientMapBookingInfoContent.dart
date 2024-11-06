@@ -104,17 +104,17 @@ class ClientMapBookingInfoContent extends StatelessWidget {
               icon: Icons.attach_money,
               keyboardType: TextInputType.phone,
               onChanged: (text) {
-                // context.read<ClientMapBookingInfoBloc>().add(FareOfferedChanged(fareOffered: BlocFormItem(value: text)));
+                context.read<ClientMapBookingInfoBloc>().add(FareOfferedChanged(fareOffered: BlocFormItem(value: text)));
               },
               validator: (value) {
-                // return state.fareOffered.error;
+                return state.fareOffered.error;
               },
             ),
             SizedBox(
               height: 10,
             ),
             _actionProfile('BUSCAR CONDUCTOR', Icons.search, () {
-              // context.read<ClientMapBookingInfoBloc>().add(CreateClientRequest());
+              context.read<ClientMapBookingInfoBloc>().add(CreateClientRequest());
             })
           ],
         ));
