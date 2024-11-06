@@ -2,13 +2,13 @@
 import 'package:medcar_app/src/data/api/ApiConfig.dart';
 import 'package:medcar_app/src/data/dataSource/local/SharefPref.dart';
 import 'package:medcar_app/src/data/dataSource/remote/services/AuthService.dart';
-// import 'package:medcar_app/src/data/dataSource/remote/services/ClientRequestsService.dart';
+import 'package:medcar_app/src/data/dataSource/remote/services/ClientRequestsService.dart';
 // import 'package:medcar_app/src/data/dataSource/remote/services/DriverCarInfoService.dart';
 // import 'package:medcar_app/src/data/dataSource/remote/services/DriverTripRequestsService.dart';
 import 'package:medcar_app/src/data/dataSource/remote/services/DriversPositionService.dart';
 import 'package:medcar_app/src/data/dataSource/remote/services/UsersService.dart';
 import 'package:medcar_app/src/data/repository/AuthRepositoryImpl.dart';
-// import 'package:medcar_app/src/data/repository/ClientRequestsRepositoryImpl.dart';
+import 'package:medcar_app/src/data/repository/ClientRequestsRepositoryImpl.dart';
 // import 'package:medcar_app/src/data/repository/DriverCarInfoRepositoryImpl.dart';
 // import 'package:medcar_app/src/data/repository/DriverTripRequestsRepositoryImpl.dart';
 import 'package:medcar_app/src/data/repository/DriversPositionRepositoryImpl.dart';
@@ -18,7 +18,7 @@ import 'package:medcar_app/src/data/repository/UsersRepositoryImpl.dart';
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/repository/AuthRepository.dart';
 import 'package:medcar_app/src/domain/repository/DriversPositionRepository.dart';
-// import 'package:medcar_app/src/domain/repository/ClientRequestsRepository.dart';
+import 'package:medcar_app/src/domain/repository/ClientRequestsRepository.dart';
 // import 'package:medcar_app/src/domain/repository/DriverCarInfoRepository.dart';
 // import 'package:medcar_app/src/domain/repository/DriverTripRequestsRepository.dart';
 // import 'package:medcar_app/src/domain/repository/DriversPositionRepository.dart';
@@ -31,7 +31,7 @@ import 'package:medcar_app/src/domain/useCases/auth/LoginUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/RegisterUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/LogoutUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/SaveUserSessionUseCase.dart';
-// import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/CreateClientRequestUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientAssignedUseCase%20copy.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/GetByClientRequestUseCase.dart';
@@ -41,7 +41,7 @@ import 'package:medcar_app/src/domain/useCases/auth/SaveUserSessionUseCase.dart'
 // import 'package:medcar_app/src/domain/useCases/client-requests/UpdateDriverAssignedUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/UpdateDriverRatingUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/UpdateStatusClientRequestUseCase.dart';
-// import 'package:medcar_app/src/domain/useCases/client-requests/getTimeAndDistanceUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/client-requests/GetTimeAndDistanceUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-car-info/CreateDriverCarInfoUseCase.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-car-info/DriverCarInfoUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-car-info/GetDriverCarInfoUseCase.dart';
@@ -101,8 +101,8 @@ abstract class AppModule {
   @injectable
   DriversPositionService get driversPositionService => DriversPositionService();
 
-  // @injectable
-  // ClientRequestsService get clientRequestsService => ClientRequestsService();
+  @injectable
+  ClientRequestsService get clientRequestsService => ClientRequestsService();
 
   // @injectable
   // DriverTripRequestsService get driverTripRequestsService => DriverTripRequestsService();
@@ -120,8 +120,9 @@ abstract class AppModule {
   @injectable
   SocketRepository get socketRepository => SocketRepositoryImpl(socket);
 
-  // @injectable
-  // ClientRequestsRepository get clientRequestsRepository => ClientRequestsRepositoryImpl(clientRequestsService);
+  @injectable
+  ClientRequestsRepository get clientRequestsRepository =>
+      ClientRequestsRepositoryImpl(clientRequestsService);
 
   @injectable
   GeolocatorRepository get geolocatorRepository => GeolocatorRepositoryImpl();
@@ -166,25 +167,28 @@ abstract class AppModule {
       disconnect: DisconnectSocketUseCase(socketRepository));
 
   @injectable
-   DriversPositionUseCases get driversPositionUseCases => DriversPositionUseCases(
-    createDriverPosition: CreateDriverPositionUseCase(driversPositionRepository),
-    deleteDriverPosition: DeleteDriverPositionUseCase(driversPositionRepository),
-    // getDriverPosition: GetDriverPositionUseCase(driversPositionRepository)
-  );
+  DriversPositionUseCases get driversPositionUseCases =>
+      DriversPositionUseCases(
+        createDriverPosition:
+            CreateDriverPositionUseCase(driversPositionRepository),
+        deleteDriverPosition:
+            DeleteDriverPositionUseCase(driversPositionRepository),
+        // getDriverPosition: GetDriverPositionUseCase(driversPositionRepository)
+      );
 
-  // @injectable
-  //  ClientRequestsUseCases get clientRequestsUseCases => ClientRequestsUseCases(
-  //   createClientRequest: CreateClientRequestUseCase(clientRequestsRepository),
-  //   getTimeAndDistance: GetTimeAndDistanceUseCase(clientRequestsRepository),
-  //   getNearbyTripRequest: GetNearbyTripRequestUseCase(clientRequestsRepository),
-  //   updateDriverAssigned: UpdateDriverAssignedUseCase(clientRequestsRepository),
-  //   getByClientRequest: GetByClientRequestUseCase(clientRequestsRepository),
-  //   updateStatusClientRequest: UpdateStatusClientRequestUseCase(clientRequestsRepository),
-  //   updateClientRating: UpdateClientRatingUseCase(clientRequestsRepository),
-  //   updateDriverRating: UpdateDriverRatingUseCase(clientRequestsRepository),
-  //   getByClientAssigned: GetByClientAssignedUseCase(clientRequestsRepository),
-  //   getByDriverAssigned: GetByDriverAssignedUseCase(clientRequestsRepository)
-  // );
+  @injectable
+  ClientRequestsUseCases get clientRequestsUseCases => ClientRequestsUseCases(
+        // createClientRequest: CreateClientRequestUseCase(clientRequestsRepository),
+        getTimeAndDistance: GetTimeAndDistanceUseCase(clientRequestsRepository),
+        // getNearbyTripRequest: GetNearbyTripRequestUseCase(clientRequestsRepository),
+        // updateDriverAssigned: UpdateDriverAssignedUseCase(clientRequestsRepository),
+        // getByClientRequest: GetByClientRequestUseCase(clientRequestsRepository),
+        // updateStatusClientRequest: UpdateStatusClientRequestUseCase(clientRequestsRepository),
+        // updateClientRating: UpdateClientRatingUseCase(clientRequestsRepository),
+        // updateDriverRating: UpdateDriverRatingUseCase(clientRequestsRepository),
+        // getByClientAssigned: GetByClientAssignedUseCase(clientRequestsRepository),
+        // getByDriverAssigned: GetByDriverAssignedUseCase(clientRequestsRepository)
+      );
 
   // @injectable
   //  DriverTripRequestUseCases get driverTripRequestUseCases => DriverTripRequestUseCases(

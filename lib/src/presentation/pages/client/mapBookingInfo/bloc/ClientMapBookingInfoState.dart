@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
 import 'package:equatable/equatable.dart';
 // import 'package:flutter/material.dart';
@@ -5,7 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:medcar_app/src/domain/models/PlacemarkData.dart';
 // import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
-// import 'package:medcar_app/src/domain/utils/Resource.dart';
+import 'package:medcar_app/src/domain/utils/Resource.dart';
 // import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
 class ClientMapBookingInfoState extends Equatable {
@@ -18,7 +20,7 @@ class ClientMapBookingInfoState extends Equatable {
   final LatLng? destinationLatLng;
   final String pickUpDescription;
   final String destinationDescription;
-  // final Resource? responseTimeAndDistance;
+  final Resource? responseTimeAndDistance;
   // final Resource? responseClientRequest;
   // final BlocFormItem fareOffered;
 
@@ -33,7 +35,7 @@ class ClientMapBookingInfoState extends Equatable {
     this.destinationDescription = '',
     this.markers = const <MarkerId, Marker>{},
     this.polylines = const <PolylineId, Polyline>{},
-    // this.responseTimeAndDistance,
+    this.responseTimeAndDistance,
     // this.responseClientRequest,
     // this.fareOffered = const BlocFormItem(error: 'Ingresa la tarifa')
   });
@@ -48,7 +50,7 @@ class ClientMapBookingInfoState extends Equatable {
     String? destinationDescription,
     Map<MarkerId, Marker>? markers,
     Map<PolylineId, Polyline>? polylines,
-    // Resource? responseTimeAndDistance,
+    Resource? responseTimeAndDistance,
     // Resource? responseClientRequest,
     // BlocFormItem? fareOffered
   }) {
@@ -64,14 +66,14 @@ class ClientMapBookingInfoState extends Equatable {
           pickUpDescription ?? this.pickUpDescription, // Manejo del valor nulo
       destinationDescription:
           destinationDescription ?? this.destinationDescription,
-      // responseTimeAndDistance: responseTimeAndDistance ?? this.responseTimeAndDistance,
+      responseTimeAndDistance:
+          responseTimeAndDistance ?? this.responseTimeAndDistance,
       // responseClientRequest: responseClientRequest,
       // fareOffered: fareOffered ?? this.fareOffered
     );
   }
 
   @override
-  // List<Object?> get props => [position, markers, polylines, controller, cameraPosition, pickUpLatLng, destinationLatLng, pickUpDescription, destinationDescription, responseTimeAndDistance, responseClientRequest, fareOffered];
   List<Object?> get props => [
         position,
         markers,
@@ -81,6 +83,10 @@ class ClientMapBookingInfoState extends Equatable {
         pickUpLatLng,
         destinationLatLng,
         pickUpDescription,
-        destinationDescription
+        destinationDescription,
+        responseTimeAndDistance,
+        // responseClientRequest,
+        // fareOffered
       ];
+  
 }

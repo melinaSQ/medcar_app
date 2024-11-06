@@ -2,7 +2,9 @@
 
 class ApiConfig {
   //ip wifi cas
-  static const String API_PROJECT = '172.17.0.1:3000';
+  // static const String API_PROJECT = '172.17.0.1:3000'; //emulador
+  static const String API_PROJECT = '192.168.0.149:3000'; //android
+  // static const String API_PROJECT = 'localhost:3000'; //chrome
 
   //ip internet iphone
   //static const String API_PROJECT = '172.20.10.2:3000';

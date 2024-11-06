@@ -13,10 +13,10 @@ import 'package:medcar_app/src/presentation/widgets/DefaultTextField.dart';
 
 class ClientMapBookingInfoContent extends StatelessWidget {
   ClientMapBookingInfoState state;
-  // TimeAndDistanceValues timeAndDistanceValues;
+  TimeAndDistanceValues timeAndDistanceValues;
 
-  // ClientMapBookingInfoContent(this.state, this.timeAndDistanceValues);
-  ClientMapBookingInfoContent(this.state);
+  ClientMapBookingInfoContent(this.state, this.timeAndDistanceValues);
+  // ClientMapBookingInfoContent(this.state, TimeAndDistanceValues timeAndDistanceValues);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class ClientMapBookingInfoContent extends StatelessWidget {
 
   Widget _cardBookingInfo(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.49,
+        height: MediaQuery.of(context).size.height * 0.59,
         padding: EdgeInsets.only(left: 20, right: 20, top: 20),
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -78,10 +78,10 @@ class ClientMapBookingInfoContent extends StatelessWidget {
                 'Tiempo y distancia aproximados',
                 style: TextStyle(fontSize: 15),
               ),
-              // subtitle: Text(
-              //   '${timeAndDistanceValues.distance.text} y ${timeAndDistanceValues.duration.text}',
-              //   style: TextStyle(fontSize: 13),
-              // ),
+              subtitle: Text(
+                '${timeAndDistanceValues.distance.text} y ${timeAndDistanceValues.duration.text}',
+                style: TextStyle(fontSize: 13),
+              ),
               leading: Icon(Icons.timer),
             ),
             ListTile(
@@ -89,14 +89,14 @@ class ClientMapBookingInfoContent extends StatelessWidget {
                 'Precios recomendados',
                 style: TextStyle(fontSize: 15),
               ),
-              // subtitle: Text(
-              //   '\$${timeAndDistanceValues.recommendedValue}',
-              //   style: TextStyle(fontSize: 13),
-              // ),
+              subtitle: Text(
+                'Bs ${timeAndDistanceValues.recommendedValue}',
+                style: TextStyle(fontSize: 13),
+              ),
               leading: Icon(Icons.money),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             DefaultTextField(
               margin: EdgeInsets.only(left: 15, right: 15),
@@ -111,7 +111,7 @@ class ClientMapBookingInfoContent extends StatelessWidget {
               },
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             _actionProfile('BUSCAR CONDUCTOR', Icons.search, () {
               // context.read<ClientMapBookingInfoBloc>().add(CreateClientRequest());

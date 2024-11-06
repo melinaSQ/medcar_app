@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
 TimeAndDistanceValues timeAndDistanceValuesFromJson(String str) => TimeAndDistanceValues.fromJson(json.decode(str));

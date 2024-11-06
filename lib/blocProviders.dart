@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/injection.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
-// import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-car-info/DriverCarInfoUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
@@ -83,7 +83,7 @@ List<BlocProvider> blocProviders = [
     create: (context) => ClientMapBookingInfoBloc(
         // context.read<BlocSocketIO>(),
         locator<GeolocatorUseCases>(),
-        // locator<ClientRequestsUseCases>(),
+        locator<ClientRequestsUseCases>(),
         locator<AuthUseCases>()),
   ),
   // BlocProvider<DriverClientRequestsBloc>(create: (context) => DriverClientRequestsBloc(context.read<BlocSocketIO>(), locator<ClientRequestsUseCases>(), locator<DriversPositionUseCases>(), locator<AuthUseCases>(), locator<DriverTripRequestUseCases>())),

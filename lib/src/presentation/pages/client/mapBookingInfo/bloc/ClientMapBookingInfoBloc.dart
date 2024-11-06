@@ -13,7 +13,7 @@ import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/models/ClientRequest.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/ClientMapBookingInfoEvent.dart';
@@ -23,13 +23,13 @@ import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 class ClientMapBookingInfoBloc
     extends Bloc<ClientMapBookingInfoEvent, ClientMapBookingInfoState> {
   GeolocatorUseCases geolocatorUseCases;
-  // ClientRequestsUseCases clientRequestsUseCases;
+  ClientRequestsUseCases clientRequestsUseCases;
   AuthUseCases authUseCases;
   // BlocSocketIO blocSocketIO;
 
   // ClientMapBookingInfoBloc(this.blocSocketIO, this.geolocatorUseCases, this.clientRequestsUseCases, this.authUseCases): super(ClientMapBookingInfoState()) {
 
-  ClientMapBookingInfoBloc(this.geolocatorUseCases, this.authUseCases)
+  ClientMapBookingInfoBloc(this.geolocatorUseCases, this.clientRequestsUseCases, this.authUseCases)
       : super(ClientMapBookingInfoState()) {
     //init event
     on<ClientMapBookingInfoInitEvent>((event, emit) async {
@@ -140,17 +140,17 @@ class ClientMapBookingInfoBloc
     //   }
     // });
 
-    // on<GetTimeAndDistanceValues>((event, emit) async {
-    //   emit(state.copyWith(responseTimeAndDistance: Loading()));
-    //   Resource<TimeAndDistanceValues> response =
-    //       await clientRequestsUseCases.getTimeAndDistance.run(
-    //     state.pickUpLatLng!.latitude,
-    //     state.pickUpLatLng!.longitude,
-    //     state.destinationLatLng!.latitude,
-    //     state.destinationLatLng!.longitude,
-    //   );
-    //   emit(state.copyWith(responseTimeAndDistance: response));
-    // });
+    on<GetTimeAndDistanceValues>((event, emit) async {
+      emit(state.copyWith(responseTimeAndDistance: Loading()));
+      Resource<TimeAndDistanceValues> response =
+          await clientRequestsUseCases.getTimeAndDistance.run(
+        state.pickUpLatLng!.latitude,
+        state.pickUpLatLng!.longitude,
+        state.destinationLatLng!.latitude,
+        state.destinationLatLng!.longitude,
+      );
+      emit(state.copyWith(responseTimeAndDistance: response));
+    });
 
     on<AddPolyline>((event, emit) async {
       List<LatLng> polylineCoordinates = await geolocatorUseCases.getPolyline
