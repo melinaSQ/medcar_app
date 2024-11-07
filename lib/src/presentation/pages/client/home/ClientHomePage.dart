@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
-import 'package:medcar_app/main.dart';
+// import 'package:medcar_app/main.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/LoginPage.dart';
 //import 'package:medcar_app/src/presentation/pages/client/historyTrip/ClientHistoryTripPage.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';

@@ -10,7 +10,7 @@ import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
 */
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
-import 'package:medcar_app/src/presentation/pages/auth/login/LoginContent.dart';
+// import 'package:medcar_app/src/presentation/pages/auth/login/LoginContent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginState.dart';

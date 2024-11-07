@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medcar_app/src/domain/models/user.dart';
+// import 'package:medcar_app/src/domain/models/user.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterEvent.dart';

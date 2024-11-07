@@ -61,18 +61,9 @@ class DriverClientRequestsBloc
         final DriverPosition driverPosition =
             driverPositionResponse.data as DriverPosition;
 
-        // Asegúrate de que `driverPosition.lat` y `driverPosition.lng` sean `double`
-        final driverLat = driverPosition.lat is double
-            ? driverPosition.lat
-            : driverPosition.lat.toDouble();
-        final driverLng = driverPosition.lng is double
-            ? driverPosition.lng
-            : driverPosition.lng.toDouble();
-
         Resource<List<ClientRequestResponse>> response =
             await clientRequestsUseCases.getNearbyTripRequest
-                .run(driverLat, driverLng);
-        // .run(driverPosition.lat, driverPosition.lng);
+                .run(driverPosition.lat, driverPosition.lng);
         // print('driver lng: ${driverPosition.lng.runtimeType}');
 
         emit(state.copyWith(
