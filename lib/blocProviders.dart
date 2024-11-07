@@ -15,7 +15,7 @@ import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterBloc.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterEvent.dart';
-// import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
+import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/client/historyTrip/bloc/ClientHistoryTripBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/bloc/ClientMapBookingInfoBloc.dart';
@@ -86,6 +86,7 @@ List<BlocProvider> blocProviders = [
         locator<ClientRequestsUseCases>(),
         locator<AuthUseCases>()),
   ),
+
   BlocProvider<DriverClientRequestsBloc>(
     create: (context) => DriverClientRequestsBloc(
       // context.read<BlocSocketIO>(),
@@ -95,7 +96,13 @@ List<BlocProvider> blocProviders = [
       locator<DriverTripRequestUseCases>(),
     ),
   ),
-  // BlocProvider<ClientDriverOffersBloc>(create: (context) => ClientDriverOffersBloc(context.read<BlocSocketIO>(), locator<DriverTripRequestUseCases>(), locator<ClientRequestsUseCases>())),
+  BlocProvider<ClientDriverOffersBloc>(
+    create: (context) => ClientDriverOffersBloc(
+      // context.read<BlocSocketIO>(),
+      locator<DriverTripRequestUseCases>(),
+      // locator<ClientRequestsUseCases>(),
+    ),
+  ),
 
   BlocProvider<DriverMapLocationBloc>(
     create: (context) => DriverMapLocationBloc(

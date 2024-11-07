@@ -16,9 +16,9 @@ class DriverTripRequestsRepositoryImpl implements DriverTripRequestsRepository {
     return driverTripRequestsService.create(driverTripRequest);
   }
   
-  // @override
-  // Future<Resource<List<DriverTripRequest>>> getDriverTripOffersByClientRequest(int idClientRequest) {
-  //   return driverTripRequestsService.getDriverTripOffersByClientRequest(idClientRequest);
-  // }
+  @override
+  Future<Resource<List<DriverTripRequest>>> getDriverTripOffersByClientRequest(int idClientRequest) {
+    return driverTripRequestsService.getDriverTripOffersByClientRequest(idClientRequest);
+  }
 
 }

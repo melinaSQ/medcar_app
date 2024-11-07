@@ -47,7 +47,7 @@ import 'package:medcar_app/src/domain/useCases/client-requests/GetTimeAndDistanc
 // import 'package:medcar_app/src/domain/useCases/driver-car-info/GetDriverCarInfoUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/driver-trip-request/CreateDriverTripRequestUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/driver-trip-request/GetDriverTripOffersByClientRequestUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/driver-trip-request/GetDriverTripOffersByClientRequestUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/drivers-position/CreateDriverPositionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/drivers-position/DeleteDriverPositionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
@@ -194,7 +194,7 @@ abstract class AppModule {
   @injectable
    DriverTripRequestUseCases get driverTripRequestUseCases => DriverTripRequestUseCases(
     createDriverTripRequest: CreateDriverTripRequestUseCase(driverTripRequestsRepository),
-    // getDriverTripOffersByClientRequest: GetDriverTripOffersByClientRequestUseCase(driverTripRequestsRepository)
+    getDriverTripOffersByClientRequest: GetDriverTripOffersByClientRequestUseCase(driverTripRequestsRepository)
   );
 
   // @injectable

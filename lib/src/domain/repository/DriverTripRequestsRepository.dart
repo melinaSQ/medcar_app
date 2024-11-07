@@ -6,6 +6,6 @@ import 'package:medcar_app/src/domain/utils/Resource.dart';
 abstract class DriverTripRequestsRepository {
 
   Future<Resource<bool>> create(DriverTripRequest driverTripRequest);
-  // Future<Resource<List<DriverTripRequest>>> getDriverTripOffersByClientRequest(int idClientRequest);
+  Future<Resource<List<DriverTripRequest>>> getDriverTripOffersByClientRequest(int idClientRequest);
 
 }

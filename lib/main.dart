@@ -1,17 +1,17 @@
 // import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/blocProviders.dart';
 import 'package:medcar_app/injection.dart';
-import 'package:medcar_app/src/domain/utils/FirebasePushNotifications.dart';
+// import 'package:medcar_app/src/domain/utils/FirebasePushNotifications.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/LoginPage.dart';
-import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
-import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
+// import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/RegisterPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/ClientHomePage.dart';
-// import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersPage.dart';
+import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersPage.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/ClientMapBookingInfoPage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapTrip/ClientMapTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/ratingTrip/ClientRatingTripPage.dart';
@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
           'client/map/booking': (BuildContext context) =>
               ClientMapBookingInfoPage(),
           'profile/update': (BuildContext context) => ProfileUpdatePage(),
-          // 'client/driver/offers': (BuildContext context) => ClientDriverOffersPage(),
+          'client/driver/offers': (BuildContext context) => ClientDriverOffersPage(),
           // 'client/map/trip': (BuildContext context) => ClientMapTripPage(),
           // 'driver/map/trip': (BuildContext context) => DriverMapTripPage(),
           // 'driver/rating/trip': (BuildContext context) => DriverRatingTripPage(),
