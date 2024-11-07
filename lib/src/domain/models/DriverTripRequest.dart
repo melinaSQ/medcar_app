@@ -1,8 +1,10 @@
-/*
+
+// ignore_for_file: file_names, avoid_function_literals_in_foreach_calls
+
 import 'dart:convert';
 
-import 'package:indriver_clone_flutter/src/domain/models/DriverCarInfo.dart';
-import 'package:indriver_clone_flutter/src/domain/models/user.dart';
+import 'package:medcar_app/src/domain/models/DriverCarInfo.dart';
+import 'package:medcar_app/src/domain/models/user.dart';
 
 DriverTripRequest driverTripRequestFromJson(String str) => DriverTripRequest.fromJson(json.decode(str));
 
@@ -64,4 +66,3 @@ class DriverTripRequest {
     };
 }
 
-*/

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
 // import 'package:medcar_app/src/domain/models/ClientRequest.dart';
 import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
@@ -37,13 +37,17 @@ class _DriverClientRequestsPageState extends State<DriverClientRequestsPage> {
     return Scaffold(
       body: BlocListener<DriverClientRequestsBloc, DriverClientRequestsState>(
         listener: (context, state) {
-          // final responseCreateTripRequest = state.responseCreateDriverTripRequest;
-          // if (responseCreateTripRequest is Success) {
-          //   Fluttertoast.showToast(msg: 'La oferta se ha enviado correctamente', toastLength: Toast.LENGTH_LONG);
-          // }
-          // else if (responseCreateTripRequest is ErrorData) {
-          //   Fluttertoast.showToast(msg: responseCreateTripRequest.message, toastLength: Toast.LENGTH_LONG);
-          // }
+          final responseCreateTripRequest =
+              state.responseCreateDriverTripRequest;
+          if (responseCreateTripRequest is Success) {
+            Fluttertoast.showToast(
+                msg: 'La oferta se ha enviado correctamente',
+                toastLength: Toast.LENGTH_LONG);
+          } else if (responseCreateTripRequest is ErrorData) {
+            Fluttertoast.showToast(
+                msg: responseCreateTripRequest.message,
+                toastLength: Toast.LENGTH_LONG);
+          }
         },
         child: BlocBuilder<DriverClientRequestsBloc, DriverClientRequestsState>(
             builder: (context, state) {
@@ -56,8 +60,8 @@ class _DriverClientRequestsPageState extends State<DriverClientRequestsPage> {
             return ListView.builder(
                 itemCount: clientRequests.length,
                 itemBuilder: (context, index) {
+                  // print('info driver page: ${state}');
                   return DriverClientRequestsItem(state, clientRequests[index]);
-                  // return Text(clientRequests[index].destinationDescription);
                 });
           }
           return Container();

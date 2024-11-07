@@ -10,7 +10,7 @@ import 'package:medcar_app/src/domain/models/DriverPosition.dart';
 // import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
-// import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/drivers-position/DriversPositionUseCases.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsEvent.dart';
@@ -22,7 +22,7 @@ class DriverClientRequestsBloc
   AuthUseCases authUseCases;
   DriversPositionUseCases driversPositionUseCases;
   ClientRequestsUseCases clientRequestsUseCases;
-  // DriverTripRequestUseCases driverTripRequestUseCases;
+  DriverTripRequestUseCases driverTripRequestUseCases;
   // BlocSocketIO blocSocketIO;
 
   DriverClientRequestsBloc(
@@ -30,7 +30,7 @@ class DriverClientRequestsBloc
     this.clientRequestsUseCases,
     this.driversPositionUseCases,
     this.authUseCases,
-    // this.driverTripRequestUseCases,
+    this.driverTripRequestUseCases,
   ) : super(DriverClientRequestsState()) {
     // on<InitDriverClientRequest>((event, emit) async {
     //   AuthResponse authResponse = await authUseCases.getUserSession.run();
@@ -68,24 +68,28 @@ class DriverClientRequestsBloc
 
         emit(state.copyWith(
           response: response,
+          idDriver: authResponse.user.id!,
         ));
       }
     });
 
-    //   on<CreateDriverTripRequest>((event, emit) async {
-    //     Resource<bool> response = await driverTripRequestUseCases
-    //         .createDriverTripRequest
-    //         .run(event.driverTripRequest);
-    //     emit(state.copyWith(responseCreateDriverTripRequest: response));
-    //     if (response is Success) {
-    //       add(EmitNewDriverOfferSocketIO(
-    //           idClientRequest: event.driverTripRequest.idClientRequest));
-    //     }
-    //   });
+    on<CreateDriverTripRequest>((event, emit) async {
+      Resource<bool> response = await driverTripRequestUseCases
+          .createDriverTripRequest
+          .run(event.driverTripRequest);
+      emit(
+        state.copyWith(responseCreateDriverTripRequest: response),
+      );
 
-    //   on<FareOfferedChange>((event, emit) {
-    //     emit(state.copyWith(fareOffered: event.fareOffered));
-    //   });
+      // if (response is Success) {
+      //   add(EmitNewDriverOfferSocketIO(
+      //       idClientRequest: event.driverTripRequest.idClientRequest));
+      // }
+    });
+
+    on<FareOfferedChange>((event, emit) {
+      emit(state.copyWith(fareOffered: event.fareOffered));
+    });
 
     //   on<ListenNewClientRequestSocketIO>((event, emit) {
     //     if (blocSocketIO.state.socket != null) {

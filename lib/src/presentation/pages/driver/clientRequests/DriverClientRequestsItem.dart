@@ -1,14 +1,14 @@
-// ignore_for_file: file_names, must_be_immutable, use_key_in_widget_constructors, sized_box_for_whitespace, avoid_print
+// ignore_for_file: file_names, must_be_immutable, use_key_in_widget_constructors, sized_box_for_whitespace, avoid_print, non_constant_identifier_names, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
-// import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
-// import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
-// import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsEvent.dart';
+import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
+import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
+import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsEvent.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsState.dart';
-// import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
+import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 // import 'package:medcar_app/src/presentation/utils/GalleryOrPhotoDialog.dart';
 import 'package:medcar_app/src/presentation/widgets/DefaultTextField.dart';
 
@@ -25,37 +25,41 @@ class DriverClientRequestsItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         FareOfferedDialog(context, () {
-          // if (clientRequest != null &&
-          //     state.idDriver != null &&
-          //     context
-          //         .read<DriverClientRequestsBloc>()
-          //         .state
-          //         .fareOffered
-          //         .value
-          //         .isNotEmpty) {
-          //   context
-          //       .read<DriverClientRequestsBloc>()
-          //       .add(CreateDriverTripRequest(
-          //           driverTripRequest: DriverTripRequest(
-          //         idDriver: state.idDriver!,
-          //         idClientRequest: clientRequest!.id,
-          //         fareOffered: double.parse(context
-          //             .read<DriverClientRequestsBloc>()
-          //             .state
-          //             .fareOffered
-          //             .value),
-          //         time: clientRequest!.googleDistanceMatrix!.duration.value
-          //                 .toDouble() /
-          //             60,
-          //         distance: clientRequest!.googleDistanceMatrix!.distance.value
-          //                 .toDouble() /
-          //             1000,
-          //       )));
-          // } else {
-          //   Fluttertoast.showToast(
-          //       msg: 'No se puede enviar la oferta',
-          //       toastLength: Toast.LENGTH_LONG);
-          // }
+          // print('clientRequest: ${clientRequest}');
+          // print('id driver: ${state.idDriver}');
+          // print('fareofefered: ${state.fareOffered.value}');
+
+          if (clientRequest != null &&
+              state.idDriver != null &&
+              context
+                  .read<DriverClientRequestsBloc>()
+                  .state
+                  .fareOffered
+                  .value
+                  .isNotEmpty) {
+            context
+                .read<DriverClientRequestsBloc>()
+                .add(CreateDriverTripRequest(
+                    driverTripRequest: DriverTripRequest(
+                  idDriver: state.idDriver!,
+                  idClientRequest: clientRequest!.id,
+                  fareOffered: double.parse(context
+                      .read<DriverClientRequestsBloc>()
+                      .state
+                      .fareOffered
+                      .value),
+                  time: clientRequest!.googleDistanceMatrix!.duration.value
+                          .toDouble() /
+                      60,
+                  distance: clientRequest!.googleDistanceMatrix!.distance.value
+                          .toDouble() /
+                      1000,
+                )));
+          } else {
+            Fluttertoast.showToast(
+                msg: 'No se puede enviar la oferta',
+                toastLength: Toast.LENGTH_LONG);
+          }
         });
       },
       child: Card(
@@ -230,7 +234,8 @@ class DriverClientRequestsItem extends StatelessWidget {
             keyboardType: TextInputType.phone,
             onChanged: (text) {
               print('Tarifa del viaje: ${text}');
-              // context.read<DriverClientRequestsBloc>().add(FareOfferedChange(fareOffered: BlocFormItem(value: text)));
+              context.read<DriverClientRequestsBloc>().add(
+                  FareOfferedChange(fareOffered: BlocFormItem(value: text)));
             }),
         actions: [
           ElevatedButton(
