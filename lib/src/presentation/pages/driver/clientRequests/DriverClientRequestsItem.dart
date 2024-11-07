@@ -1,19 +1,20 @@
-// ignore_for_file: file_names, must_be_immutable, use_key_in_widget_constructors, sized_box_for_whitespace
+// ignore_for_file: file_names, must_be_immutable, use_key_in_widget_constructors, sized_box_for_whitespace, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
 // import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
-import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsEvent.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsState.dart';
-import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
+// import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 // import 'package:medcar_app/src/presentation/utils/GalleryOrPhotoDialog.dart';
 import 'package:medcar_app/src/presentation/widgets/DefaultTextField.dart';
 
-class DriverClientRequestsItem extends StatelessWidget {
+import 'package:intl/intl.dart';
 
+class DriverClientRequestsItem extends StatelessWidget {
   DriverClientRequestsState state;
   ClientRequestResponse? clientRequest;
 
@@ -23,25 +24,38 @@ class DriverClientRequestsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FareOfferedDialog(
-          context, 
-          () {
-            // if (clientRequest != null && state.idDriver != null && context.read<DriverClientRequestsBloc>().state.fareOffered.value.isNotEmpty) {
-            //   context.read<DriverClientRequestsBloc>().add(
-                // CreateDriverTripRequest(
-                //   driverTripRequest: DriverTripRequest(
-                //     idDriver: state.idDriver!, 
-                //     idClientRequest: clientRequest!.id, 
-                //     fareOffered: double.parse(context.read<DriverClientRequestsBloc>().state.fareOffered.value), 
-                //     time: clientRequest!.googleDistanceMatrix!.duration.value.toDouble() / 60, 
-                //     distance: clientRequest!.googleDistanceMatrix!.distance.value.toDouble() / 1000, 
-                //   )
-                // )
-            //   );
-            // }
-            // else {
-            //   Fluttertoast.showToast(msg: 'No se puede enviar la oferta', toastLength: Toast.LENGTH_LONG);
-            // }
+        FareOfferedDialog(context, () {
+          // if (clientRequest != null &&
+          //     state.idDriver != null &&
+          //     context
+          //         .read<DriverClientRequestsBloc>()
+          //         .state
+          //         .fareOffered
+          //         .value
+          //         .isNotEmpty) {
+          //   context
+          //       .read<DriverClientRequestsBloc>()
+          //       .add(CreateDriverTripRequest(
+          //           driverTripRequest: DriverTripRequest(
+          //         idDriver: state.idDriver!,
+          //         idClientRequest: clientRequest!.id,
+          //         fareOffered: double.parse(context
+          //             .read<DriverClientRequestsBloc>()
+          //             .state
+          //             .fareOffered
+          //             .value),
+          //         time: clientRequest!.googleDistanceMatrix!.duration.value
+          //                 .toDouble() /
+          //             60,
+          //         distance: clientRequest!.googleDistanceMatrix!.distance.value
+          //                 .toDouble() /
+          //             1000,
+          //       )));
+          // } else {
+          //   Fluttertoast.showToast(
+          //       msg: 'No se puede enviar la oferta',
+          //       toastLength: Toast.LENGTH_LONG);
+          // }
         });
       },
       child: Card(
@@ -50,39 +64,48 @@ class DriverClientRequestsItem extends StatelessWidget {
             ListTile(
               trailing: _imageUser(),
               title: Text(
-                'Fecha Hora de Recogida: \$${clientRequest?.pickUpTime}',
+                'Fecha y Hora de Recogida: ${DateFormat('dd/MM/yyyy hh:mm a').format(clientRequest?.pickupDate ?? DateTime.now())}',
                 style: TextStyle(
-                  color: Colors.blueAccent,
-                  fontWeight: FontWeight.bold
-                ),
+                    color: Colors.blueAccent, fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
                 '${clientRequest?.client.name} ${clientRequest?.client.lastname}',
+                style: TextStyle(fontSize: 16, color: Colors.blue[900]),
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'Datos del viaje',
                 style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blue[900]
+                  decoration: TextDecoration.underline,
                 ),
               ),
-            ),
-            ListTile(
-              title: Text('Datos del viaje'),
               subtitle: Column(
-                children: [
-                  _textPickup(),
-                  _textDestination()
-                ],
+                children: [_textPickup(), _textDestination()],
               ),
             ),
             ListTile(
-              title: Text('Tiempo y Distancia'),
+              title: Text(
+                'Datos del Paciente',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
               subtitle: Column(
-                children: [
-                  _textMinutes(),
-                  _textDistance()
-                ],
+                children: [_textData()],
               ),
             ),
-            
+            ListTile(
+              title: Text(
+                'Tiempo y Distancia',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              subtitle: Column(
+                children: [_textMinutes(), _textDistance()],
+              ),
+            ),
           ],
         ),
       ),
@@ -96,15 +119,12 @@ class DriverClientRequestsItem extends StatelessWidget {
           width: 140,
           child: Text(
             'Tiempo de llegada: ',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold
-            ),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
         Flexible(
-          child: Text(clientRequest?.googleDistanceMatrix?.duration.text ?? '')
-        ),
+            child:
+                Text(clientRequest?.googleDistanceMatrix?.duration.text ?? '')),
       ],
     );
   }
@@ -116,15 +136,27 @@ class DriverClientRequestsItem extends StatelessWidget {
           width: 140,
           child: Text(
             'Recorrido: ',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold
-            ),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
         Flexible(
-          child: Text(clientRequest?.googleDistanceMatrix?.distance.text ?? '')
+            child:
+                Text(clientRequest?.googleDistanceMatrix?.distance.text ?? '')),
+      ],
+    );
+  }
+
+  Widget _textData() {
+    return Row(
+      children: [
+        Container(
+          width: 90,
+          child: Text(
+            'Diagnostico: ',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
         ),
+        Flexible(child: Text(clientRequest?.patientData ?? '')),
       ],
     );
   }
@@ -136,15 +168,10 @@ class DriverClientRequestsItem extends StatelessWidget {
           width: 90,
           child: Text(
             'Recoger en: ',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold
-            ),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
-        Flexible(
-          child: Text(clientRequest?.pickupDescription ?? '')
-        ),
+        Flexible(child: Text(clientRequest?.pickupDescription ?? '')),
       ],
     );
   }
@@ -156,82 +183,67 @@ class DriverClientRequestsItem extends StatelessWidget {
           width: 90,
           child: Text(
             'Llevar a: ',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold
-            ),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
-        Flexible(
-          child: Text(clientRequest?.destinationDescription ?? '')
-        ),
+        Flexible(child: Text(clientRequest?.destinationDescription ?? '')),
       ],
     );
   }
 
   Widget _imageUser() {
     return Container(
-        width: 60,
-        // margin: EdgeInsets.only(top: 25, bottom: 15),
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: ClipOval(
-            child: clientRequest != null 
-            ? clientRequest!.client.image != null 
-              ? FadeInImage.assetNetwork(
-                placeholder: 'assets/img/user_image.png', 
-                image: clientRequest?.client.image,
-                fit: BoxFit.cover,
-                fadeInDuration: Duration(seconds: 1),
-              )
-              : Image.asset(
-                'assets/img/user_image.png',
-              )
-            : Container(),
-          ),
+      width: 60,
+      // margin: EdgeInsets.only(top: 25, bottom: 15),
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: ClipOval(
+          child: clientRequest != null
+              ? clientRequest!.client.image != null
+                  ? FadeInImage.assetNetwork(
+                      placeholder: 'assets/img/user_image.png',
+                      image: clientRequest!.client.image,
+                      fit: BoxFit.cover,
+                      fadeInDuration: Duration(seconds: 1),
+                    )
+                  : Image.asset(
+                      'assets/img/user_image.png',
+                    )
+              : Container(),
         ),
-      );
+      ),
+    );
   }
 
   FareOfferedDialog(BuildContext context, Function() submit) {
-
     return showDialog(
-      context: context, 
+      context: context,
       builder: (BuildContext context) => AlertDialog(
-        
         title: Text(
           'Ingresa tu tarifa',
-          style: TextStyle(
-            fontSize: 17
-          ),
+          style: TextStyle(fontSize: 17),
         ),
         contentPadding: EdgeInsets.only(bottom: 15),
         content: DefaultTextField(
-          text: 'Valor', 
-          icon: Icons.attach_money, 
-          keyboardType: TextInputType.phone,
-          onChanged: (text) {
-            print('Tarifa del viaje: ${text}');
-            // context.read<DriverClientRequestsBloc>().add(FareOfferedChange(fareOffered: BlocFormItem(value: text)));
-          }
-        ),
+            text: 'Valor',
+            icon: Icons.attach_money,
+            keyboardType: TextInputType.phone,
+            onChanged: (text) {
+              print('Tarifa del viaje: ${text}');
+              // context.read<DriverClientRequestsBloc>().add(FareOfferedChange(fareOffered: BlocFormItem(value: text)));
+            }),
         actions: [
           ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              submit();
-            }, 
-            child: Text(
-              'Enviar tarifa',
-              style: TextStyle(
-                color: Colors.black
-              ),
-            )
-          ),
-          
+              onPressed: () {
+                Navigator.pop(context);
+                submit();
+              },
+              child: Text(
+                'Enviar tarifa',
+                style: TextStyle(color: Colors.black),
+              )),
         ],
-      )
+      ),
     );
-
   }
 }

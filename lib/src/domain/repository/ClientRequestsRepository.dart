@@ -19,7 +19,10 @@ abstract class ClientRequestsRepository {
   // Future<Resource<bool>> updateDriverRating(int idClientRequest, double rating);
   // Future<Resource<bool>> updateClientRating(int idClientRequest, double rating);
   // Future<Resource<bool>> updateDriverAssigned(int idClientRequest, int idDriver, double fareAssigned);
-  Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat,double driverLng);
+  Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(
+    double driverLat,
+    double driverLng,
+  );
   // Future<Resource<ClientRequestResponse>> getByClientRequest(int idClientRequest);
   // Future<Resource<List<ClientRequestResponse>>> getByDriverAssigned(int idDriver);
   // Future<Resource<List<ClientRequestResponse>>> getByClientAssigned(int idClient);

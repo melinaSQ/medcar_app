@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 // import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 // import 'package:medcar_app/src/domain/models/ClientRequest.dart';
@@ -22,7 +25,6 @@ class DriverClientRequestsBloc
   // DriverTripRequestUseCases driverTripRequestUseCases;
   // BlocSocketIO blocSocketIO;
 
-
   DriverClientRequestsBloc(
     // this.blocSocketIO,
     this.clientRequestsUseCases,
@@ -43,15 +45,35 @@ class DriverClientRequestsBloc
     // });
 
     on<GetNearbyTripRequest>((event, emit) async {
-      final responseDriverPosition = state.responseDriverPosition;
-      if (responseDriverPosition is Success) {
+      AuthResponse authResponse = await authUseCases.getUserSession.run();
 
-        DriverPosition driverPosition =
-            responseDriverPosition.data as DriverPosition;
+      Resource driverPositionResponse = await driversPositionUseCases
+          .getDriverPosition
+          .run(authResponse.user.id!);
+      // responseDriverPosition.data as DriverPosition;
+
+      emit(state.copyWith(
+        response: Loading(),
+      ));
+
+      // final responseDriverPosition = state.responseDriverPosition;
+      if (driverPositionResponse is Success) {
+        final DriverPosition driverPosition =
+            driverPositionResponse.data as DriverPosition;
+
+        // Asegúrate de que `driverPosition.lat` y `driverPosition.lng` sean `double`
+        final driverLat = driverPosition.lat is double
+            ? driverPosition.lat
+            : driverPosition.lat.toDouble();
+        final driverLng = driverPosition.lng is double
+            ? driverPosition.lng
+            : driverPosition.lng.toDouble();
 
         Resource<List<ClientRequestResponse>> response =
             await clientRequestsUseCases.getNearbyTripRequest
-                .run(driverPosition.lat, driverPosition.lng);
+                .run(driverLat, driverLng);
+        // .run(driverPosition.lat, driverPosition.lng);
+        // print('driver lng: ${driverPosition.lng.runtimeType}');
 
         emit(state.copyWith(
           response: response,
@@ -59,34 +81,34 @@ class DriverClientRequestsBloc
       }
     });
 
-  //   on<CreateDriverTripRequest>((event, emit) async {
-  //     Resource<bool> response = await driverTripRequestUseCases
-  //         .createDriverTripRequest
-  //         .run(event.driverTripRequest);
-  //     emit(state.copyWith(responseCreateDriverTripRequest: response));
-  //     if (response is Success) {
-  //       add(EmitNewDriverOfferSocketIO(
-  //           idClientRequest: event.driverTripRequest.idClientRequest));
-  //     }
-  //   });
+    //   on<CreateDriverTripRequest>((event, emit) async {
+    //     Resource<bool> response = await driverTripRequestUseCases
+    //         .createDriverTripRequest
+    //         .run(event.driverTripRequest);
+    //     emit(state.copyWith(responseCreateDriverTripRequest: response));
+    //     if (response is Success) {
+    //       add(EmitNewDriverOfferSocketIO(
+    //           idClientRequest: event.driverTripRequest.idClientRequest));
+    //     }
+    //   });
 
-  //   on<FareOfferedChange>((event, emit) {
-  //     emit(state.copyWith(fareOffered: event.fareOffered));
-  //   });
+    //   on<FareOfferedChange>((event, emit) {
+    //     emit(state.copyWith(fareOffered: event.fareOffered));
+    //   });
 
-  //   on<ListenNewClientRequestSocketIO>((event, emit) {
-  //     if (blocSocketIO.state.socket != null) {
-  //       blocSocketIO.state.socket?.on('created_client_request', (data) {
-  //         add(GetNearbyTripRequest());
-  //       });
-  //     }
-  //   });
+    //   on<ListenNewClientRequestSocketIO>((event, emit) {
+    //     if (blocSocketIO.state.socket != null) {
+    //       blocSocketIO.state.socket?.on('created_client_request', (data) {
+    //         add(GetNearbyTripRequest());
+    //       });
+    //     }
+    //   });
 
-  //   on<EmitNewDriverOfferSocketIO>((event, emit) {
-  //     if (blocSocketIO.state.socket != null) {
-  //       blocSocketIO.state.socket?.emit(
-  //           'new_driver_offer', {'id_client_request': event.idClientRequest});
-  //     }
-  //   });
+    //   on<EmitNewDriverOfferSocketIO>((event, emit) {
+    //     if (blocSocketIO.state.socket != null) {
+    //       blocSocketIO.state.socket?.emit(
+    //           'new_driver_offer', {'id_client_request': event.idClientRequest});
+    //     }
+    //   });
   }
 }

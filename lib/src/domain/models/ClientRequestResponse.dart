@@ -2,8 +2,6 @@
 
 import 'dart:convert';
 
-import 'package:medcar_app/src/domain/models/DriverCarInfo.dart';
-
 ClientRequestResponse clientRequestResponseFromJson(String str) =>
     ClientRequestResponse.fromJson(json.decode(str));
 
@@ -13,6 +11,8 @@ String clientRequestResponseToJson(ClientRequestResponse data) =>
 class ClientRequestResponse {
   int id;
   int idClient;
+  String patientData;
+  DateTime pickupDate;
   String pickupDescription;
   String destinationDescription;
   DateTime updatedAt;
@@ -26,13 +26,13 @@ class ClientRequestResponse {
   GoogleDistanceMatrix? googleDistanceMatrix;
   int? idDriverAssigned;
   double? fareAssigned;
-  DriverCarInfo? car;
-  String patientData; // Nuevo parámetro
-  DateTime pickUpTime; // Nuevo parámetro
+  // DriverCarInfo? car;
 
   ClientRequestResponse({
     required this.id,
     required this.idClient,
+    required this.patientData,
+    required this.pickupDate,
     required this.pickupDescription,
     required this.destinationDescription,
     required this.updatedAt,
@@ -46,9 +46,7 @@ class ClientRequestResponse {
     this.fareAssigned,
     this.idDriverAssigned,
     this.driver,
-    this.car,
-    required this.patientData, // Agregar al constructor
-    required this.pickUpTime, // Agregar al constructor
+    // this.car
   });
 
   static List<ClientRequestResponse> fromJsonList(List<dynamic> jsonList) {
@@ -65,6 +63,8 @@ class ClientRequestResponse {
       ClientRequestResponse(
         id: json["id"],
         idClient: json["id_client"],
+        patientData: json["patient_data"],
+        pickupDate: DateTime.parse(json["pickup_date"]),
         pickupDescription: json["pickup_description"],
         destinationDescription: json["destination_description"],
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -82,15 +82,14 @@ class ClientRequestResponse {
         googleDistanceMatrix: json["google_distance_matrix"] != null
             ? GoogleDistanceMatrix.fromJson(json["google_distance_matrix"])
             : null,
-        car: json["car"] != null ? DriverCarInfo.fromJson(json["car"]) : null,
-        patientData: json["patient_data"] ??
-            "", // Asegúrate de que el JSON tenga este campo
-        pickUpTime: DateTime.parse(json["pick_up_time"]), // Asegúrate
+        // car: json["car"] != null ? DriverCarInfo.fromJson(json["car"]) : null,
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "id_client": idClient,
+        "patient_data": patientData,
+        "pickup_date": pickupDate.toIso8601String(),
         "pickup_description": pickupDescription,
         "destination_description": destinationDescription,
         "updated_at": updatedAt.toIso8601String(),
@@ -103,8 +102,7 @@ class ClientRequestResponse {
         "id_driver_assigned": idDriverAssigned,
         "fare_assigned": fareAssigned,
         "driver": driver,
-        "car": car?.toJson(), "patient_data": patientData, // Incluir en toJson
-        "pick_up_time": pickUpTime, // Incluir en toJson
+        // "car": car?.toJson()
       };
 }
 
@@ -193,6 +191,9 @@ class Distance {
   factory Distance.fromJson(Map<String, dynamic> json) => Distance(
         text: json["text"],
         value: json["value"],
+        // value: (json["value"] is int)
+        //     ? json["value"]
+        //     : (json["value"] as double).toInt(),
       );
 
   Map<String, dynamic> toJson() => {

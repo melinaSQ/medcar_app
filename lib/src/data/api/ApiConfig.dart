@@ -3,7 +3,8 @@
 class ApiConfig {
   //ip wifi cas
   // static const String API_PROJECT = '172.17.0.1:3000'; //emulador
-  static const String API_PROJECT = '192.168.0.149:3000'; //android
+  // static const String API_PROJECT = '192.168.0.149:3000'; //wifi connie
+  static const String API_PROJECT = '192.168.0.26:3000'; //wifi tigo alex
   // static const String API_PROJECT = 'localhost:3000'; //chrome
 
   //ip internet iphone

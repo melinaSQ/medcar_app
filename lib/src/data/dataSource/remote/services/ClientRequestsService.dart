@@ -10,29 +10,25 @@ import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 import 'package:medcar_app/src/domain/utils/ListToString.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:http/http.dart' as http;
+
 class ClientRequestsService {
-
   Future<Resource<bool>> create(ClientRequest clientRequest) async {
-
     try {
       Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests');
-      Map<String, String> headers = { 'Content-Type': 'application/json' };
+      Map<String, String> headers = {'Content-Type': 'application/json'};
       String body = json.encode(clientRequest);
       final response = await http.post(url, headers: headers, body: body);
       final data = json.decode(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         // return Success(data);
         return Success(true);
-      }
-      else {
+      } else {
         return ErrorData(listToString(data['message']));
       }
-      
     } catch (e) {
       print('Error: $e');
       return ErrorData(e.toString());
     }
-
   }
 
   // Future<Resource<bool>> updateStatus(int idClientRequest, StatusTrip statusTrip) async {
@@ -51,7 +47,7 @@ class ClientRequestsService {
   //     else {
   //       return ErrorData(listToString(data['message']));
   //     }
-      
+
   //   } catch (e) {
   //     print('Error: $e');
   //     return ErrorData(e.toString());
@@ -74,7 +70,7 @@ class ClientRequestsService {
   //     else {
   //       return ErrorData(listToString(data['message']));
   //     }
-      
+
   //   } catch (e) {
   //     print('Error: $e');
   //     return ErrorData(e.toString());
@@ -97,7 +93,7 @@ class ClientRequestsService {
   //     else {
   //       return ErrorData(listToString(data['message']));
   //     }
-      
+
   //   } catch (e) {
   //     print('Error: $e');
   //     return ErrorData(e.toString());
@@ -122,7 +118,7 @@ class ClientRequestsService {
   //     else {
   //       return ErrorData(listToString(data['message']));
   //     }
-      
+
   //   } catch (e) {
   //     print('Error: $e');
   //     return ErrorData(e.toString());
@@ -131,52 +127,56 @@ class ClientRequestsService {
   // }
 
   Future<Resource<TimeAndDistanceValues>> getTimeAndDistanceClientRequets(
-    double originLat, 
-    double originLng, 
-    double destinationLat, 
-    double destinationLng
-  ) async {
-
+      double originLat,
+      double originLng,
+      double destinationLat,
+      double destinationLng) async {
     try {
-      Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests/${originLat}/${originLng}/${destinationLat}/${destinationLng}');
-      Map<String, String> headers = { 'Content-Type': 'application/json' };
+      Uri url = Uri.http(ApiConfig.API_PROJECT,
+          '/client-requests/${originLat}/${originLng}/${destinationLat}/${destinationLng}');
+      Map<String, String> headers = {'Content-Type': 'application/json'};
       final response = await http.get(url, headers: headers);
       final data = json.decode(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        TimeAndDistanceValues timeAndDistanceValues = TimeAndDistanceValues.fromJson(data);
+        TimeAndDistanceValues timeAndDistanceValues =
+            TimeAndDistanceValues.fromJson(data);
         return Success(timeAndDistanceValues);
-      }
-      else {
+      } else {
         return ErrorData(listToString(data['message']));
       }
-      
     } catch (e) {
       print('Error: $e');
       return ErrorData(e.toString());
     }
-
   }
 
-  Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(double driverLat, double driverLng) async {
+  Future<Resource<List<ClientRequestResponse>>> getNearbyTripRequest(
+      double driverLat, double driverLng) async {
+    // print('lat ${driverLat.runtimeType}'); // Debe ser double
+    // print('lng ${driverLng.runtimeType}'); // Debe ser double
+    // print('entro al metodo nearby');
 
     try {
-      Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests/${driverLat}/${driverLng}');
-      Map<String, String> headers = { 'Content-Type': 'application/json' };
+      Uri url = Uri.http(
+          ApiConfig.API_PROJECT, '/client-requests/${driverLat}/${driverLng}');
+      Map<String, String> headers = {'Content-Type': 'application/json'};
       final response = await http.get(url, headers: headers);
       final data = json.decode(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        List<ClientRequestResponse> clientRequests = ClientRequestResponse.fromJsonList(data);
+        List<ClientRequestResponse> clientRequests =
+            ClientRequestResponse.fromJsonList(data);
+        //
+        print(' solciitudes de clientes: $clientRequests');
+
         return Success(clientRequests);
-      }
-      else {
+      } else {
         return ErrorData(listToString(data['message']));
       }
-      
-    } catch (e) {
-      print('Error: $e');
+    } catch (e, stackTrace) {
+      print('Error en getNearbyTripRequest: $e');
+      print('StackTrace: $stackTrace');
       return ErrorData(e.toString());
     }
-
   }
 
   // Future<Resource<List<ClientRequestResponse>>> getByDriverAssigned(int idDriver) async {
@@ -192,7 +192,7 @@ class ClientRequestsService {
   //     else {
   //       return ErrorData(listToString(data['message']));
   //     }
-      
+
   //   } catch (e) {
   //     print('Error: $e');
   //     return ErrorData(e.toString());
@@ -212,7 +212,7 @@ class ClientRequestsService {
   //     else {
   //       return ErrorData(listToString(data['message']));
   //     }
-      
+
   //   } catch (e) {
   //     print('Error: $e');
   //     return ErrorData(e.toString());
@@ -233,12 +233,11 @@ class ClientRequestsService {
   //     else {
   //       return ErrorData(listToString(data['message']));
   //     }
-      
+
   //   } catch (e) {
   //     print('Error: $e');
   //     return ErrorData(e.toString());
   //   }
 
   // }
-
 }
