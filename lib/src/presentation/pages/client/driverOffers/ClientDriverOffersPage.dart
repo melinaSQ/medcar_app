@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
-// import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersItem.dart';
+import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersItem.dart';
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersEvent.dart';
 // import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersEvent.dart';
@@ -67,7 +67,7 @@ class _ClientDriverOffersPageState extends State<ClientDriverOffersPage> {
                   // if (driverTripRequest.length == 0) {
                   //   return Column(
                   //     children: [
-                  //       Text('Esperando conductores...'),
+                  //       Text('Esperando ambulancias...'),
                   //       // Lottie.asset(
                   //       //   'assets/lottie/waiting_car.json',
                   //       //   width: 200,
@@ -77,11 +77,11 @@ class _ClientDriverOffersPageState extends State<ClientDriverOffersPage> {
                   //     ],
                   //   );
                   // }
-                  // return ClientDriverOffersItem(driverTripRequest[index]);
-                  return Text(
-                    driverTripRequest[index].id.toString(),
-                    style: TextStyle(fontSize: 25),
-                  );
+                  return ClientDriverOffersItem(driverTripRequest[index]);
+                  // return Text(
+                  //   driverTripRequest[index].id.toString(),
+                  //   style: TextStyle(fontSize: 25),
+                  // );
                 });
           }
           return Center(
