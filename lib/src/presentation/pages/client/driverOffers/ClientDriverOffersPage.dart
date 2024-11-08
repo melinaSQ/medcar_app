@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
-import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersItem.dart';
+// import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersItem.dart';
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersEvent.dart';
 // import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersEvent.dart';

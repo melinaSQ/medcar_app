@@ -6,7 +6,7 @@ class DriverHomeState extends Equatable {
 
   final int pageIndex;
 
-  DriverHomeState({
+  const DriverHomeState({
     this.pageIndex = 0
   });
 

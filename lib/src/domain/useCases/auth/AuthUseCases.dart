@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:medcar_app/src/domain/useCases/auth/GetUserSessionUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/LoginUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/RegisterUseCase.dart';

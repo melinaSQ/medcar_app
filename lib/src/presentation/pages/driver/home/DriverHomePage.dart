@@ -1,11 +1,12 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_bloc/medcar_apploc.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
 import 'package:medcar_app/main.dart';
+import 'package:medcar_app/src/presentation/pages/auth/login/LoginPage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapSeeker/ClientMapSeekerPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/carInfo/DriverCarInfoPage.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
@@ -41,18 +42,6 @@ class _DriverHomePageState extends State<DriverHomePage> {
         title: Text(
           'Menu de opciones',
         ),
-        // flexibleSpace: Container(
-        //   decoration: BoxDecoration(
-        //     gradient: LinearGradient(
-        //       begin: Alignment.topRight,
-        //       end: Alignment.bottomLeft,
-        //       colors: [
-        //         Color.fromARGB(255, 12, 38, 145),
-        //         Color.fromARGB(255, 34, 156, 249),
-        //       ]
-        //     ),
-        //   )
-        // ),
       ),
       body: BlocBuilder<DriverHomeBloc, DriverHomeState>(
         builder: (context, state) {
@@ -66,19 +55,21 @@ class _DriverHomePageState extends State<DriverHomePage> {
               padding: EdgeInsets.zero,
               children: [
                 DrawerHeader(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: const [
-                            Color.fromARGB(255, 12, 38, 145),
-                            Color.fromARGB(255, 34, 156, 249),
-                          ]),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: const [
+                        Color.fromARGB(255, 12, 38, 145),
+                        Color.fromARGB(255, 34, 156, 249),
+                      ],
                     ),
-                    child: Text(
-                      'Menu del Conductor',
-                      style: TextStyle(color: Colors.white),
-                    )),
+                  ),
+                  child: Text(
+                    'Menu del Conductor',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
                 ListTile(
                   title: Text('Mapa de localizacion'),
                   selected: state.pageIndex == 0,
@@ -142,12 +133,34 @@ class _DriverHomePageState extends State<DriverHomePage> {
                 ListTile(
                   title: Text('Cerrar sesion'),
                   onTap: () {
-                    context.read<DriverHomeBloc>().add(Logout());
+                    // context.read<DriverHomeBloc>().add(Logout());
                     // context.read<BlocSocketIO>().add(DisconnectSocketIO());
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyApp()),
-                        (route) => false);
+                    // Navigator.pushAndRemoveUntil(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => MyApp()),
+                    //     (route) => false);
+                    try {
+                      print('entro al try del boton cerrar sesion');
+                      context.read<DriverHomeBloc>().add(Logout());
+                      context.read<BlocSocketIO>().add(DisconnectSocketIO());
+
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                          (Route<dynamic> route) =>
+                              false, // Elimina todas las rutas previas
+                        );
+                      });
+
+                      // Navigator.pushAndRemoveUntil(
+                      //     context,
+                      //     MaterialPageRoute(builder: (context) => MyApp()),
+                      //     (route) => false);
+                    } catch (e, stackTrace) {
+                      print('Error en el cierre de sesión: $e');
+                      print(stackTrace);
+                    }
                   },
                 )
               ],

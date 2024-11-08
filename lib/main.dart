@@ -61,8 +61,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
+      // providers: blocProviders,
+      // create: (context) => LoginBloc()..add(LoginInitEvent()),
+
       providers: blocProviders,
-      //create: (context) => LoginBloc()..add(LoginInitEvent()),
 
       child: MaterialApp(
         builder: FToastBuilder(),

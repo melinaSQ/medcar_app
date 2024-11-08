@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medcar_app/main.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 // import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
 // import 'package:medcar_app/main.dart';
@@ -112,7 +113,6 @@ class _ClientHomePageState extends State<ClientHomePage> {
                     Navigator.pop(context);
                   },
                 ),
-                
                 ListTile(
                   title: Text('Roles de usuario'),
                   selected: state.pageIndex == 2,
@@ -123,15 +123,11 @@ class _ClientHomePageState extends State<ClientHomePage> {
                     Navigator.pop(context);
                   },
                 ),
-              
-
                 ListTile(
                   title: Text('Cerrar sesion'),
                   onTap: () {
                     // Despacha el evento de logout al Bloc.
                     context.read<ClientHomeBloc>().add(Logout());
-
-                    //context.read<ClientHomeBloc>().add(Logout());
                     //context.read<BlocSocketIO>().add(DisconnectSocketIO());
 
                     // Reinicia la aplicación o navega a la pantalla de login.
@@ -142,14 +138,16 @@ class _ClientHomePageState extends State<ClientHomePage> {
                       (route) => false, // Este argumento asegura que toda la pila de navegación se elimine.
                     );
                     */
-                    Navigator.pushAndRemoveUntil(
-                      // ignore: use_build_context_synchronously
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              LoginPage()), // Cambia LoginPage a tu pantalla de login.
-                      (route) => false, // Elimina toda la pila de navegación.
-                    );
+                    print('entro al try del boton cerrar sesion');
+
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (Route<dynamic> route) =>
+                            false, // Elimina todas las rutas previas
+                      );
+                    });
                   },
                 )
               ],

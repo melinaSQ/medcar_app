@@ -1,13 +1,11 @@
-// ignore_for_file: unnecessary_string_interpolations, avoid_print
+// ignore_for_file: unnecessary_string_interpolations, avoid_print, file_names
 
 import 'package:flutter/material.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/LoginContent.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-/*
 import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
-*/
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
 // import 'package:medcar_app/src/presentation/pages/auth/login/LoginContent.dart';
@@ -50,11 +48,9 @@ class _LoginPageState extends State<LoginPage> {
           context
               .read<LoginBloc>()
               .add(SaveUserSession(authResponse: authResponse));
-          /*
-            context.read<LoginBloc>().add(UpdateNotificationToken(id: authResponse.user.id!));
-            context.read<BlocSocketIO>().add(ConnectSocketIO());
-            context.read<BlocSocketIO>().add(ListenDriverAssignedSocketIO());
-            */
+          // context.read<LoginBloc>().add(UpdateNotificationToken(id: authResponse.user.id!));
+          context.read<BlocSocketIO>().add(ConnectSocketIO());
+          // context.read<BlocSocketIO>().add(ListenDriverAssignedSocketIO());
           if (authResponse.user.roles!.length > 1) {
             Navigator.pushNamedAndRemoveUntil(
                 context, 'roles', (route) => false);
@@ -66,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          final response = state.response; 
+          final response = state.response;
           if (response is Loading) {
             return Stack(
               children: [

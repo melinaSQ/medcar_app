@@ -8,7 +8,7 @@ import 'package:image/image.dart' as img;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/models/DriverPosition.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
@@ -26,11 +26,15 @@ class DriverMapLocationBloc
   AuthUseCases authUseCases;
   DriversPositionUseCases driversPositionUseCases;
   StreamSubscription? positionSubscription;
-  // BlocSocketIO blocSocketIO;
+  BlocSocketIO blocSocketIO;
 
-  DriverMapLocationBloc(/*this.blocSocketIO,*/ this.geolocatorUseCases,
-      this.socketUseCases, this.authUseCases, this.driversPositionUseCases)
-      : super(DriverMapLocationState()) {
+  DriverMapLocationBloc(
+    this.blocSocketIO,
+    this.geolocatorUseCases,
+    this.socketUseCases,
+    this.authUseCases,
+    this.driversPositionUseCases,
+  ) : super(DriverMapLocationState()) {
     //
     on<DriverMapLocationInitEvent>((event, emit) async {
       Completer<GoogleMapController> controller =
@@ -123,11 +127,11 @@ class DriverMapLocationBloc
     });
 
     on<EmitDriverPositionSocketIO>((event, emit) async {
-      // blocSocketIO.state.socket?.emit('change_driver_position', {
-      //   'id': state.idDriver,
-      //   'lat': state.position!.latitude,
-      //   'lng': state.position!.longitude,
-      // });
+      blocSocketIO.state.socket?.emit('change_driver_position', {
+        'id': state.idDriver,
+        'lat': state.position!.latitude,
+        'lng': state.position!.longitude,
+      });
     });
 
     on<SaveLocationData>((event, emit) async {
@@ -137,16 +141,6 @@ class DriverMapLocationBloc
 
     on<DeleteLocationData>((event, emit) async {
       await driversPositionUseCases.deleteDriverPosition.run(event.idDriver);
-    });
-
-    //opcional
-
-    on<ConnectSocketIo>((event, emit) {
-      socketUseCases.connect.run();
-    });
-
-    on<DisconnectSocketIo>((event, emit) {
-      socketUseCases.disconnect.run();
     });
   }
 }

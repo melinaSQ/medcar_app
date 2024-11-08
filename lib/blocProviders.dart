@@ -3,7 +3,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/injection.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 // import 'package:medcar_app/src/domain/useCases/driver-car-info/DriverCarInfoUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
@@ -53,7 +53,12 @@ List<BlocProvider> blocProviders = [
     create: (context) => ClientHomeBloc(locator<AuthUseCases>()),
   ),
 
-  // BlocProvider<BlocSocketIO>(create: (context) => BlocSocketIO(locator<SocketUseCases>(), locator<AuthUseCases>())),
+  BlocProvider<BlocSocketIO>(
+    create: (context) => BlocSocketIO(
+      locator<SocketUseCases>(),
+      // locator<AuthUseCases>(),
+    ),
+  ),
   BlocProvider<DriverHomeBloc>(
     create: (context) => DriverHomeBloc(locator<AuthUseCases>()),
   ),
@@ -106,7 +111,7 @@ List<BlocProvider> blocProviders = [
 
   BlocProvider<DriverMapLocationBloc>(
     create: (context) => DriverMapLocationBloc(
-      // context.read<BlocSocketIO>(),
+      context.read<BlocSocketIO>(),
       locator<GeolocatorUseCases>(),
       locator<SocketUseCases>(),
       locator<AuthUseCases>(),
