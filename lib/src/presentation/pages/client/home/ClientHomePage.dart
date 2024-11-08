@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medcar_app/main.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
 // import 'package:medcar_app/main.dart';
-import 'package:medcar_app/src/presentation/pages/auth/login/LoginPage.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
+import 'package:medcar_app/main.dart';
+// import 'package:medcar_app/main.dart';
 //import 'package:medcar_app/src/presentation/pages/client/historyTrip/ClientHistoryTripPage.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/bloc/ClientHomeEvent.dart';
@@ -128,7 +128,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
                   onTap: () {
                     // Despacha el evento de logout al Bloc.
                     context.read<ClientHomeBloc>().add(Logout());
-                    //context.read<BlocSocketIO>().add(DisconnectSocketIO());
+                    context.read<BlocSocketIO>().add(DisconnectSocketIO());
 
                     // Reinicia la aplicación o navega a la pantalla de login.
                     /*
@@ -143,7 +143,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => MyApp()),
                         (Route<dynamic> route) =>
                             false, // Elimina todas las rutas previas
                       );

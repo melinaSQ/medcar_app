@@ -59,8 +59,10 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
           if (responseClientRequest is Success) {
             // int idClientRequest = responseClientRequest.data;
             // context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
-            Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
+            context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: 2));
+            // Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
             // Navigator.pushNamed(context, 'client/driver/offers', arguments: idClientRequest);
+            Navigator.pushNamed(context, 'client/driver/offers');
             Fluttertoast.showToast(
                 msg: 'Solicitud enviada', toastLength: Toast.LENGTH_LONG);
           }

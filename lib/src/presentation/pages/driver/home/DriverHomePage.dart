@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/blocSocketIO/BlocSocketIOEvent.dart';
 import 'package:medcar_app/main.dart';
-import 'package:medcar_app/src/presentation/pages/auth/login/LoginPage.dart';
+// import 'package:medcar_app/main.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapSeeker/ClientMapSeekerPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/carInfo/DriverCarInfoPage.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
@@ -147,7 +147,7 @@ class _DriverHomePageState extends State<DriverHomePage> {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
+                          MaterialPageRoute(builder: (context) => MyApp()),
                           (Route<dynamic> route) =>
                               false, // Elimina todas las rutas previas
                         );

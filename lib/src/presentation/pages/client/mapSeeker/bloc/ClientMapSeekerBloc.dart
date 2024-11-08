@@ -1,12 +1,15 @@
 // ignore_for_file: avoid_print, file_names
 
 import 'dart:async';
+import 'package:image/image.dart' as img;
+
 // import 'dart:convert';
 // import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/models/PlacemarkData.dart';
 import 'package:medcar_app/src/domain/useCases/geolocator/GeolocatorUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
@@ -18,12 +21,11 @@ class ClientMapSeekerBloc
     extends Bloc<ClientMapSeekerEvent, ClientMapSeekerState> {
   GeolocatorUseCases geolocatorUseCases;
   SocketUseCases socketUseCases;
-  // BlocSocketIO blocSocketIO;
+  BlocSocketIO blocSocketIO;
 
   ClientMapSeekerBloc(
-    /*this.blocSocketIO,*/ this.geolocatorUseCases,
-    this.socketUseCases
-  ) : super(ClientMapSeekerState()) {
+      this.blocSocketIO, this.geolocatorUseCases, this.socketUseCases)
+      : super(ClientMapSeekerState()) {
     //
     on<ClientMapSeekerInitEvent>((event, emit) {
       Completer<GoogleMapController> controller =
@@ -81,52 +83,62 @@ class ClientMapSeekerBloc
     });
 
     on<ListenDriversPositionSocketIO>((event, emit) async {
-      // if (blocSocketIO.state.socket != null ) {
-      //   blocSocketIO.state.socket?.on('new_driver_position', (data) {
-          // add(
-          //   AddDriverPositionMarker(
-          //     idSocket: data['id_socket'] as String,
-          //     id: data['id'] as int,
-          //     lat: data['lat'] as double,
-          //     lng: data['lng'] as double
-          //   )
-          // );
-      //   });
-      // }
+      if (blocSocketIO.state.socket != null) {
+        blocSocketIO.state.socket?.on('new_driver_position', (data) {
+          add(AddDriverPositionMarker(
+              idSocket: data['id_socket'] as String,
+              id: data['id'] as int,
+              lat: data['lat'] as double,
+              lng: data['lng'] as double));
+        });
+      }
     });
 
     on<ListenDriversDisconnectedSocketIO>((event, emit) {
-      // if (blocSocketIO.state.socket != null ) {
-      //   blocSocketIO.state.socket?.on('driver_disconnected', (data) {
-      //     print('Id: ${data['id_socket']}');
-      //     add(RemoveDriverPositionMarker(idSocket: data['id_socket'] as String));
-      //   });
-      // }
+      if (blocSocketIO.state.socket != null) {
+        blocSocketIO.state.socket?.on('driver_disconnected', (data) {
+          print('Id: ${data['id_socket']}');
+          add(RemoveDriverPositionMarker(
+              idSocket: data['id_socket'] as String));
+        });
+      }
     });
 
     on<RemoveDriverPositionMarker>((event, emit) {
-      emit(
-          state.copyWith(
-            markers: Map.of(state.markers)..remove(MarkerId(event.idSocket))
-          )
-        );
+      emit(state.copyWith(
+          markers: Map.of(state.markers)..remove(MarkerId(event.idSocket))));
     });
 
     on<AddDriverPositionMarker>((event, emit) async {
-      BitmapDescriptor descriptor = await geolocatorUseCases.createMarker.run('assets/img/car_pin.png');
-      Marker marker = geolocatorUseCases.getMarker.run(
-        event.idSocket,
-        event.lat,
-        event.lng,
-        'Conductor disponible',
-        '',
-        descriptor
-      );
-      emit(
-        state.copyWith(
-          markers: Map.of(state.markers)..[marker.markerId] = marker
-        )
-      );
+      Future<BitmapDescriptor> getResizedBitmapDescriptor(
+          String assetPath, int width, int height) async {
+        // Cargar la imagen
+        ByteData data = await rootBundle.load(assetPath);
+        Uint8List bytes = data.buffer.asUint8List();
+
+        // Decodificar y redimensionar la imagen
+        img.Image originalImage = img.decodeImage(bytes)!;
+        img.Image resizedImage =
+            img.copyResize(originalImage, width: width, height: height);
+
+        // Codificar la imagen redimensionada
+        Uint8List resizedBytes =
+            Uint8List.fromList(img.encodePng(resizedImage));
+
+        // ignore: deprecated_member_use
+        return BitmapDescriptor.fromBytes(resizedBytes);
+      }
+
+      // Crea los marcadores usando las imágenes redimensionadas
+      BitmapDescriptor descriptor = await getResizedBitmapDescriptor(
+          'assets/img/car_pin.png', 80, 80); // Cambia el tamaño a 64x64
+
+      // BitmapDescriptor descriptor =
+      //     await geolocatorUseCases.createMarker.run('assets/img/car_pin.png');
+      Marker marker = geolocatorUseCases.getMarker.run(event.idSocket,
+          event.lat, event.lng, 'Conductor disponible', '', descriptor);
+      emit(state.copyWith(
+          markers: Map.of(state.markers)..[marker.markerId] = marker));
     });
   }
 }

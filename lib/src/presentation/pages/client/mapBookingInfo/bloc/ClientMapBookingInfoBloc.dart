@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
 import 'package:medcar_app/src/domain/models/ClientRequest.dart';
 import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
@@ -25,14 +25,14 @@ class ClientMapBookingInfoBloc
   GeolocatorUseCases geolocatorUseCases;
   ClientRequestsUseCases clientRequestsUseCases;
   AuthUseCases authUseCases;
-  // BlocSocketIO blocSocketIO;
-
-  // ClientMapBookingInfoBloc(this.blocSocketIO, this.geolocatorUseCases, this.clientRequestsUseCases, this.authUseCases): super(ClientMapBookingInfoState()) {
+  BlocSocketIO blocSocketIO;
 
   ClientMapBookingInfoBloc(
-      this.geolocatorUseCases, this.clientRequestsUseCases, this.authUseCases)
-      : super(ClientMapBookingInfoState()) {
-    //init event
+    this.blocSocketIO,
+    this.geolocatorUseCases,
+    this.clientRequestsUseCases,
+    this.authUseCases,
+  ) : super(ClientMapBookingInfoState()) {
     on<ClientMapBookingInfoInitEvent>((event, emit) async {
       Completer<GoogleMapController> controller =
           Completer<GoogleMapController>();
@@ -113,30 +113,13 @@ class ClientMapBookingInfoBloc
       AuthResponse authResponse = await authUseCases.getUserSession.run();
       // print("Usuario autenticado, ID: ${authResponse.user.id}");
 
-      // Asegúrate de que los valores del estado estén correctos
-      // print("Valores actuales del estado:");
-      // print("pickUpDescription: ${state.pickUpDescription}");
-      // print("destinationDescription: ${state.destinationDescription}");
-      // print("pickUpLatLng: ${state.pickUpLatLng}");
-      // print("destinationLatLng: ${state.destinationLatLng}");
-      // print("patientData: ${state.patientData.value}");
-      // print("pickupDate: ${state.pickupDate.value}");
-
-      // Verifica si el formato de pickupDate es correcto
-      // try {
-      //   DateTime parsedDateTime = DateTime.parse(state.pickupDate.value);
-      //   print("pickupDate (parsed): $parsedDateTime");
-      // } catch (e) {
-      //   print("Error al parsear pickupDate: $e");
-      // }
-
       // Resource<bool> response =
       //     await clientRequestsUseCases.createClientRequest.run(ClientRequest(
       Resource<bool> response =
           await clientRequestsUseCases.createClientRequest.run(ClientRequest(
         idClient: authResponse.user.id!,
         patientData: state.patientData.value, // nuevo campo
-        pickupDate: DateTime.parse(state.pickupDate.value),//
+        pickupDate: DateTime.parse(state.pickupDate.value), //
         pickupDescription: state.pickUpDescription,
         destinationDescription: state.destinationDescription,
         pickupLat: state.pickUpLatLng!.latitude,
@@ -151,12 +134,14 @@ class ClientMapBookingInfoBloc
       print("termino el evento created");
     });
 
-    // on<EmitNewClientRequestSocketIO>((event, emit) {
-    //   if (blocSocketIO.state.socket != null) {
-    //     blocSocketIO.state.socket?.emit(
-    //         'new_client_request', {'id_client_request': event.idClientRequest});
-    //   }
-    // });
+    on<EmitNewClientRequestSocketIO>((event, emit) {
+      if (blocSocketIO.state.socket != null) {
+        blocSocketIO.state.socket?.emit(
+            // 'new_client_request', {'id_client_request': event.idClientRequest});
+            'new_client_request',
+            {'id_client_request': 2});
+      }
+    });
 
     on<GetTimeAndDistanceValues>((event, emit) async {
       emit(state.copyWith(responseTimeAndDistance: Loading()));

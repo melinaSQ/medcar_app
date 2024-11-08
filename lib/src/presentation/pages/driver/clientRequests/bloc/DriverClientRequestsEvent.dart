@@ -5,7 +5,7 @@ import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
 abstract class DriverClientRequestsEvent {}
 
-// class InitDriverClientRequest extends DriverClientRequestsEvent{}
+class InitDriverClientRequest extends DriverClientRequestsEvent{}
 class GetNearbyTripRequest extends DriverClientRequestsEvent {}
 class CreateDriverTripRequest extends DriverClientRequestsEvent {
   final DriverTripRequest driverTripRequest;
@@ -17,7 +17,7 @@ class FareOfferedChange extends DriverClientRequestsEvent {
   FareOfferedChange({required this.fareOffered});
 }
 
-// class ListenNewClientRequestSocketIO extends DriverClientRequestsEvent {}
+class ListenNewClientRequestSocketIO extends DriverClientRequestsEvent {}
 // class EmitNewDriverOfferSocketIO extends DriverClientRequestsEvent{
 //   final int idClientRequest;
 //   EmitNewDriverOfferSocketIO({required this.idClientRequest});

@@ -24,7 +24,8 @@ import 'package:medcar_app/src/presentation/pages/roles/RolesPage.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+// final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,6 +57,13 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     //onMessageListener();
+    navigatorKey = GlobalKey<NavigatorState>();
+  }
+
+  @override
+  void dispose() {
+    navigatorKey = null; // Liberar referencia
+    super.dispose();
   }
 
   @override
@@ -85,7 +93,8 @@ class _MyAppState extends State<MyApp> {
           'client/map/booking': (BuildContext context) =>
               ClientMapBookingInfoPage(),
           'profile/update': (BuildContext context) => ProfileUpdatePage(),
-          'client/driver/offers': (BuildContext context) => ClientDriverOffersPage(),
+          'client/driver/offers': (BuildContext context) =>
+              ClientDriverOffersPage(),
           // 'client/map/trip': (BuildContext context) => ClientMapTripPage(),
           // 'driver/map/trip': (BuildContext context) => DriverMapTripPage(),
           // 'driver/rating/trip': (BuildContext context) => DriverRatingTripPage(),

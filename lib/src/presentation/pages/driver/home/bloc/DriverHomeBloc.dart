@@ -6,8 +6,6 @@ import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeEvent.dart';
 import 'package:medcar_app/src/presentation/pages/driver/home/bloc/DriverHomeState.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class DriverHomeBloc extends Bloc<DriverHomeEvent, DriverHomeState> {
   AuthUseCases authUseCases;
 
