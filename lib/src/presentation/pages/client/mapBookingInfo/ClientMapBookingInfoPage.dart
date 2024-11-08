@@ -57,9 +57,10 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
         listener: (context, state) {
           final responseClientRequest = state.responseClientRequest;
           if (responseClientRequest is Success) {
-            // int idClientRequest = responseClientRequest.data;
-            // context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
-            context.read<ClientMapBookingInfoBloc>().add(EmitNewClientRequestSocketIO(idClientRequest: 2));
+            int idClientRequest = responseClientRequest.data;
+            print(' id client request${responseClientRequest.data}');
+            context.read<ClientMapBookingInfoBloc>().add(
+                EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
             // Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
             // Navigator.pushNamed(context, 'client/driver/offers', arguments: idClientRequest);
             Navigator.pushNamed(context, 'client/driver/offers');

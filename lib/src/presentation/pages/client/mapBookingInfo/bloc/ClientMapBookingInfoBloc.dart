@@ -113,9 +113,7 @@ class ClientMapBookingInfoBloc
       AuthResponse authResponse = await authUseCases.getUserSession.run();
       // print("Usuario autenticado, ID: ${authResponse.user.id}");
 
-      // Resource<bool> response =
-      //     await clientRequestsUseCases.createClientRequest.run(ClientRequest(
-      Resource<bool> response =
+      Resource<int> response =
           await clientRequestsUseCases.createClientRequest.run(ClientRequest(
         idClient: authResponse.user.id!,
         patientData: state.patientData.value, // nuevo campo
@@ -127,7 +125,7 @@ class ClientMapBookingInfoBloc
         destinationLat: state.destinationLatLng!.latitude,
         destinationLng: state.destinationLatLng!.longitude,
       ));
-      print("entro al run client");
+      // print("entro al run client");
 
       emit(state.copyWith(responseClientRequest: response));
 
@@ -137,9 +135,9 @@ class ClientMapBookingInfoBloc
     on<EmitNewClientRequestSocketIO>((event, emit) {
       if (blocSocketIO.state.socket != null) {
         blocSocketIO.state.socket?.emit(
-            // 'new_client_request', {'id_client_request': event.idClientRequest});
-            'new_client_request',
-            {'id_client_request': 2});
+          'new_client_request',
+          {'id_client_request': event.idClientRequest},
+        );
       }
     });
 

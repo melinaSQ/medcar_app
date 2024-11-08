@@ -12,7 +12,7 @@ import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:http/http.dart' as http;
 
 class ClientRequestsService {
-  Future<Resource<bool>> create(ClientRequest clientRequest) async {
+  Future<Resource<int>> create(ClientRequest clientRequest) async {
     try {
       Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests');
       Map<String, String> headers = {'Content-Type': 'application/json'};
@@ -20,8 +20,8 @@ class ClientRequestsService {
       final response = await http.post(url, headers: headers, body: body);
       final data = json.decode(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // return Success(data);
-        return Success(true);
+        return Success(data);
+        // return Success(true);
       } else {
         return ErrorData(listToString(data['message']));
       }

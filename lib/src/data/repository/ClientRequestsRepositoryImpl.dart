@@ -24,7 +24,7 @@ class ClientRequestsRepositoryImpl implements ClientRequestsRepository {
   }
 
   @override
-  Future<Resource<bool>> create(ClientRequest clientRequest) {
+  Future<Resource<int>> create(ClientRequest clientRequest) {
     return clientRequestsService.create(clientRequest);
   }
 
