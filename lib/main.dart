@@ -13,7 +13,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medcar_app/src/presentation/pages/client/home/ClientHomePage.dart';
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersPage.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/ClientMapBookingInfoPage.dart';
-// import 'package:medcar_app/src/presentation/pages/client/mapTrip/ClientMapTripPage.dart';
+import 'package:medcar_app/src/presentation/pages/client/mapTrip/ClientMapTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/ratingTrip/ClientRatingTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
 import 'package:medcar_app/src/presentation/pages/driver/home/DriverHomePage.dart';
@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
           'profile/update': (BuildContext context) => ProfileUpdatePage(),
           'client/driver/offers': (BuildContext context) =>
               ClientDriverOffersPage(),
-          // 'client/map/trip': (BuildContext context) => ClientMapTripPage(),
+          'client/map/trip': (BuildContext context) => ClientMapTripPage(),
           // 'driver/map/trip': (BuildContext context) => DriverMapTripPage(),
           // 'driver/rating/trip': (BuildContext context) => DriverRatingTripPage(),
           // 'driver/client/request': (BuildContext context) => DriverClientRequestsPage(),

@@ -41,14 +41,14 @@ class _ClientDriverOffersPageState extends State<ClientDriverOffersPage> {
       body: BlocListener<ClientDriverOffersBloc, ClientDriverOffersState>(
         listener: (context, state) {
           final response = state.responseDriverOffers;
-          // final responseAssignDriver = state.responseAssignDriver;
+          final responseAssignDriver = state.responseAssignDriver;
           if (response is ErrorData) {
             Fluttertoast.showToast(
                 msg: response.message, toastLength: Toast.LENGTH_LONG);
           }
-          // if (responseAssignDriver is Success) {
-          //   Navigator.pushNamed(context, 'client/map/trip', arguments: idClientRequest);
-          // }
+          if (responseAssignDriver is Success) {
+            Navigator.pushNamed(context, 'client/map/trip', arguments: idClientRequest);
+          }
         },
         child: BlocBuilder<ClientDriverOffersBloc, ClientDriverOffersState>(
             builder: (context, state) {

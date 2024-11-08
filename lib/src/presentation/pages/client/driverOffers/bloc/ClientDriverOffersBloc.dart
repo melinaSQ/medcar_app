@@ -4,7 +4,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
-// import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
+import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersEvent.dart';
@@ -14,12 +14,12 @@ class ClientDriverOffersBloc
     extends Bloc<ClientDriverOffersEvent, ClientDriverOffersState> {
   BlocSocketIO blocSocketIO;
   DriverTripRequestUseCases driverTripRequestUseCases;
-  // ClientRequestsUseCases clientRequestsUseCases;
+  ClientRequestsUseCases clientRequestsUseCases;
 
   ClientDriverOffersBloc(
     this.blocSocketIO,
     this.driverTripRequestUseCases,
-    // this.clientRequestsUseCases,
+    this.clientRequestsUseCases,
   ) : super(ClientDriverOffersState()) {
     //eventos
     on<GetDriverOffers>((event, emit) async {
@@ -41,18 +41,20 @@ class ClientDriverOffersBloc
       }
     });
 
-    // on<AssignDriver>((event, emit) async {
-    //   Resource<bool> response = await clientRequestsUseCases
-    //       .updateDriverAssigned
-    //       .run(event.idClientRequest, event.idDriver, event.fareAssigned);
-    //   emit(state.copyWith(responseAssignDriver: response));
-    //   if (response is Success) {
-    //     add(EmitNewClientRequestSocketIO(
-    //         idClientRequest: event.idClientRequest));
-    //     add(EmitNewDriverAssignedSocketIO(
-    //         idClientRequest: event.idClientRequest, idDriver: event.idDriver));
-    //   }
-    // });
+    on<AssignDriver>((event, emit) async {
+      Resource<bool> response = await clientRequestsUseCases
+          .updateDriverAssigned
+          .run(event.idClientRequest, event.idDriver, event.fareAssigned);
+      emit(
+        state.copyWith(responseAssignDriver: response),
+      );
+      // if (response is Success) {
+      //   add(EmitNewClientRequestSocketIO(
+      //       idClientRequest: event.idClientRequest));
+      //   add(EmitNewDriverAssignedSocketIO(
+      //       idClientRequest: event.idClientRequest, idDriver: event.idDriver));
+      // }
+    });
 
     // on<EmitNewClientRequestSocketIO>((event, emit) {
     //   if (blocSocketIO.state.socket != null) {

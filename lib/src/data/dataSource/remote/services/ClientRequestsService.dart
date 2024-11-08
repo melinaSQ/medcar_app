@@ -12,6 +12,9 @@ import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:http/http.dart' as http;
 
 class ClientRequestsService {
+
+
+  // -------------------create solicitud
   Future<Resource<int>> create(ClientRequest clientRequest) async {
     try {
       Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests');
@@ -100,31 +103,29 @@ class ClientRequestsService {
   //   }
   // }
 
-  // Future<Resource<bool>> updateDriverAssigned(int idClientRequest, int idDriver, double fareAssigned) async {
-
-  //   try {
-  //     Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests');
-  //     Map<String, String> headers = { 'Content-Type': 'application/json' };
-  //     String body = json.encode({
-  //       'id': idClientRequest,
-  //       'id_driver_assigned': idDriver,
-  //       'fare_assigned': fareAssigned
-  //     });
-  //     final response = await http.put(url, headers: headers, body: body);
-  //     final data = json.decode(response.body);
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       return Success(true);
-  //     }
-  //     else {
-  //       return ErrorData(listToString(data['message']));
-  //     }
-
-  //   } catch (e) {
-  //     print('Error: $e');
-  //     return ErrorData(e.toString());
-  //   }
-
-  // }
+//-----------------------update driver asigned
+  Future<Resource<bool>> updateDriverAssigned(
+      int idClientRequest, int idDriver, double fareAssigned) async {
+    try {
+      Uri url = Uri.http(ApiConfig.API_PROJECT, '/client-requests');
+      Map<String, String> headers = {'Content-Type': 'application/json'};
+      String body = json.encode({
+        'id': idClientRequest,
+        'id_driver_assigned': idDriver,
+        'fare_assigned': fareAssigned
+      });
+      final response = await http.put(url, headers: headers, body: body);
+      final data = json.decode(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Success(true);
+      } else {
+        return ErrorData(listToString(data['message']));
+      }
+    } catch (e) {
+      print('Error: $e');
+      return ErrorData(e.toString());
+    }
+  }
 
   Future<Resource<TimeAndDistanceValues>> getTimeAndDistanceClientRequets(
       double originLat,

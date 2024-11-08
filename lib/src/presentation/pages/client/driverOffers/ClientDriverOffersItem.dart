@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
-// import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersEvent.dart';
+import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersEvent.dart';
 import 'package:medcar_app/src/presentation/widgets/DefaultButton.dart';
 
 class ClientDriverOffersItem extends StatelessWidget {
@@ -70,14 +70,14 @@ class ClientDriverOffersItem extends StatelessWidget {
               DefaultButton(
                 text: 'Aceptar', 
                 onPressed: () {
-                  // context.read<ClientDriverOffersBloc>().add(
-                  //   AssignDriver(
-                  //     idClientRequest: driverTripRequest!.idClientRequest, 
-                  //     idDriver: driverTripRequest!.idDriver, 
-                  //     fareAssigned: driverTripRequest!.fareOffered,
-                  //     context: context
-                  //   )
-                  // );
+                  context.read<ClientDriverOffersBloc>().add(
+                    AssignDriver(
+                      idClientRequest: driverTripRequest!.idClientRequest, 
+                      idDriver: driverTripRequest!.idDriver, 
+                      fareAssigned: driverTripRequest!.fareOffered,
+                      // context: context
+                    )
+                  );
                 },
                 width: 120,
                 height: 40,

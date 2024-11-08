@@ -1,11 +1,13 @@
-// import 'package:indriver_clone_flutter/src/domain/repository/ClientRequestsRepository.dart';
+// ignore_for_file: file_names
 
-// class UpdateDriverAssignedUseCase {
+import 'package:medcar_app/src/domain/repository/ClientRequestsRepository.dart';
 
-//   ClientRequestsRepository clientRequestsRepository;
+class UpdateDriverAssignedUseCase {
 
-//   UpdateDriverAssignedUseCase(this.clientRequestsRepository);
+  ClientRequestsRepository clientRequestsRepository;
 
-//   run(int idClientRequest, int idDriver, double fareAssigned) => clientRequestsRepository.updateDriverAssigned(idClientRequest, idDriver, fareAssigned);
+  UpdateDriverAssignedUseCase(this.clientRequestsRepository);
 
-// }
+  run(int idClientRequest, int idDriver, double fareAssigned) => clientRequestsRepository.updateDriverAssigned(idClientRequest, idDriver, fareAssigned);
+
+}

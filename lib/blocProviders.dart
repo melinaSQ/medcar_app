@@ -105,7 +105,7 @@ List<BlocProvider> blocProviders = [
     create: (context) => ClientDriverOffersBloc(
       context.read<BlocSocketIO>(),
       locator<DriverTripRequestUseCases>(),
-      // locator<ClientRequestsUseCases>(),
+      locator<ClientRequestsUseCases>(),
     ),
   ),
 
