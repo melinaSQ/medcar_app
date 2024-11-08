@@ -36,25 +36,29 @@ class DriverClientRequestsItem extends StatelessWidget {
                   .state
                   .fareOffered
                   .value
-                  .isNotEmpty) {
-            context
-                .read<DriverClientRequestsBloc>()
-                .add(CreateDriverTripRequest(
+                  .isNotEmpty)
+          //
+          {
+            context.read<DriverClientRequestsBloc>().add(
+                  CreateDriverTripRequest(
                     driverTripRequest: DriverTripRequest(
-                  idDriver: state.idDriver!,
-                  idClientRequest: clientRequest!.id,
-                  fareOffered: double.parse(context
-                      .read<DriverClientRequestsBloc>()
-                      .state
-                      .fareOffered
-                      .value),
-                  time: clientRequest!.googleDistanceMatrix!.duration.value
-                          .toDouble() /
-                      60,
-                  distance: clientRequest!.googleDistanceMatrix!.distance.value
-                          .toDouble() /
-                      1000,
-                )));
+                      idDriver: state.idDriver!,
+                      idClientRequest: clientRequest!.id,
+                      fareOffered: double.parse(context
+                          .read<DriverClientRequestsBloc>()
+                          .state
+                          .fareOffered
+                          .value),
+                      time: clientRequest!.googleDistanceMatrix!.duration.value
+                              .toDouble() /
+                          60,
+                      distance: clientRequest!
+                              .googleDistanceMatrix!.distance.value
+                              .toDouble() /
+                          1000,
+                    ),
+                  ),
+                );
           } else {
             Fluttertoast.showToast(
                 msg: 'No se puede enviar la oferta',

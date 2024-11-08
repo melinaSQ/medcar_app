@@ -104,9 +104,12 @@ class DriverMapLocationBloc
       try {
         GoogleMapController googleMapController =
             await state.controller!.future;
-        await googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-            CameraPosition(
-                target: LatLng(event.lat, event.lng), zoom: 13, bearing: 0)));
+        await googleMapController
+            .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: LatLng(event.lat, event.lng),
+          zoom: 13,
+          bearing: 0,
+        )));
       } catch (e) {
         print('ERROR EN ChangeMapCameraPosition: $e');
       }

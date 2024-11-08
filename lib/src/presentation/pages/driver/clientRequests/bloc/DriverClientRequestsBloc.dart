@@ -74,10 +74,10 @@ class DriverClientRequestsBloc
         state.copyWith(responseCreateDriverTripRequest: response),
       );
 
-      // if (response is Success) {
-      //   add(EmitNewDriverOfferSocketIO(
-      //       idClientRequest: event.driverTripRequest.idClientRequest));
-      // }
+      if (response is Success) {
+        add(EmitNewDriverOfferSocketIO(
+            idClientRequest: event.driverTripRequest.idClientRequest));
+      }
     });
 
     on<FareOfferedChange>((event, emit) {
@@ -92,11 +92,11 @@ class DriverClientRequestsBloc
       }
     });
 
-    //   on<EmitNewDriverOfferSocketIO>((event, emit) {
-    //     if (blocSocketIO.state.socket != null) {
-    //       blocSocketIO.state.socket?.emit(
-    //           'new_driver_offer', {'id_client_request': event.idClientRequest});
-    //     }
-    //   });
+    on<EmitNewDriverOfferSocketIO>((event, emit) {
+      if (blocSocketIO.state.socket != null) {
+        blocSocketIO.state.socket?.emit(
+            'new_driver_offer', {'id_client_request': event.idClientRequest});
+      }
+    });
   }
 }

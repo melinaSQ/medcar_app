@@ -18,7 +18,7 @@ class FareOfferedChange extends DriverClientRequestsEvent {
 }
 
 class ListenNewClientRequestSocketIO extends DriverClientRequestsEvent {}
-// class EmitNewDriverOfferSocketIO extends DriverClientRequestsEvent{
-//   final int idClientRequest;
-//   EmitNewDriverOfferSocketIO({required this.idClientRequest});
-// }
+class EmitNewDriverOfferSocketIO extends DriverClientRequestsEvent{
+  final int idClientRequest;
+  EmitNewDriverOfferSocketIO({required this.idClientRequest});
+}

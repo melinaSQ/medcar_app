@@ -2,7 +2,7 @@
 
 // import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
+import 'package:medcar_app/blocSocketIO/BlocSocketIO.dart';
 import 'package:medcar_app/src/domain/models/DriverTripRequest.dart';
 // import 'package:medcar_app/src/domain/useCases/client-requests/ClientRequestsUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/driver-trip-request/DriverTripRequestUseCases.dart';
@@ -12,12 +12,12 @@ import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/Clien
 
 class ClientDriverOffersBloc
     extends Bloc<ClientDriverOffersEvent, ClientDriverOffersState> {
-  // BlocSocketIO blocSocketIO;
+  BlocSocketIO blocSocketIO;
   DriverTripRequestUseCases driverTripRequestUseCases;
   // ClientRequestsUseCases clientRequestsUseCases;
 
   ClientDriverOffersBloc(
-    // this.blocSocketIO,
+    this.blocSocketIO,
     this.driverTripRequestUseCases,
     // this.clientRequestsUseCases,
   ) : super(ClientDriverOffersState()) {
@@ -31,14 +31,15 @@ class ClientDriverOffersBloc
       );
     });
 
-    // on<ListenNewDriverOfferSocketIO>((event, emit) {
-    //   if (blocSocketIO.state.socket != null) {
-    //     blocSocketIO.state.socket
-    //         ?.on('created_driver_offer/${event.idClientRequest}', (data) {
-    //       add(GetDriverOffers(idClientRequest: event.idClientRequest));
-    //     });
-    //   }
-    // });
+    on<ListenNewDriverOfferSocketIO>((event, emit) {
+      if (blocSocketIO.state.socket != null) {
+        blocSocketIO.state.socket
+            ?.on('created_driver_offer/${event.idClientRequest}', (data) {
+          print('ListenNewDriverOfferSocketIO id: ${event.idClientRequest}');
+          add(GetDriverOffers(idClientRequest: event.idClientRequest));
+        });
+      }
+    });
 
     // on<AssignDriver>((event, emit) async {
     //   Resource<bool> response = await clientRequestsUseCases

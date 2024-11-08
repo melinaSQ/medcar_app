@@ -20,25 +20,23 @@ class ClientDriverOffersPage extends StatefulWidget {
 }
 
 class _ClientDriverOffersPageState extends State<ClientDriverOffersPage> {
-  // int? idClientRequest;
+  int? idClientRequest;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // if (idClientRequest != null) {
-      // context.read<ClientDriverOffersBloc>().add(ListenNewDriverOfferSocketIO(idClientRequest: idClientRequest!));
-      // }
-      context
-          .read<ClientDriverOffersBloc>()
-          .add(GetDriverOffers(idClientRequest: 2));
+      if (idClientRequest != null) {
+        context.read<ClientDriverOffersBloc>().add(
+            ListenNewDriverOfferSocketIO(idClientRequest: idClientRequest!));
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // idClientRequest = ModalRoute.of(context)?.settings.arguments as int;
+    idClientRequest = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
       body: BlocListener<ClientDriverOffersBloc, ClientDriverOffersState>(
         listener: (context, state) {
@@ -56,8 +54,8 @@ class _ClientDriverOffersPageState extends State<ClientDriverOffersPage> {
             builder: (context, state) {
           final response = state.responseDriverOffers;
 
-          print('state en ClientDriverOffersPage: ${state}');
-          print('response en ClientDriverOffersPage: ${response}');
+          // print('state en ClientDriverOffersPage: ${state}');
+          // print('response en ClientDriverOffersPage: ${response}');
           if (response is Loading) {
             return Center(child: CircularProgressIndicator());
           } else if (response is Success) {
