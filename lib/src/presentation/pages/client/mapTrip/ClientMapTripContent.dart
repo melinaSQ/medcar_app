@@ -1,13 +1,13 @@
 // ignore_for_file: file_names, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
 // import 'package:medcar_app/src/domain/models/TimeAndDistanceValues.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
-import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripEvent.dart';
-import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripState.dart';
+// import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripEvent.dart';
+// import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripState.dart';
 // import 'package:medcar_app/src/presentation/widgets/DefaultImageUrl.dart';
 
 class ClientMapTripContent extends StatelessWidget {

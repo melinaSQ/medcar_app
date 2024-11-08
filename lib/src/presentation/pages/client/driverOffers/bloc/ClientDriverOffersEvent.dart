@@ -28,10 +28,10 @@ class AssignDriver extends ClientDriverOffersEvent {
   });
 }
 
-// class EmitNewClientRequestSocketIO extends ClientDriverOffersEvent {
-//   final int idClientRequest;
-//   EmitNewClientRequestSocketIO({required this.idClientRequest}); 
-// }
+class EmitNewClientRequestSocketIO extends ClientDriverOffersEvent {
+  final int idClientRequest;
+  EmitNewClientRequestSocketIO({required this.idClientRequest}); 
+}
 
 // class EmitNewDriverAssignedSocketIO extends ClientDriverOffersEvent {
 //   final int idClientRequest;

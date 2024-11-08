@@ -1,15 +1,15 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
-import 'package:medcar_app/src/domain/utils/Resource.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:medcar_app/src/domain/models/ClientRequestResponse.dart';
+// import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapTrip/ClientMapTripContent.dart';
 // import 'package:medcar_app/src/presentation/pages/client/mapTrip/ClientMapTripContent.dart';
-import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
-import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripEvent.dart';
-import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripState.dart';
+// import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripEvent.dart';
+// import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripState.dart';
 
 class ClientMapTripPage extends StatefulWidget {
   const ClientMapTripPage({super.key});
