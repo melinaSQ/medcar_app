@@ -78,17 +78,19 @@ class ClientMapTripContent extends StatelessWidget {
   //               fontSize: 13
   //             ),
   //           ),
-  //           trailing: DefaultImageUrl(
-  //             url: clientRequest?.driver?.image,
-  //             width: 60,
-  //           ),
+  //           // trailing: DefaultImageUrl(
+  //           //   url: clientRequest?.driver?.image,
+  //           //   width: 60,
+  //           // ),
   //         ),
   //         ListTile(
-  //           title: Text(clientRequest?.car?.brand ?? ''),
+  //           // title: Text(clientRequest?.car?.brand ?? ''),
+  //           title: Text('ambulancia basica'),
   //           subtitle: Column(
   //             crossAxisAlignment: CrossAxisAlignment.start,
   //             children: [
-  //               Text('${clientRequest?.car?.color} - ${clientRequest?.car?.plate}'),
+  //               // Text('${clientRequest?.car?.color} - ${clientRequest?.car?.plate}'),
+  //               Text('4545HDT'),
   //               Text(
   //                 'Llega en ${state.timeAndDistanceValues?.duration.text} Aproximadamente',
   //                 style: TextStyle(

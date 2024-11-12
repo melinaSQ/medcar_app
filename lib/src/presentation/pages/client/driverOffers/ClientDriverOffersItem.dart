@@ -9,7 +9,6 @@ import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/Clien
 import 'package:medcar_app/src/presentation/widgets/DefaultButton.dart';
 
 class ClientDriverOffersItem extends StatelessWidget {
-
   DriverTripRequest? driverTripRequest;
 
   // ignore: use_key_in_widget_constructors
@@ -24,8 +23,7 @@ class ClientDriverOffersItem extends StatelessWidget {
           ListTile(
             leading: _imageUser(),
             title: Text(
-              '${driverTripRequest?.driver?.name ?? ''} ${driverTripRequest?.driver?.lastname ?? ''}'
-            ),
+                '${driverTripRequest?.driver?.name ?? ''} ${driverTripRequest?.driver?.lastname ?? ''}'),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
@@ -39,18 +37,10 @@ class ClientDriverOffersItem extends StatelessWidget {
               children: [
                 Text(
                   '${driverTripRequest?.time} min',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.blueAccent
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.blueAccent),
                 ),
-                Text(
-                  '${driverTripRequest?.distance} km',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.blueAccent
-                  )
-                )
+                Text('${driverTripRequest?.distance} km',
+                    style: TextStyle(fontSize: 14, color: Colors.blueAccent))
               ],
             ),
           ),
@@ -61,33 +51,37 @@ class ClientDriverOffersItem extends StatelessWidget {
                 margin: EdgeInsets.only(left: 20, bottom: 15),
                 child: Text(
                   'Bs ${driverTripRequest?.fareOffered}',
-                  style: TextStyle(
-                    fontSize: 27,
-                    fontWeight: FontWeight.bold
-                  ),
+                  style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
                 ),
               ),
               DefaultButton(
-                text: 'Aceptar', 
+                text: 'Aceptar',
                 onPressed: () {
-                  context.read<ClientDriverOffersBloc>().add(
-                    AssignDriver(
-                      idClientRequest: driverTripRequest!.idClientRequest, 
-                      idDriver: driverTripRequest!.idDriver, 
-                      fareAssigned: driverTripRequest!.fareOffered,
-                      // context: context
-                    )
-                  );
+                  context.read<ClientDriverOffersBloc>().add(AssignDriver(
+                        idClientRequest: driverTripRequest!.idClientRequest,
+                        idDriver: driverTripRequest!.idDriver,
+                        fareAssigned: driverTripRequest!.fareOffered,
+                        // context: context
+                      ));
                 },
                 width: 120,
                 height: 40,
                 margin: EdgeInsets.only(right: 20, bottom: 15),
                 color: Colors.blueAccent,
                 textColor: Colors.white,
-              )
+              ),
+              // DefaultButton(
+              //   text: 'Rechazar',
+              //   onPressed: () {
+              //   },
+              //   width: 120,
+              //   height: 40,
+              //   margin: EdgeInsets.only(right: 20, bottom: 15),
+              //   color: Colors.redAccent,
+              //   textColor: Colors.white,
+              // ),
             ],
           )
-          
         ],
       ),
     );
@@ -95,25 +89,25 @@ class ClientDriverOffersItem extends StatelessWidget {
 
   Widget _imageUser() {
     return Container(
-        width: 60,
-        // margin: EdgeInsets.only(top: 25, bottom: 15),
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: ClipOval(
-            child: driverTripRequest != null 
-            ? driverTripRequest!.driver!.image != null 
-              ? FadeInImage.assetNetwork(
-                placeholder: 'assets/img/user_image.png', 
-                image: driverTripRequest!.driver!.image!,
-                fit: BoxFit.cover,
-                fadeInDuration: Duration(seconds: 1),
-              )
-              : Image.asset(
-                'assets/img/user_image.png',
-              )
-            : Container(),
-          ),
+      width: 60,
+      // margin: EdgeInsets.only(top: 25, bottom: 15),
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: ClipOval(
+          child: driverTripRequest != null
+              ? driverTripRequest!.driver!.image != null
+                  ? FadeInImage.assetNetwork(
+                      placeholder: 'assets/img/user_image.png',
+                      image: driverTripRequest!.driver!.image!,
+                      fit: BoxFit.cover,
+                      fadeInDuration: Duration(seconds: 1),
+                    )
+                  : Image.asset(
+                      'assets/img/user_image.png',
+                    )
+              : Container(),
         ),
-      );
+      ),
+    );
   }
 }

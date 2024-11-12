@@ -25,9 +25,9 @@ class DriverClientRequestsItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         FareOfferedDialog(context, () {
-          // print('clientRequest: ${clientRequest}');
-          // print('id driver: ${state.idDriver}');
-          // print('fareofefered: ${state.fareOffered.value}');
+          print('clientRequest: ${clientRequest}');
+          print('id driver: ${state.idDriver}');
+          print('fareofefered: ${state.fareOffered.value}');
 
           if (clientRequest != null &&
               state.idDriver != null &&

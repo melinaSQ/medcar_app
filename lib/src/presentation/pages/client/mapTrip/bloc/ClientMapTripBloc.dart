@@ -231,7 +231,7 @@
 //           );
 //         }
 //         else if (statusTrip == StatusTrip.FINISHED.name) {
-//           navigatorKey.currentState?.pushNamedAndRemoveUntil('client/rating/trip', (route) => false, arguments: state.clientRequestResponse);
+//           // navigatorKey.currentState?.pushNamedAndRemoveUntil('client/rating/trip', (route) => false, arguments: state.clientRequestResponse);
 //         }
 //       });
 //     });

@@ -7,18 +7,20 @@ class ClientDriverOffersState extends Equatable {
   final Resource? responseDriverOffers;
   final Resource? responseAssignDriver;
 
-  ClientDriverOffersState({
+
+  const ClientDriverOffersState({
     this.responseDriverOffers,
-    this.responseAssignDriver
+    this.responseAssignDriver,
   });
 
   ClientDriverOffersState copyWith({
     Resource? responseDriverOffers,
-    Resource? responseAssignDriver
+    Resource? responseAssignDriver,
+    Resource? responseRejectDriver, // Agregar aquí también
   }) {
     return ClientDriverOffersState(
       responseDriverOffers: responseDriverOffers ?? this.responseDriverOffers,
-      responseAssignDriver: responseAssignDriver
+      responseAssignDriver: responseAssignDriver,
     );
   }
 

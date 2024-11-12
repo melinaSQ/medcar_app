@@ -12,7 +12,6 @@ import 'package:medcar_app/src/domain/useCases/client-requests/UpdateDriverAssig
 // import 'package:medcar_app/src/domain/useCases/client-requests/UpdateStatusClientRequestUseCase.dart';
 
 class ClientRequestsUseCases {
-
   CreateClientRequestUseCase createClientRequest;
   GetTimeAndDistanceUseCase getTimeAndDistance;
   GetNearbyTripRequestUseCase getNearbyTripRequest;
@@ -37,4 +36,5 @@ class ClientRequestsUseCases {
     // required this.getByDriverAssigned,
   });
 
+  
 }

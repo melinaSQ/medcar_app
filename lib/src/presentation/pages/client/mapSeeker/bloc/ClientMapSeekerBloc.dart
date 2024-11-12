@@ -134,7 +134,8 @@ class ClientMapSeekerBloc
 
       // Crea los marcadores usando las imágenes redimensionadas
       BitmapDescriptor descriptor = await getResizedBitmapDescriptor(
-          'assets/img/car_pin.png', 80, 80); // Cambia el tamaño a 64x64
+          'assets/img/ambu_pin.png', 80, 80); // Cambia el tamaño a 64x64
+      // 'assets/img/car_pin.png', 80, 80); // Cambia el tamaño a 64x64
 
       // BitmapDescriptor descriptor =
       //     await geolocatorUseCases.createMarker.run('assets/img/car_pin.png');
