@@ -6,6 +6,7 @@ import 'package:medcar_app/blocProviders.dart';
 import 'package:medcar_app/injection.dart';
 // import 'package:medcar_app/src/domain/utils/FirebasePushNotifications.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/LoginPage.dart';
+import 'package:medcar_app/src/presentation/pages/auth/login_car/LoginCarPage.dart';
 // import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/RegisterPage.dart';
@@ -14,6 +15,7 @@ import 'package:medcar_app/src/presentation/pages/client/home/ClientHomePage.dar
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/ClientDriverOffersPage.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapBookingInfo/ClientMapBookingInfoPage.dart';
 import 'package:medcar_app/src/presentation/pages/client/mapTrip/ClientMapTripPage.dart';
+import 'package:medcar_app/src/presentation/pages/company/home/CompanyHomePage.dart';
 // import 'package:medcar_app/src/presentation/pages/client/ratingTrip/ClientRatingTripPage.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/clientRequests/DriverClientRequestsPage.dart';
 import 'package:medcar_app/src/presentation/pages/driver/home/DriverHomePage.dart';
@@ -89,6 +91,8 @@ class _MyAppState extends State<MyApp> {
           'register': (BuildContext context) => RegisterPage(),
           'client/home': (BuildContext context) => ClientHomePage(),
           'roles': (BuildContext context) => RolesPage(),
+          'company/home': (BuildContext context) => CompanyHomePage(),
+          'driver/form': (BuildContext context) => LoginCarPage(),
           'driver/home': (BuildContext context) => DriverHomePage(),
           'client/map/booking': (BuildContext context) =>
               ClientMapBookingInfoPage(),

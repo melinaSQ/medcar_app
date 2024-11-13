@@ -43,6 +43,11 @@ class DriverMapLocationState extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [position, markers, controller, cameraPosition, idDriver];
+  List<Object?> get props => [
+        position,
+        markers,
+        controller,
+        cameraPosition,
+        idDriver,
+      ];
 }

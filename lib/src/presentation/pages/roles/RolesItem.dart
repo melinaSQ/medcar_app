@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:medcar_app/src/domain/models/Role.dart';
 
 class RolesItem extends StatelessWidget {
-
   Role role;
 
   RolesItem(this.role);
@@ -13,7 +12,15 @@ class RolesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamedAndRemoveUntil(context, role.route, (route) => false);
+        // if (role.id == 'DRIVER') {
+        //   Navigator.pushNamedAndRemoveUntil(
+        //       context, role.route, (route) => false);
+        // } else {
+        //   Navigator.pushNamedAndRemoveUntil(
+        //       context, role.route, (route) => false);
+        // }
+        Navigator.pushNamedAndRemoveUntil(
+            context, role.route, (route) => false);
       },
       child: Column(
         children: [
@@ -30,10 +37,7 @@ class RolesItem extends StatelessWidget {
           Text(
             role.name,
             style: TextStyle(
-              fontSize: 21,
-              fontWeight: FontWeight.bold,
-              color: Colors.white
-            ),
+                fontSize: 21, fontWeight: FontWeight.bold, color: Colors.white),
           )
         ],
       ),

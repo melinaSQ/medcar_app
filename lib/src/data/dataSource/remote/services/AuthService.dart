@@ -34,6 +34,7 @@ class AuthService {
 
       else if (response.statusCode == 400) {
         // Ejemplo: credenciales inválidas
+        
         return ErrorData(
             "Credenciales inválidas. Por favor, revisa tu email y contraseña.");
       } else if (response.statusCode == 404) {

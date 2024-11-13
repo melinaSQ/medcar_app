@@ -108,7 +108,7 @@ class DriverMapLocationBloc
         await googleMapController
             .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
           target: LatLng(event.lat, event.lng),
-          zoom: 13,
+          zoom: 17,
           bearing: 0,
         )));
       } catch (e) {

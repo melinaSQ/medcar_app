@@ -13,6 +13,8 @@ import 'package:medcar_app/src/domain/useCases/socket/SocketUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/users/UsersUseCases.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
 import 'package:medcar_app/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
+import 'package:medcar_app/src/presentation/pages/auth/login_car/bloc/LoginCarBloc.dart';
+import 'package:medcar_app/src/presentation/pages/auth/login_car/bloc/LoginCarEvent.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterBloc.dart';
 import 'package:medcar_app/src/presentation/pages/auth/register/bloc/RegisterEvent.dart';
 import 'package:medcar_app/src/presentation/pages/client/driverOffers/bloc/ClientDriverOffersBloc.dart';
@@ -24,7 +26,9 @@ import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMa
 // ignore: unused_import
 import 'package:medcar_app/src/presentation/pages/client/mapSeeker/bloc/ClientMapSeekerEvent.dart';
 
-import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
+// import 'package:medcar_app/src/presentation/pages/client/mapTrip/bloc/ClientMapTripBloc.dart';
+import 'package:medcar_app/src/presentation/pages/company/home/bloc/CompanyHomeBloc.dart';
+import 'package:medcar_app/src/presentation/pages/company/mapControl/bloc/CompanyMapControlBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/client/ratingTrip/bloc/ClientRatingTripBloc.dart';
 // import 'package:medcar_app/src/presentation/pages/driver/carInfo/bloc/DriverCarInfoBloc.dart';
 import 'package:medcar_app/src/presentation/pages/driver/clientRequests/bloc/DriverClientRequestsBloc.dart';
@@ -45,6 +49,11 @@ List<BlocProvider> blocProviders = [
       locator<AuthUseCases>(), /*locator<UsersUseCases>()*/
     )..add(LoginInitEvent()),
   ),
+  BlocProvider<LoginCarBloc>(
+    create: (context) => LoginCarBloc(
+      locator<AuthUseCases>(), /*locator<UsersUseCases>()*/
+    )..add(LoginCarInitEvent()),
+  ),
   BlocProvider<RegisterBloc>(
     create: (context) =>
         RegisterBloc(locator<AuthUseCases>())..add(RegisterInitEvent()),
@@ -61,6 +70,10 @@ List<BlocProvider> blocProviders = [
   ),
   BlocProvider<DriverHomeBloc>(
     create: (context) => DriverHomeBloc(locator<AuthUseCases>()),
+  ),
+
+  BlocProvider<CompanyHomeBloc>(
+    create: (context) => CompanyHomeBloc(locator<AuthUseCases>()),
   ),
 
   BlocProvider<RolesBloc>(
@@ -116,6 +129,16 @@ List<BlocProvider> blocProviders = [
       locator<SocketUseCases>(),
       locator<AuthUseCases>(),
       locator<DriversPositionUseCases>(),
+    ),
+  ),
+
+  BlocProvider<CompanyMapControlBloc>(
+    create: (context) => CompanyMapControlBloc(
+      context.read<BlocSocketIO>(),
+      locator<GeolocatorUseCases>(),
+      locator<SocketUseCases>(),
+      // locator<AuthUseCases>(),
+      // locator<DriversPositionUseCases>(),
     ),
   ),
 
