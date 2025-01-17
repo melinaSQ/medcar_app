@@ -5,7 +5,7 @@ import 'package:medcar_app/src/domain/utils/Resource.dart';
 import 'package:medcar_app/src/presentation/utils/BlocFormItem.dart';
 
 class DriverClientRequestsState extends Equatable {
-  final Resource? response;
+  final Resource? response; //respuesta del client request
   final Resource? responseCreateDriverTripRequest;
   final Resource? responseDriverPosition;
   final BlocFormItem fareOffered;

@@ -70,6 +70,7 @@ class DriverClientRequestsBloc
       Resource<bool> response = await driverTripRequestUseCases
           .createDriverTripRequest
           .run(event.driverTripRequest);
+          
       emit(
         state.copyWith(responseCreateDriverTripRequest: response),
       );

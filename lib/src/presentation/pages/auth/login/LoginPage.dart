@@ -38,12 +38,14 @@ class _LoginPageState extends State<LoginPage> {
         body: BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         final response = state.response;
+        print('Response LoginPage: ${state.response}');
+
         if (response is ErrorData) {
           Fluttertoast.showToast(
               msg: '${response.message}', toastLength: Toast.LENGTH_SHORT);
-          print('Error Data: ${response.message}');
+          print('Error Data LoginPage: ${response.message}');
         } else if (response is Success) {
-          print('Success Dta: ${response.data}');
+          print('Success Dta LoginPage: ${response.data}');
           final authResponse = response.data as AuthResponse;
           context
               .read<LoginBloc>()
@@ -52,6 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           context.read<BlocSocketIO>().add(ConnectSocketIO());
           // context.read<BlocSocketIO>().add(ListenDriverAssignedSocketIO());
           if (authResponse.user.roles!.length > 1) {
+
             Navigator.pushNamedAndRemoveUntil(
                 context, 'roles', (route) => false);
           } else {

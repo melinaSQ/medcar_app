@@ -61,7 +61,6 @@ class _ClientMapBookingInfoPageState extends State<ClientMapBookingInfoPage> {
             print(' id client request${responseClientRequest.data}');
             context.read<ClientMapBookingInfoBloc>().add(
                 EmitNewClientRequestSocketIO(idClientRequest: idClientRequest));
-            // Navigator.pushNamedAndRemoveUntil(context, 'client/driver/offers', (route) => false);
             Navigator.pushNamed(context, 'client/driver/offers',
                 arguments: idClientRequest);
             Fluttertoast.showToast(

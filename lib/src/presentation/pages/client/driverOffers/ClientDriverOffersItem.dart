@@ -26,10 +26,10 @@ class ClientDriverOffersItem extends StatelessWidget {
                 '${driverTripRequest?.driver?.name ?? ''} ${driverTripRequest?.driver?.lastname ?? ''}'),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text('5.0'),
-                Text('Ambulancia Basica'),
-                // Text(driverTripRequest?.car?.brand ?? ''),
+                // Text('Ambulancia Basica'),
+                Text(driverTripRequest?.car?.ambulanceType ?? ''),
               ],
             ),
             trailing: Column(

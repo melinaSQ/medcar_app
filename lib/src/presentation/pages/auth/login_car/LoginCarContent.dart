@@ -47,28 +47,31 @@ class LoginCarContent extends StatelessWidget {
           ),
 
           //**** 2 container del formulario de login
-          Container(
-            height: MediaQuery.of(context).size.height,
-            // margin: EdgeInsets.only(left: 60, bottom: 35),
-            margin:
-                EdgeInsets.only(left: 100, bottom: 200, right: 100, top: 200),
-            // margin: EdgeInsets.all(100),
-            decoration: BoxDecoration(
-              //color: Colors.white,
-              gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: const [
-                    Color.fromARGB(255, 255, 255, 255),
-                    Color.fromARGB(255, 154, 154, 154),
-                  ]),
-              borderRadius: BorderRadius.all(Radius.circular(35)),
-            ),
 
-            //******conteenido del fomrulario
+          SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.only(left: 25, right: 25),
-              child: SingleChildScrollView(
+              // height: MediaQuery.of(context).size.height,
+              // margin: EdgeInsets.only(left: 60, bottom: 35),
+              padding: EdgeInsets.only(bottom: 35),
+              margin:
+                  EdgeInsets.only(left: 100, bottom: 200, right: 100, top: 200),
+              // margin: EdgeInsets.all(100),
+              decoration: BoxDecoration(
+                //color: Colors.white,
+                gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: const [
+                      Color.fromARGB(255, 255, 255, 255),
+                      Color.fromARGB(255, 154, 154, 154),
+                    ]),
+                borderRadius: BorderRadius.all(Radius.circular(35)),
+              ),
+
+              //******conteenido del fomrulario
+              child: Container(
+                margin: EdgeInsets.only(left: 25, right: 25),
+                // child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -81,8 +84,8 @@ class LoginCarContent extends StatelessWidget {
                     //***campo placa
                     DefaultTextField(
                         onChanged: (text) {
-                          context.read<LoginCarBloc>().add(
-                              CarPlateChanged(plate: BlocFormItem(value: text)));
+                          context.read<LoginCarBloc>().add(CarPlateChanged(
+                              plate: BlocFormItem(value: text)));
                         },
                         validator: (value) {
                           return state.plate.error;
@@ -93,8 +96,9 @@ class LoginCarContent extends StatelessWidget {
                     //****campo code */
                     DefaultTextField(
                       onChanged: (text) {
-                        context.read<LoginCarBloc>().add(CodeChanged(
-                            code: BlocFormItem(value: text)));
+                        context
+                            .read<LoginCarBloc>()
+                            .add(CodeChanged(code: BlocFormItem(value: text)));
                       },
                       validator: (value) {
                         return state.code.error;
@@ -117,6 +121,14 @@ class LoginCarContent extends StatelessWidget {
                       textColor: Colors.white,
 
                       onPressed: () {
+                        print('ingreso al onpress en logincarcontent');
+                        // print('id user: ${state.userId}');
+                        // print('Plate: ${state.plate.value}');
+                        // print('Code: ${state.code.value}');
+
+                        print(
+                            'estado del form: ${state.formKey!.currentState!}');
+
                         if (state.formKey!.currentState!.validate()) {
                           context.read<LoginCarBloc>().add(FormSubmit());
                         } else {
@@ -129,12 +141,12 @@ class LoginCarContent extends StatelessWidget {
               ),
             ),
           ),
+
+          //aqui terminar el conteiner
         ],
       ),
     );
   }
-
-  
 
   Widget _text(String text, double size) {
     return Container(
@@ -155,7 +167,6 @@ class LoginCarContent extends StatelessWidget {
     );
   }
 
-
   Widget _imageMedcar() {
     return Container(
       padding: EdgeInsets.all(0),
@@ -168,5 +179,4 @@ class LoginCarContent extends StatelessWidget {
       ),
     );
   }
-
 }

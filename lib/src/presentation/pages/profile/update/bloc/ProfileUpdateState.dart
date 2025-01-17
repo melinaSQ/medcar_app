@@ -41,7 +41,7 @@ class ProfileUpdateState extends Equatable {
     BlocFormItem? phone,
     File? image,
     GlobalKey<FormState>? formKey,
-    Resource? response
+    Resource? response,
   }) {
     return ProfileUpdateState(
       id: id ?? this.id,

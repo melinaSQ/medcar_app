@@ -29,15 +29,32 @@ class DriverTripRequestsService {
 
   Future<Resource<List<DriverTripRequest>>> getDriverTripOffersByClientRequest(
       int idClientRequest) async {
+    print('idClientRequest en el service: $idClientRequest');
+    print(
+        'tipo del idClientRequest en el service: ${idClientRequest.runtimeType}');
     try {
       Uri url = Uri.http(ApiConfig.API_PROJECT,
           '/driver-trip-offers/findByClientRequest/${idClientRequest}');
       Map<String, String> headers = {'Content-Type': 'application/json'};
       final response = await http.get(url, headers: headers);
+      print('data en el service de driverTripService: $response');
       final data = json.decode(response.body);
+      print('data en el service de driverTripService: $data');
+
+      // if (data is List) {
+      //   List<DriverTripRequest> driverTripRequest =
+      //       DriverTripRequest.fromJsonList(data);
+      //   return Success(driverTripRequest);
+      // } else {
+      //   return ErrorData("Expected a list but received a different structure");
+      // }
+
       if (response.statusCode == 200 || response.statusCode == 201) {
+        print('Entro al if de sucess');
         List<DriverTripRequest> driverTripRequest =
             DriverTripRequest.fromJsonList(data);
+        print('hizo la lista ; $driverTripRequest');
+
         return Success(driverTripRequest);
       } else {
         return ErrorData(listToString(data['message']));

@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:medcar_app/src/domain/useCases/auth/GetUserSessionUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/auth/LoginCarUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/LoginUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/RegisterUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/LogoutUseCase.dart';
@@ -8,6 +9,7 @@ import 'package:medcar_app/src/domain/useCases/auth/SaveUserSessionUseCase.dart'
 
 class AuthUseCases {
   LoginUseCase login;
+  LoginCarUseCase loginCar;
   RegisterUseCase register;
   SaveUserSessionUseCase saveUserSession;
   GetUserSessionUseCase getUserSession;
@@ -15,6 +17,7 @@ class AuthUseCases {
 
   AuthUseCases({
     required this.login,
+    required this.loginCar,
     required this.register,
     required this.saveUserSession,
     required this.getUserSession,

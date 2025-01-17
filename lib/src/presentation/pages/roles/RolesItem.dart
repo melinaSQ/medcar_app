@@ -12,15 +12,13 @@ class RolesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // if (role.id == 'DRIVER') {
-        //   Navigator.pushNamedAndRemoveUntil(
-        //       context, role.route, (route) => false);
-        // } else {
-        //   Navigator.pushNamedAndRemoveUntil(
-        //       context, role.route, (route) => false);
-        // }
-        Navigator.pushNamedAndRemoveUntil(
-            context, role.route, (route) => false);
+        if (role.name == 'DRIVER' && role.name == 'DRIVER') {
+          Navigator.pushNamedAndRemoveUntil(
+              context, 'driver/form', (route) => false);
+        } else {
+          Navigator.pushNamedAndRemoveUntil(
+              context, role.route, (route) => false);
+        }
       },
       child: Column(
         children: [

@@ -40,6 +40,7 @@ class DriverClientRequestsItem extends StatelessWidget {
           //
           {
             context.read<DriverClientRequestsBloc>().add(
+              //pasando un solicitud del conductor para el usuario
                   CreateDriverTripRequest(
                     driverTripRequest: DriverTripRequest(
                       idDriver: state.idDriver!,

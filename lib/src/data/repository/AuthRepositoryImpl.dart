@@ -1,6 +1,7 @@
 import 'package:medcar_app/src/data/dataSource/local/SharefPref.dart';
 import 'package:medcar_app/src/data/dataSource/remote/services/AuthService.dart';
 import 'package:medcar_app/src/domain/models/AuthResponse.dart';
+// import 'package:medcar_app/src/domain/models/AssingDriver.dart';
 import 'package:medcar_app/src/domain/models/user.dart';
 import 'package:medcar_app/src/domain/repository/AuthRepository.dart';
 import 'package:medcar_app/src/domain/utils/Resource.dart';
@@ -14,6 +15,11 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Resource<AuthResponse>> login(String email, String password) {
     return authService.login(email, password);
+  }
+
+  @override
+  Future<Resource<bool>> loginCar(int idDriver, String plate, String code) {
+    return authService.loginCar(idDriver, plate, code);
   }
 
   @override

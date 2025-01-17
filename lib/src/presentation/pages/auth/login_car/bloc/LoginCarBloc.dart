@@ -28,7 +28,10 @@ class LoginCarBloc extends Bloc<LoginCarEvent, LoginCarState> {
 
       emit(state.copyWith(formKey: formKey));
       if (authResponse != null) {
-        emit(state.copyWith(response: Success(authResponse), formKey: formKey));
+        emit(state.copyWith(
+            // response: Success(authResponse),
+            formKey: formKey,
+            userId: authResponse.user.id));
       }
     });
 
@@ -56,16 +59,25 @@ class LoginCarBloc extends Bloc<LoginCarEvent, LoginCarState> {
     });
 
     on<FormSubmit>((event, emit) async {
+      print('ingreso al form submit');
+      print('id user: ${state.userId}');
       print('Plate: ${state.plate.value}');
       print('Code: ${state.code.value}');
 
-      emit(state.copyWith(response: Loading(), formKey: formKey));
+      emit(state.copyWith(
+        response: Loading(),
+        formKey: formKey,
+      ));
 
-//areglar
-      Resource response =
-          await authUseCases.login.run(state.plate.value, state.code.value);
+      Resource response = await authUseCases.loginCar
+          .run(state.userId!, state.plate.value, state.code.value);
 
-      emit(state.copyWith(response: response, formKey: formKey));
+      print('response carbloc: ${response}');
+
+      emit(state.copyWith(
+        response: response,
+        formKey: formKey,
+      ));
     });
 
     /*

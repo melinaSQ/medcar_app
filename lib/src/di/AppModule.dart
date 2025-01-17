@@ -27,6 +27,7 @@ import 'package:medcar_app/src/domain/repository/SocketRepository.dart';
 import 'package:medcar_app/src/domain/repository/UsersRepository.dart';
 import 'package:medcar_app/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:medcar_app/src/domain/useCases/auth/GetUserSessionUseCase.dart';
+import 'package:medcar_app/src/domain/useCases/auth/LoginCarUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/LoginUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/RegisterUseCase.dart';
 import 'package:medcar_app/src/domain/useCases/auth/LogoutUseCase.dart';
@@ -140,6 +141,7 @@ abstract class AppModule {
   @injectable
   AuthUseCases get authUseCases => AuthUseCases(
         login: LoginUseCase(authRepository),
+        loginCar: LoginCarUseCase(authRepository),
         register: RegisterUseCase(authRepository),
         saveUserSession: SaveUserSessionUseCase(authRepository),
         getUserSession: GetUserSessionUseCase(authRepository),
